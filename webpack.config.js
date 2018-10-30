@@ -4,9 +4,10 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var VARIABLE = require("./webpack.variable");
+var JavaScriptObfuscator = require('webpack-obfuscator');
 
 module.exports = {
-  entry:VARIABLE.entry.main,  
+  entry:VARIABLE.entry,  
   output: {
     path: VARIABLE.output.path,
     filename: VARIABLE.output.filename,
@@ -84,6 +85,7 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
+    //混淆
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
@@ -92,6 +94,10 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
-    })
+    }),
+    //加密
+    new JavaScriptObfuscator({
+      rotateUnicodeArray: true
+    }, [])
   ])
 }

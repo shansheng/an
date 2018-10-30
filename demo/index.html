@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>an控件库demo</title>
+    <script type="text/javascript" src="/plugins/jquery-2.2.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator/dist/index.browser.js"></script>
 </head>
 <body>
-    <div id="appContainer"></div>
+    <div id="firstVue">控件库
+        <br/>
+        {{myData}}
+        <my-component></my-component>
+    </div>
+    <script>
+        var obfuscationResult = JavaScriptObfuscator.obfuscate(
+    `
+        (function(){
+            var variable1 = '5' - 3;
+            var variable2 = '5' + 3;
+            var variable3 = '5' + - '2';
+            var variable4 = ['10','10','10','10','10'].map(parseInt);
+            var variable5 = 'foo ' + 1 + 1;
+            console.log(variable1);
+            console.log(variable2);
+            console.log(variable3);
+            console.log(variable4);
+            console.log(variable5);
+        })();
+    `,
+    {
+        compact: false,
+        controlFlowFlattening: true
+    }
+);
+
+console.log(obfuscationResult.getObfuscatedCode());
+    </script>
 </body>
 </html>
