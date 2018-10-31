@@ -51,7 +51,7 @@ VARIABLE.entry = {
 VARIABLE.output = {
     path: VARIABLE.getPath(VARIABLE.buildDir),
     publicPath: VARIABLE.isProduction ? "./" : "/",
-    filename: `js/[name]${VARIABLE.isProduction ? ".min" : ""}.js`,
+    filename: `js/[name].[hash:5]${VARIABLE.isProduction ? ".min" : ""}.js`,
     css: `css/[name]${VARIABLE.isProduction ? ".min" : ""}.css`,
     imgs:'css/imgs/'
 };

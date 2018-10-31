@@ -41,7 +41,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader", 
+          use: "css-loader" 
+        }),//css提取到文件内；若无则加载在<style>
+        //loader: 'style-loader!css-loader' 
       },
       {
         test: /\.styl$/,
@@ -66,7 +70,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin(VARIABLE.output.css),// 提取css
+    new ExtractTextPlugin({filename:VARIABLE.output.css}),// 提取css
     new HtmlWebpackPlugin({
       filename: VARIABLE.htmlPlugin.filename,
       template: VARIABLE.htmlPlugin.template,

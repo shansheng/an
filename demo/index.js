@@ -1,6 +1,7 @@
 /*webpack入口文件*/
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import './assets/main.css'
 import menu from './components/menu.vue';
 import dencrypt from './components/demo/encrypt.vue';
 import pencrypt from './components/plugins/encrypt.vue';
@@ -82,7 +83,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to);
   if (to.meta.title) {
       document.title = "anUI-"+to.meta.title;
   }
