@@ -1,10 +1,9 @@
 
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var VARIABLE = require("./webpack.variable");
-var JavaScriptObfuscator = require('webpack-obfuscator');
+const webpack = require('webpack'),
+ExtractTextPlugin = require("extract-text-webpack-plugin"),
+HtmlWebpackPlugin = require('html-webpack-plugin'),
+VARIABLE = require("./webpack.variable"),
+JavaScriptObfuscator = require('webpack-obfuscator');
 
 module.exports = {
   entry:VARIABLE.entry,  

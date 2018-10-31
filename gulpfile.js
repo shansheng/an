@@ -1,4 +1,4 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
 gulpjavascriptObfuscator = require('gulp-javascript-obfuscator'),
 concat = require('gulp-concat'),
 rename = require('gulp-rename'),
