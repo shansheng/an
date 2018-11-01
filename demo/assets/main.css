@@ -7,11 +7,13 @@ center p{color: #888;}
 .top h1{
     float: left;
     margin: 0 10px;
+    color: #563d7c;
 }
 .top a{
     padding:5px;
+    color: #758697;
 }
-a.router-link-active{font-weight:700;}
+a.router-link-active{font-weight:700;color: #ab46bc;}
 .nav{   
     margin-left: 10px;
     height: 100%;

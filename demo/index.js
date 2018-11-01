@@ -7,7 +7,7 @@ import index from './components/index.vue';
 import menu from './components/menu.vue';
 import dencrypt from './components/demo/encrypt.vue';
 import base from './components/plugins/base.vue';
-import pencrypt from './components/plugins/encrypt.vue';
+
 // import JavaScriptObfuscator from 'javascript-obfuscator';
 
 // var obfuscationResult = JavaScriptObfuscator.obfuscate(
@@ -108,48 +108,30 @@ const menuRoutes=function(arr,active){
 }
 
 const routes = [
-  { path: '/',meta:{title:"首页",active:"home"}, component: index},
   { 
-    path: '/demo', 
+    path: '/',
+    redirect:'/demo/encrypt',
+    meta:{title:"首页",active:"home"}
+  },
+  { 
+    path: '/demo/encrypt', 
+    meta:{title:"Demo",active:"demo"}, 
     component: menu,
     children: menuRoutes(menuArry.demo,"demo")
   },
   { 
-    path: '/plugins', 
+    path: '/plugins/base', 
+    meta:{title:"插件",active:"plugins"}, 
+    component: menu,
+    children: menuRoutes(menuArry.plugins,"plugins")
+  },
+  { 
+    path: '/library', 
+    meta:{title:"藏书阁",active:"library"}, 
     component: menu,
     children: menuRoutes(menuArry.plugins,"plugins")
   }
 ]
-// const routes = [
-//   { path: '/',meta:{title:"首页",active:"home"}, component: index},
-//   { 
-//     path: '/demo', 
-//     component: menu,
-//     children: [
-//       {
-//         path:'encrypt',
-//         meta:{active:"demo"},
-//         component: dencrypt
-//       }
-//     ]
-//   },
-//   { 
-//     path: '/plugins', 
-//     component: menu,
-//     children: [
-//       {
-//         path:'base',
-//         meta:{active:"plugins"},
-//         component: base
-//       },
-//       {
-//         path:'encrypt',
-//         meta:{active:"plugins"},
-//         component: pencrypt
-//       }
-//     ] 
-//   }
-// ]
 
 // 3. 创建 router 实例，然后传 `routes` 配置
 // 你还可以传别的配置参数, 不过先这么简单着吧。
@@ -160,9 +142,10 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+  to.query["head"]=routes;
   to.query["menu"]=menuArry[to.meta.active];
   if (to.meta.title) {
-      document.title = "anUI-"+to.meta.title;
+      document.title = "anUI "+to.meta.title;
   }
   next()
 })
