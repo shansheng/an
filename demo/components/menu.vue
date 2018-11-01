@@ -1,13 +1,18 @@
 <template>
   <div class="main">
-   <ul class="nav">
-       <li class="active"><a href="javascript:;">Base（基础）</a>
-        <ul class="nav">
-            <li><router-link to='./index'>简介</router-link></li>
-            <li><router-link to='./encrypt'>js加密</router-link></li>
-        </ul>
-       </li>
-   </ul>
+  <div class="left">
+      <ul class="nav">
+          <!-- :to="{path:i.to?i.to:'javascript:;'}" :class="[i.disabled]"-->
+          <li v-for="item in $route.query.menu" class="active"><a href="javascript:;">{{item.title}}</a>
+             <ul class="nav">
+                 <li v-for="i in item.children">
+                     <router-link v-if="i.disabled" :to="{path:i.path?i.path:'javascript:;'}"  class="disabled" event="">{{i.title}}</router-link>
+                     <router-link v-else :to="{path:i.path?i.path:'javascript:;'}">{{i.title}}</router-link>
+                 </li>
+             </ul>
+          </li>
+      </ul>
+   </div>
    <div class="content">
     <router-view></router-view>
    </div>

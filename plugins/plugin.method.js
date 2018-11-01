@@ -33,7 +33,7 @@
 
     /*------as()调用方法和属性-----------*/
     /*------使用as()调用方法，处理传递参数比较少的控件*/
-    window.as = function (q) {
+    window.an = function (q) {
         return new _ananas(q);
     };
 
