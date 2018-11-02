@@ -53,6 +53,7 @@ VARIABLE.output = {
     publicPath: VARIABLE.isProduction ? "./" : "/",
     filename: `js/[name]${VARIABLE.isProduction ? ".min" : ""}.js`,
     css: `css/[name]${VARIABLE.isProduction ? ".min" : ""}.css`,
+    fonts: "css/fonts/[name].[ext]",
     imgs:'css/imgs/'
 };
 

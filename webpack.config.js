@@ -40,6 +40,18 @@ module.exports = {
         }
       },
       {
+
+        // 字体图标
+        test: /\.(woff|woff2|svg|eot|ttf|)$/,
+        use: [{
+            loader: 'file-loader',
+            options: {
+                name: VARIABLE.output.fonts,
+            }
+        }]
+
+      },
+      {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader", 

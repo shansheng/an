@@ -8,13 +8,20 @@
 /*------通用的控件库 by:cqy 2017-5-18------*/
 /*------处理参数比较多的控件------*/
 (function ($) {
-$.fn.backTop = function (settings) {
+    $.fn.objectDemo = function (options) {
         var el = $(this);
         if (el.length == 0) return;
-        var defaultSettings = {
+        var defaults = {
             defaultV: null
         }
-        var options = $.extend(true, defaultSettings, settings);
+        var opt = $.extend(true, defaults,options);
     };
+
+    $.staticDemo=function(options){
+        var defaults = {
+            defaultV: null
+        }
+        var opt = $.extend({},defaults, options);
+    }
 
 })(jQuery);

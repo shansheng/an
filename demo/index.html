@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>anUI</title>
-    <script type="text/javascript" src="/plugins/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <!--Open Sans Font [ OPTIONAL ]-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator/dist/index.browser.js"></script>
 </head>
 <body>
@@ -26,5 +28,16 @@
         <!-- 路由匹配到的组件将渲染在这里 -->
         <router-view></router-view>
       </div>
+      <link href="/js/plugins/noty/demo.css" rel="stylesheet">
+      <script type="text/javascript" src="/js/plugins/noty/an.noty.js"></script>
+      <script>
+      $("#app").noty({
+        type: 'dark',
+        title: '欢迎使用anUI',
+        message: '<p>作者：cqy</p><p>联系方式：qingtang166@qq.com</p>',
+        container: 'floating',
+        timer: 0
+      });
+      </script>
 </body>
 </html>

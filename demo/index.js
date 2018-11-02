@@ -130,6 +130,12 @@ const routes = [
     meta:{title:"藏书阁",active:"library"}, 
     component: menu,
     children: menuRoutes(menuArry.plugins,"plugins")
+  },
+  { 
+    path: '/download', 
+    meta:{title:"下载",active:"download"}, 
+    component: menu,
+    children: menuRoutes(menuArry.plugins,"plugins")
   }
 ]
 
