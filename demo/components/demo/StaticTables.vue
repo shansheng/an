@@ -1,5 +1,5 @@
 <template>
   <div class="header">
-      erwe
+      Static Tables
   </div>
 </template>

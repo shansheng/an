@@ -5,7 +5,8 @@ import './assets/base.css';
 import './assets/main.css';
 import index from './components/index.vue';
 import menu from './components/menu.vue';
-import dencrypt from './components/demo/encrypt.vue';
+import StaticTables from './components/demo/StaticTables.vue';
+import dencrypt from './components/plugins/encrypt.vue';
 import base from './components/plugins/base.vue';
 
 // import JavaScriptObfuscator from 'javascript-obfuscator';
@@ -36,28 +37,93 @@ const menuArry={
   demo:
   [
     {
-      title:"Tool（工具）",
+      title:"DataGrid（数据网格）",
       children:
       [
         {
-          title:"js加密",
-          path:'encrypt',
-          component: dencrypt
+          title:"Static Tables",
+          path:'StaticTables',
+          component:StaticTables
         },
         {
-          title:"iconfont图标库",
+          title:"Data Tables",
+          disabled:true
+        },
+        {
+          title:"Foo Tables",
+          disabled:true
+        },
+        {
+          title:"Bootstrap Tables",
+          disabled:true
+        },
+        {
+          title:"DataGrid",
           disabled:true
         }
       ]
     },
-    {title:"DataGrid（数据网格）"},
-    {title:"Tree（树）"},
-    {title:"Form（表单）"},
-    {title:"Uploader（上传）"},
-    {title:"Map（地图）"},
+    {
+      title:"Tree（树）",
+      children:
+      [
+        {
+          title:"anTree",
+          disabled:true
+        },
+        {
+          title:"zTree",
+          disabled:true
+        }
+      ]
+    },
+    {
+      title:"Form（表单）",
+      children:
+      [
+        {
+          title:"Validation",
+          disabled:true
+        },
+        {
+          title:"AreaSelect",
+          disabled:true
+        },
+        {
+          title:"DatePicker",
+          disabled:true
+        },
+        {
+          title:"Chosen",
+          disabled:true
+        }
+      ]
+    },
     {title:"Dialog（弹出框）"},
-    {title:"Extension（扩展）"},
-    {title:"参考文档"}
+    {
+      title:"Uploader（上传）",
+      children:
+      [
+        {
+          title:"Dropzone",
+          disabled:true
+        }
+      ]
+    },
+    {
+      title:"Map（地图）",
+      children:
+      [
+        {
+          title:"百度地图（在线）",
+          disabled:true
+        },
+        {
+          title:"百度地图（本地化）",
+          disabled:true
+        }
+      ]
+    }
   ],
   plugins:
   [
@@ -77,7 +143,23 @@ const menuArry={
       ]
     },
     {
-      title:"Donwload（下载）"
+      title:"Tool（工具）",
+      children:
+      [
+        {
+          title:"js加密",
+          path:'encrypt',
+          component: dencrypt
+        },
+        {
+          title:"js混淆",
+          disabled:true
+        },
+        {
+          title:"iconfont图标库",
+          disabled:true
+        }
+      ]
     }
   ]
 };
@@ -93,11 +175,12 @@ const Index = { template: '<div class="main"><center><h1>欢迎使用anUI！</h1
 // 或者，只是一个组件配置对象。
 // 我们晚点再讨论嵌套路由。
 const menuRoutes=function(arr,active){
+  if(!arr)return;
   var children=[];
-  for(var i = 0,len = arr.length; i < len; i++){
+  for(var i = 0; i < arr.length; i++){
     var item=arr[i].children;
     if(!item)continue; 
-    for(var j = 0,len = item.length; j < len; j++){
+    for(var j = 0; j <item.length; j++){
       var oldchild=item[j];
       if(!oldchild.path)continue;
       oldchild["meta"]={active:active,title:arr[i].title};
@@ -110,34 +193,43 @@ const menuRoutes=function(arr,active){
 const routes = [
   { 
     path: '/',
-    redirect:'/demo/encrypt',
+    redirect:'/demo/StaticTables',
     meta:{title:"首页",active:"home"}
   },
   { 
-    path: '/demo/encrypt', 
-    meta:{title:"Demo",active:"demo"}, 
+    path: '/demo', 
+    default:'/demo/StaticTables',
+    meta:{title:"Demo（教程）",active:"demo"}, 
     component: menu,
     children: menuRoutes(menuArry.demo,"demo")
   },
   { 
-    path: '/plugins/base', 
-    meta:{title:"插件",active:"plugins"}, 
+    path: '/plugins', 
+    default:'/plugins/base',
+    meta:{title:"Plugins（插件）",active:"plugins"}, 
     component: menu,
     children: menuRoutes(menuArry.plugins,"plugins")
+  },
+  { 
+    path: '/extend', 
+    meta:{title:"Extension（扩展）",active:"extend"}, 
+    component: menu,
+    children: menuRoutes(null,"extend")
   },
   { 
     path: '/library', 
-    meta:{title:"藏书阁",active:"library"}, 
+    meta:{title:"Library（藏书阁）",active:"library"}, 
     component: menu,
-    children: menuRoutes(menuArry.plugins,"plugins")
+    children: menuRoutes(null,"library")
   },
   { 
     path: '/download', 
-    meta:{title:"下载",active:"download"}, 
+    meta:{title:"Donwload（下载）",active:"download"}, 
     component: menu,
-    children: menuRoutes(menuArry.plugins,"plugins")
+    children: menuRoutes(null,"download")
   }
 ]
+
 
 // 3. 创建 router 实例，然后传 `routes` 配置
 // 你还可以传别的配置参数, 不过先这么简单着吧。
@@ -148,11 +240,13 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
+  
   to.query["head"]=routes;
   to.query["menu"]=menuArry[to.meta.active];
   if (to.meta.title) {
       document.title = "anUI "+to.meta.title;
   }
+  console.log(to);
   next()
 })
 

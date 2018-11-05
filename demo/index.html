@@ -17,9 +17,9 @@
           <!-- 通过传入 `to` 属性指定链接. -->
           <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
           <!-- <router-link :class="[$route.meta.active ==='home'? 'router-link-active' : '']" to="/" exact>首页</router-link>
-          <router-link :class="[$route.meta.active ==='demo'? 'router-link-active' : '']"  to="/demo/encrypt">anUI Demo</router-link>
+          <router-link :class="[$route.meta.active ==='demo'? 'router-link-active' : '']"  to="/demo/StaticTables">anUI Demo</router-link>
           <router-link :class="[$route.meta.active ==='plugins'? 'router-link-active' : '']" to="/plugins/base">anUI 插件</router-link> -->
-          <router-link exact v-if="item.path!='/'" v-for="item in $route.query.head" :class="[$route.meta.active ===item.meta.active ? 'router-link-active' : '']"  :to="{path:item.path}">
+          <router-link exact v-if="item.path!='/'" v-for="item in $route.query.head" :class="[$route.meta.active ===item.meta.active ? 'router-link-active' : '']"  :to="{path:item.default}">
               {{item.meta.title}}
           </router-link>
         </div>
@@ -31,13 +31,13 @@
       <link href="/js/plugins/noty/demo.css" rel="stylesheet">
       <script type="text/javascript" src="/js/plugins/noty/an.noty.js"></script>
       <script>
-      $("#app").noty({
-        type: 'dark',
-        title: '欢迎使用anUI',
-        message: '<p>作者：cqy</p><p>联系方式：qingtang166@qq.com</p>',
-        container: 'floating',
-        timer: 0
-      });
+    //   $("#app").noty({
+    //     type: 'dark',
+    //     title: '欢迎使用anUI',
+    //     message: '<p>作者：cqy</p><p>联系方式：qingtang166@qq.com</p>',
+    //     container: 'floating',
+    //     timer: 0
+    //   });
       </script>
 </body>
 </html>
