@@ -137,7 +137,7 @@ const menuArry={
           component: base
         },
         {
-          title:"xui.js",
+          title:"扩展脚本",
           disabled:true
         }
       ]
@@ -157,6 +157,90 @@ const menuArry={
         },
         {
           title:"iconfont图标库",
+          disabled:true
+        }
+      ]
+    },
+    
+  ]
+  ,
+  extend:
+  [
+    {
+      title:"手机（WebApp）",
+      children:
+      [
+        {
+          title:"xui.js",
+          disabled:true
+        },
+        {
+          title:"Swiper",
+          path:'base',
+          component: base
+        },
+        {
+          title:"Iscroll",
+          disabled:true
+        }
+      ]
+    },
+    {
+      title:"甘特图（Gantt）",
+      children:
+      [
+        {
+          title:"示例",
+          disabled:true
+        }
+      ]
+    },
+    {
+      title:"Mobile示例",
+      children:
+      [
+        {
+          title:"示例1",
+          disabled:true
+        },
+        {
+          title:"示例2",
+          disabled:true
+        }
+      ]
+    }
+  ],
+  library:
+  [
+    {
+      title:"前端",
+      children:
+      [
+        {
+          title:"HTML5",
+          path:'base',
+          component: base
+        },
+        {
+          title:"CSS3",
+          disabled:true
+        },
+        {
+          title:"Flex",
+          disabled:true
+        }
+      ]
+    },
+    {
+      title:"Nodejs",
+      children:
+      [
+        {
+          title:"Vue",
+          disabled:true
+        },
+        {
+          title:"Koa",
           disabled:true
         }
       ]
@@ -212,15 +296,17 @@ const routes = [
   },
   { 
     path: '/extend', 
+    default:'/extend/base',
     meta:{title:"Extension（扩展）",active:"extend"}, 
     component: menu,
-    children: menuRoutes(null,"extend")
+    children: menuRoutes(menuArry.extend,"extend")
   },
   { 
     path: '/library', 
+    default:'/library/base',
     meta:{title:"Library（藏书阁）",active:"library"}, 
     component: menu,
-    children: menuRoutes(null,"library")
+    children: menuRoutes(menuArry.library,"library")
   },
   { 
     path: '/download', 
