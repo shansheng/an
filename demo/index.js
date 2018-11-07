@@ -119,7 +119,7 @@ const menuArry={
           disabled:true
         },
         {
-          title:"百度地图（本地化）",
+          title:"百度地图（本地）",
           disabled:true
         }
       ]
@@ -147,13 +147,9 @@ const menuArry={
       children:
       [
         {
-          title:"js加密",
+          title:"混淆加密",
           path:'encrypt',
           component: dencrypt
-        },
-        {
-          title:"js混淆",
-          disabled:true
         },
         {
           title:"iconfont图标库",
