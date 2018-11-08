@@ -6,9 +6,11 @@ import './assets/main.css';
 import index from './components/index.vue';
 import menu from './components/menu.vue';
 import StaticTables from './components/demo/StaticTables.vue';
-import dencrypt from './components/plugins/encrypt.vue';
-import base from './components/plugins/base.vue';
 
+/** 插件*/
+import base from './components/plugins/base.vue';
+import dencrypt from './components/plugins/encrypt.vue';
+import icon from './components/plugins/icon.vue';
 // import JavaScriptObfuscator from 'javascript-obfuscator';
 
 // var obfuscationResult = JavaScriptObfuscator.obfuscate(
@@ -153,7 +155,8 @@ const menuArry={
         },
         {
           title:"iconfont图标库",
-          disabled:true
+          path:'icon',
+          component: icon
         }
       ]
     },

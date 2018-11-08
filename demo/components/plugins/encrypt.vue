@@ -32,18 +32,8 @@
             </div>
 </div>
 </template>
-<script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator/dist/index.browser.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/minify.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/utils.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/ast.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/parse.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/transform.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/scope.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/output.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/compress.js"></script>
-<script src="https://skalman.github.io/UglifyJS-online/uglify/lib/propmangle.js"></script>
 <script>
-//import JavaScriptObfuscator from 'javascript-obfuscator';
+import JavaScriptObfuscator from 'javascript-obfuscator';
     export default {
         data () {
             return {
@@ -87,8 +77,7 @@ this.res=obfuscationResult.getObfuscatedCode();
 
 <style scoped>
 .container{
-    background-color: #f7f7f7 !important;
-    height: 100%;
+
 }
 .row {
  padding: 15px;

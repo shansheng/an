@@ -24,6 +24,7 @@ a.router-link-active{font-weight:700;color: #ab46bc;}
 }
 
 .content{
+    background-color: #ecf0f5;
     border: 1px solid rgb(225, 225, 232);
     border-top: 0;
     margin-right: 10px;
