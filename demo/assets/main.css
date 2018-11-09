@@ -28,6 +28,7 @@ a.router-link-active{font-weight:700;color: #ab46bc;}
     border: 1px solid rgb(225, 225, 232);
     border-top: 0;
     margin-right: 10px;
+    padding: 10px;
 }
 .nav>li {
 position: relative;
@@ -59,4 +60,56 @@ font-weight: 400;
 
 .nav,.nav li{
     background: #fafafa
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #337ab7;
+    border-radius: 0;
+}
+
+.btn-link:hover {
+    color: #23527c;
+    text-decoration: underline;
+    background-color: transparent;
+}
+
+.panel {
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border-radius: 0;
+    border: 1px solid #e7ecf3;
+    border-bottom: 1px solid rgba(0,0,0,0.17);
+    margin-bottom: 15px;
+}
+
+.panel-heading {
+    position: relative;
+    height: 50px;
+    padding: 0;
+    color: #2b425b;
+}
+
+.panel-heading:after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+.panel-title {
+    font-weight: 600;
+    padding: 0 20px 0 20px;
+    font-size: 1.2em;
+    line-height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.panel-body {
+    padding: 15px 20px 25px;
 }
