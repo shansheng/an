@@ -70,10 +70,59 @@
     border-color: #d1d9de;
     color: #758697;
 }
+
+.btn-default-basic,
+.btn-default,
+.btn-default:focus,
+.btn-default.disabled:hover,
+.btn-default:disabled:hover,
+.btn-hover-default:hover,
+.btn-hover-default:active,
+.btn-hover-default.active,
+.btn.btn-active-default:active,
+.btn.btn-active-default.active,
+.dropdown.open > .btn.btn-active-default,
+.btn-group.open .dropdown-toggle.btn.btn-active-default {
+  background-color: #fafafa;
+  border-color: #d1d9de;
+  color: #758697;
+}
+.btn-default:hover,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  background-color: #e8e8e8;
+  border-color: #d1d9de;
+  color: #758697;
+}
 .btn-purple {
     background-color: #b761c5;
     border-color: #ba68c8;
     color: #fff;
+}
+
+.btn-purple,
+.btn-purple:focus,
+.btn-purple.disabled:hover,
+.btn-purple:disabled:hover,
+.btn-hover-purple:hover,
+.btn-hover-purple:active,
+.btn-hover-purple.active,
+.btn.btn-active-purple:active,
+.btn.btn-active-purple.active,
+.dropdown.open > .btn.btn-active-purple,
+.btn-group.open .dropdown-toggle.btn.btn-active-purple {
+  background-color: #b761c5;
+  border-color: #ba68c8;
+  color: #fff;
+}
+.btn-purple:hover,
+.btn-purple:active,
+.btn-purple.active,
+.open > .dropdown-toggle.btn-purple {
+  background-color: #ab46bc;
+  border-color: #ae4ebe;
+  color: #fff;
 }
 
 .caret {
@@ -118,6 +167,37 @@
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+
+.form-control:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+  }
+  .form-control::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+  }
+  .form-control:-ms-input-placeholder {
+    color: #999;
+  }
+  .form-control::-webkit-input-placeholder {
+    color: #999;
+  }
+  .form-control::-ms-expand {
+    background-color: transparent;
+    border: 0;
+  }
+  .form-control[disabled],
+  .form-control[readonly],
+  fieldset[disabled] .form-control {
+    background-color: #eee;
+    opacity: 1;
+  }
+  .form-control[disabled],
+  fieldset[disabled] .form-control {
+    cursor: not-allowed;
+  }
 
 .table-responsive .table-toolbar-right>.form-group {
     display: inline-block;
