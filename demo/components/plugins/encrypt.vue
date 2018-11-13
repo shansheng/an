@@ -25,7 +25,6 @@
                 <div class="col-md">
                     <div class="form-group">
                         <textarea name="ctl00$MainContent$TextBox2" rows="16" cols="20" id="ctl00_MainContent_TextBox2" class="form-control form-control-md" spellcheck="false" placeholder="Obfuscated result">
-                        {{res}}
                         </textarea>
                     </div>
                 </div>
@@ -33,48 +32,8 @@
 </div>
 </template>
 <script>
-import JavaScriptObfuscator from 'javascript-obfuscator';
-    export default {
-        data () {
-            return {
-                content: `
-(function(){
-    var variable1 = '5' - 3;
-    var variable2 = '5' + 3;
-    var variable3 = '5' + - '2';
-    var variable4 = ['10','10','10','10','10'].map(parseInt);
-    var variable5 = 'foo ' + 1 + 1;
-    console.log(variable1);
-    console.log(variable2);
-    console.log(variable3);
-    console.log(variable4);
-    console.log(variable5);
-})();
-`,
-                res: ''
-            }
-        },
-        methods:{
-            obfuscate:getObfuscatedCode,
-            minify:getUglifyJSCode  
-        }
-    }
-
-function getUglifyJSCode(){
- this.res=minify(this.content);
-}
-function getObfuscatedCode(){
-var obfuscationResult = JavaScriptObfuscator.obfuscate(this.content,
-    {
-        compact: false,
-        controlFlowFlattening: true
-    }
-);
-this.res=obfuscationResult.getObfuscatedCode();
-}
 
 </script>
-
 <style scoped>
 .container{
 

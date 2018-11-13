@@ -6,7 +6,7 @@ import './assets/main.css';
 import index from './components/index.vue';
 import menu from './components/menu.vue';
 import StaticTables from './components/demo/StaticTables.vue';
-
+import DataTables from './components/demo/DataTables.vue';
 /** 插件*/
 import base from './components/plugins/base.vue';
 import dencrypt from './components/plugins/encrypt.vue';
@@ -49,7 +49,8 @@ const menuArry={
         },
         {
           title:"Data Tables",
-          disabled:true
+          path:"DataTables",
+          component:DataTables
         },
         {
           title:"Foo Tables",

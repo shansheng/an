@@ -7,7 +7,7 @@
     border-bottom: 1px solid rgba(0,0,0,0.17);
     background-color: #fff;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    margin: 10px;
+    margin: 30px;
     padding: 20px;
 }
 
@@ -242,6 +242,10 @@
     line-height: 1.42857143;
     color: #333;
     white-space: nowrap;
+}
+.table-responsive .dropdown-menu:not(.head-list)>li>a:hover {
+    background-color: #42a5f5;
+    color: #fff;
 }
 
 .table {
