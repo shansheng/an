@@ -32,9 +32,7 @@ VARIABLE.buildDir = VARIABLE.isProduction ? "./build" : "./dev";
  */
 VARIABLE.entry = {
     // 业务代码
-    main: [
-        VARIABLE.getPath("demo/index.js")
-    ]
+    main: [VARIABLE.getPath("demo/index.js")]
 };
 
 /**

@@ -309,3 +309,6 @@ th {
     padding: 5px;
 }
 
+.pagination>li {
+    display: inline;
+}

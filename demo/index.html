@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>anUI</title>
-    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="https://lastsoup.github.io/Nifty/js/jquery-2.2.4.min.js"></script>
     <!--Open Sans Font [ OPTIONAL ]-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
+    <!--DataTables[ OPTIONAL ]-->
     <script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator/dist/index.browser.js"></script>
-
+    <!--DataTables[ OPTIONAL ]-->
+    <script src="https://lastsoup.github.io/Nifty/plugins/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="https://lastsoup.github.io/Nifty/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
+    <script src="https://lastsoup.github.io/Nifty/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/js/plugins/anui.datatables.js"></script>
 </head>
 <body>
     <div id="app" class="page">
@@ -29,5 +34,5 @@
         <!-- 路由匹配到的组件将渲染在这里 -->
         <router-view></router-view>
       </div>
-</body>
+    </body>
 </html>

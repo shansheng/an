@@ -3,14 +3,17 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import './assets/base.css';
 import './assets/main.css';
-import index from './components/index.vue';
+
+/*左侧菜单栏 */
 import menu from './components/menu.vue';
+/*Demo（教程） */
 import StaticTables from './components/demo/StaticTables.vue';
 import DataTables from './components/demo/DataTables.vue';
-/** 插件*/
+/*Plugins（插件）*/
 import base from './components/plugins/base.vue';
 import dencrypt from './components/plugins/encrypt.vue';
 import icon from './components/plugins/icon.vue';
+
 // import JavaScriptObfuscator from 'javascript-obfuscator';
 
 // var obfuscationResult = JavaScriptObfuscator.obfuscate(
@@ -326,7 +329,6 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  
   to.query["head"]=routes;
   to.query["menu"]=menuArry[to.meta.active];
   if (to.meta.title) {

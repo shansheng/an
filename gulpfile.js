@@ -5,11 +5,19 @@ rename = require('gulp-rename'),
 uglify = require("gulp-uglify");
 
 gulp.task('default', function() {
-    return gulp.src(['plugins/*.js','!plugins/*.min.js'])
+    return gulp.src(['js/plugins/*.js','!plugins/*.min.js'])
     .pipe(gulpjavascriptObfuscator())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('build/plugins'));
+    .pipe(concat('jquery.plugin.min.js'))
+    .pipe(gulp.dest('build/js'));
 });
+
+// gulp.task('default', function() {
+//     return gulp.src(['plugins/*.js','!plugins/*.min.js'])
+//     .pipe(gulpjavascriptObfuscator())
+//     .pipe(rename({suffix: '.min'}))
+//     .pipe(gulp.dest('build/plugins'));
+// });
+
 
 // gulp.task('default', function() {
 //     return gulp.src('plugins/plugin.js')

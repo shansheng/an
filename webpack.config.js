@@ -81,6 +81,11 @@ module.exports = {
     hints: false
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: VARIABLE.isProduction
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({filename:VARIABLE.output.css}),// 提取css
     new HtmlWebpackPlugin({
@@ -95,11 +100,6 @@ module.exports = {
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map';
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
     //混淆
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
@@ -107,6 +107,7 @@ if (process.env.NODE_ENV === 'production') {
         warnings: false
       }
     }),
+    //压缩
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
