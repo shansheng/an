@@ -33,7 +33,7 @@
 					            </div>
 					        </div>
           <table data-paging="true" data-sorting="true"  id="table-demo1" class="table table-striped table-bordered"  cellspacing="0" width="100%"></table>
-     </div>
+	 </div>
   </div>
 </template>
 <script>

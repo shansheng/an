@@ -350,3 +350,8 @@ table.footable .pagination{
   float: right;
   margin: 10px 0;
 }
+
+table.footable .form-inline{
+	float: left;
+    margin: 10px;
+}

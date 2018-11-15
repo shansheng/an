@@ -5603,9 +5603,22 @@
 				this.$container.addClass('footable-paging-external').addClass(position);
 			}
 			this.$wrapper = $('<div/>', {'class': 'footable-pagination-wrapper'}).appendTo(this.$container);
+			var labelstr=`<label class="form-inline">Show
+			<select id="demo-show-entries" class="form-control input-sm">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+			</select>
+			entries
+			</label>`;
+			var label = $(labelstr);
+			this.$lengthMenu=$.each([5,10,15],function(){
+
+			});
 			this.$pagination = $('<ul/>', { 'class': 'pagination' }).on('click.footable', 'a.footable-page-link', { self: this }, this._onPageClicked);
 			this.$count = $('<span/>', { 'class': 'label label-default' });
-			this.$wrapper.append( this.$count,this.$pagination, $('<div/>', {'class': 'divider'}));
+			this.$wrapper.append(label,this.$count,this.$pagination, $('<div/>', {'class': 'divider'}));
 			this.detached = false;
 		},
 
