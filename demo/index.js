@@ -9,6 +9,7 @@ import menu from './components/menu.vue';
 /*Demo（教程） */
 import StaticTables from './components/demo/StaticTables.vue';
 import DataTables from './components/demo/DataTables.vue';
+import FooTables from './components/demo/FooTables.vue';
 /*Plugins（插件）*/
 import base from './components/plugins/base.vue';
 import dencrypt from './components/plugins/encrypt.vue';
@@ -57,7 +58,8 @@ const menuArry={
         },
         {
           title:"Foo Tables",
-          disabled:true
+          path:"FooTables",
+          component:FooTables
         },
         {
           title:"Bootstrap Tables",
