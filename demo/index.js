@@ -10,6 +10,7 @@ import menu from './components/menu.vue';
 import StaticTables from './components/demo/StaticTables.vue';
 import DataTables from './components/demo/DataTables.vue';
 import FooTables from './components/demo/FooTables.vue';
+import BootstrapTables from './components/demo/BootstrapTables.vue';
 /*Plugins（插件）*/
 import base from './components/plugins/base.vue';
 import dencrypt from './components/plugins/encrypt.vue';
@@ -63,7 +64,8 @@ const menuArry={
         },
         {
           title:"Bootstrap Tables",
-          disabled:true
+          path:"BootstrapTables",
+          component:BootstrapTables
         },
         {
           title:"DataGrid",

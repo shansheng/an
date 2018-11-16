@@ -81,7 +81,7 @@ $(function () {
             "type": "post",
             //"dataSrc": "",
             "data": function (d) {
-                return {"length": d.length,"draw": d.draw, "start": d.start,"search": d.search.value}
+                return {"length": d.length,"start": d.start,"search": d.search.value}
             }
         },
         "columns": [
@@ -94,7 +94,6 @@ $(function () {
 </script>
 <style scoped>
 @import "https://lastsoup.github.io/Nifty/css/demo/nifty-demo-icons.min.css";
-@import "../css/Tables.css";
 @import "../css/DataTables.css";
 </style>
 

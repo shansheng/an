@@ -1,44 +1,29 @@
 <template>
   <div>
-<center>
-       <a style="text-decoration: underline;" target="_blank" href="http://fooplugins.github.io/FooTable/docs/getting-started.html#examples">FooTables官方文档</a>
+	  <center>
+       <a style="text-decoration: underline;" target="_blank" href="http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/">BootstrapTables官方文档</a>
+	    <a style="text-decoration: underline;" target="_blank" href="http://vitalets.github.io/x-editable/demo.html?c=inline">Editables官方文档</a>
  </center>
-     <div class="table-responsive">
- <div class="pad-btm form-inline">
-					            <div class="row">
-					                <div class="col-sm-6 table-toolbar-left">
-					                    <button id="demo-btn-addrow" class="btn btn-purple"><i class="demo-pli-plus"></i> Add New Row</button>
-					                </div>
-					                <div class="col-sm-6 table-toolbar-right">
-					                    <div class="form-group">
-					                        <input id="demo-input-search2" type="text" placeholder="Search" class="form-control" autocomplete="off">
-					                    </div>
-					                    <div class="btn-group">
-					                        <button class="btn btn-default"><i class="demo-pli-download-from-cloud"></i></button>
-					                        <div class="btn-group open">
-					                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-					                                <i class="demo-pli-gear"></i>
-					                                <span class="caret"></span>
-					                            </button>
-					                            <ul role="menu" class="dropdown-menu dropdown-menu-right">
-					                                <li><a href="#">Action</a></li>
-					                                <li><a href="#">Another action</a></li>
-					                                <li><a href="#">Something else here</a></li>
-					                                <li class="divider"></li>
-					                                <li><a href="#">Separated link</a></li>
-					                            </ul>
-					                        </div>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-          <table data-paging="true" data-sorting="true"  id="table-demo1" class="table table-striped table-bordered"  cellspacing="0" width="100%"></table>
-	 </div>
+ <div class="table-responsive">
+	 <div id="demo-custom-toolbar" class="table-toolbar-left">
+        <button id="demo-dt-addrow-btn" class="btn btn-primary"><i class="demo-pli-plus"></i> Add row</button>
+		<button id="demo-dt-delete-btn" class="btn btn-danger"><i class="demo-pli-cross"></i> Delete</button>
+	</div>
+   <table id="table-demo2" class="demo-add-niftycheck"></table>
+ </div>
+
+  <div class="table-responsive">
+	 <div id="demo-custom-toolbar2" class="table-toolbar-left">
+        <button id="demo-dt-addrow-btn" class="btn btn-primary"><i class="demo-pli-plus"></i> Add row</button>
+		<button id="demo-dt-delete-btn" class="btn btn-danger"><i class="demo-pli-cross"></i> Delete</button>
+	</div>
+   <table id="table-server2" class="demo-add-niftycheck"></table>
+ </div>
   </div>
 </template>
 <script>
 $(function () { 
-var dr={};
+	var dr={};
  dr.rows = [
 		{"id":1,"firstName":"Dennise","lastName":"Fuhrman","jobTitle":"High School History Teacher","started":1320727711718,"dob":-297779282564},
 		{"id":2,"firstName":"Elodia","lastName":"Weisz","jobTitle":"Wallpaperer Helper","started":1287148515499,"dob":386361738424},
@@ -123,23 +108,80 @@ var dr={};
 	];
 
 	dr.columns =[ 
-		{ name: 'id', title: 'ID', width: 80, type: 'number' },
-		 { name: 'firstName', title: 'First Name', sorted: true, direction: 'ASC' },
-		 { name: 'lastName', title: 'Last Name', hide: 'phone' },
-		{ name: 'jobTitle', title: 'Job Title', hide: 'phone', maxWidth: 200, ellipsis: true },
-		{ name: 'started', title: 'Started', hide: 'phone tablet' },
-	  { name: 'dob', title: 'DOB', hide: 'phone tablet' }
+		{ field: 'id', title: 'ID'},
+		 { field: 'firstName', title: 'First Name',editable: {type: 'text'}  },
+		 { field: 'lastName', title: 'Last Name'},
+		{ field: 'jobTitle', title: 'Job Title'},
+		{field: 'started', title: 'Started'},
+	  { field: 'dob', title: 'DOB'}
 	];
-  $('#table-demo1').footable({
-       "columns": dr.columns,
-       "rows":dr.rows
+
+    jQuery.fn.bootstrapTable.defaults.icons = {
+        paginationSwitchDown: 'demo-pli-arrow-down',
+        paginationSwitchUp: 'demo-pli-arrow-up',
+        refresh: 'demo-pli-repeat-2',
+        toggle: 'demo-pli-layout-grid',
+        columns: 'demo-pli-check',
+        detailOpen: 'demo-psi-add',
+        detailClose: 'demo-psi-remove'
+    }
+	 $('#table-demo2').bootstrapTable({
+       columns: dr.columns,
+	   data:dr.rows,
+	   striped:true,
+	   toolbar:"#demo-custom-toolbar",
+	   sortName:"firstName",
+	   pagination:true,
+	   search:true,
+	   showColumns:true,
+	   showRefresh:true,
+	   showToggle:true,
+	   showPaginationSwitch:true
      }
   );
 
+  	 $('#table-server2').bootstrapTable({
+	   contentType: "application/x-www-form-urlencoded",
+	   url:"http://192.168.0.9:8080/Home/GetUserList",
+	   sidePagination: 'server',
+       columns:  [
+            { "field": "Id","title": "Id",sortable:true },
+            { "field": "Name","title": "Name",sortable:true, editable: {type: 'text'} }
+		],
+	   queryParams:function(d) {
+			return {"length": d.limit, "start": d.offset,"search": d.search}
+	   },
+	   responseHandler:function(res) {
+		  return {
+			  total:res.recordsTotal,
+			  rows:res.data
+		  };
+	   },
+	   method:"post",
+	   sortName:"Id",
+	   sortStable:true,
+	   toolbar:"#demo-custom-toolbar2",
+	   pagination:true,
+	   search:true,
+	   showColumns:true,
+	   showRefresh:true,
+	   showToggle:true,
+	   showPaginationSwitch:true
+     }
+	   );
+
+	     $.fn.editableform.buttons =
+        '<button type="submit" class="btn btn-primary editable-submit">'+
+            '<i class="fa fa-fw fa-check"></i>'+
+        '</button>'+
+        '<button type="button" class="btn btn-default editable-cancel">'+
+            '<i class="fa fa-fw fa-times"></i>'+
+        '</button>';
 });
 </script>
 <style scoped>
 @import "https://lastsoup.github.io/Nifty/css/demo/nifty-demo-icons.min.css";
-@import "../css/FooTables.css";
+@import "../css/BootstrapTables.css";
+@import "../css/Editable.css";
 </style>
 
