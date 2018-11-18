@@ -180,8 +180,6 @@ $(function () {
 });
 </script>
 <style scoped>
-@import "https://lastsoup.github.io/Nifty/css/demo/nifty-demo-icons.min.css";
-@import "../css/BootstrapTables.css";
-@import "../css/Editable.css";
+@import "https://lastsoup.github.io/Nifty/plugins/x-editable/css/bootstrap-editable.css";
 </style>
 

@@ -93,7 +93,6 @@ $(function () {
 });
 </script>
 <style scoped>
-@import "https://lastsoup.github.io/Nifty/css/demo/nifty-demo-icons.min.css";
 @import "../css/DataTables.css";
 </style>
 
