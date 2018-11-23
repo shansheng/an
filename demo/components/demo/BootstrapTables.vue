@@ -181,5 +181,6 @@ $(function () {
 </script>
 <style scoped>
 @import "https://lastsoup.github.io/Nifty/plugins/x-editable/css/bootstrap-editable.css";
+@import "../css/BootstrapTables.css";
 </style>
 
