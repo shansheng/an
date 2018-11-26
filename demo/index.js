@@ -192,16 +192,16 @@ const menuArry={
         }
       ]
     },
-    // {
-    //   title:"甘特图（Gantt）",
-    //   children:
-    //   [
-    //     {
-    //       title:"示例",
-    //       disabled:true
-    //     }
-    //   ]
-    // },
+    {
+      title:"甘特图（Gantt）",
+      children:
+      [
+        {
+          title:"示例",
+          disabled:true
+        }
+      ]
+    },
     {
       title:"Mobile示例",
       children:
