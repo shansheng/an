@@ -11,6 +11,7 @@ import StaticTables from './components/demo/StaticTables.vue';
 import DataTables from './components/demo/DataTables.vue';
 import FooTables from './components/demo/FooTables.vue';
 import BootstrapTables from './components/demo/BootstrapTables.vue';
+import DataGrid from './components/demo/DataGrid.vue';
 /*Plugins（插件）*/
 import base from './components/plugins/base.vue';
 import dencrypt from './components/plugins/encrypt.vue';
@@ -69,7 +70,8 @@ const menuArry={
         },
         {
           title:"DataGrid",
-          disabled:true
+          path:"DataGrid",
+          component:DataGrid
         }
       ]
     },
