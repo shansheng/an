@@ -7,11 +7,11 @@ import './assets/main.css';
 /*左侧菜单栏 */
 import menu from './components/menu.vue';
 /*Demo（教程） */
-import StaticTables from './components/demo/StaticTables.vue';
-import DataTables from './components/demo/DataTables.vue';
-import FooTables from './components/demo/FooTables.vue';
-import BootstrapTables from './components/demo/BootstrapTables.vue';
-import DataGrid from './components/demo/DataGrid.vue';
+// import StaticTables from './components/demo/StaticTables.vue';
+// import DataTables from './components/demo/DataTables.vue';
+// import FooTables from './components/demo/FooTables.vue';
+// import BootstrapTables from './components/demo/BootstrapTables.vue';
+// import DataGrid from './components/demo/DataGrid.vue';
 /*Plugins（插件）*/
 import base from './components/plugins/base.vue';
 import dencrypt from './components/plugins/encrypt.vue';
@@ -51,27 +51,32 @@ const menuArry={
         {
           title:"Static Tables",
           path:'StaticTables',
-          component:StaticTables
+          iframe:"demo/pages/StaticTables.html"
+          //component:StaticTables
         },
         {
           title:"Data Tables",
           path:"DataTables",
-          component:DataTables
+          iframe:"demo/pages/DataTables.html"
+         //component:DataTables
         },
         {
           title:"Foo Tables",
           path:"FooTables",
-          component:FooTables
+          iframe:"demo/pages/FooTables.html"
+          //component:FooTables
         },
         {
           title:"Bootstrap Tables",
           path:"BootstrapTables",
-          component:BootstrapTables
+          iframe:"demo/pages/BootstrapTables.html"
+          //component:BootstrapTables
         },
         {
           title:"DataGrid",
           path:"DataGrid",
-          component:DataGrid
+          iframe:"demo/pages/DataGrid.html"
+          //component:DataGrid
         }
       ]
     },
@@ -166,6 +171,7 @@ const menuArry={
         {
           title:"iconfont图标库",
           path:'icon',
+          iframe:'https://lastsoup.github.io/Nifty/icons-ionicons.html',
           component: icon
         }
       ]
@@ -262,6 +268,7 @@ Vue.use(VueRouter);
 // 可以从其他文件 import 进来
 const Index = { template: '<div class="main"><center><h1>欢迎使用anUI！</h1><p>作者：cqy</p><p>联系方式：qingtang166@qq.com</p></center></div>' }
 
+
 // 2. 定义路由
 // 每个路由应该映射一个组件。 其中"component" 可以是
 // 通过 Vue.extend() 创建的组件构造器，
@@ -277,6 +284,11 @@ const menuRoutes=function(arr,active){
       var oldchild=item[j];
       if(!oldchild.path)continue;
       oldchild["meta"]={active:active,title:arr[i].title};
+      //router-view换成Iframe
+      var iframeStr='<div style="width:100%;height:100%;overflow: hidden;"><iframe src="'+(oldchild.iframe?oldchild.iframe:"http://www.0non0.com")+'" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div>';
+      var Iframe = {template:iframeStr}
+      oldchild.component=Iframe;
+      //router-view换成Iframe
       children.push(oldchild);
     }
   }

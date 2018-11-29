@@ -1,0 +1,83 @@
+
+/*datagrid新样式 Start*/
+.datagrid-htable, .datagrid-btable, .datagrid-ftable {
+    color: #000000;
+}
+.datagrid-header td,
+.datagrid-body td,
+.datagrid-footer td {
+    border-width: 0 1px 1px 0;
+    border-style: solid;
+    margin: 0;
+    padding: 0;
+}
+.datagrid-header,
+.datagrid-td-rownumber {
+    background-color: #fafafa;
+    background: -webkit-linear-gradient(top,#fdfdfd 0,#f5f5f5 100%);
+    background: -moz-linear-gradient(top,#fdfdfd 0,#f5f5f5 100%);
+    background: -o-linear-gradient(top,#fdfdfd 0,#f5f5f5 100%);
+    background: linear-gradient(to bottom,#fdfdfd 0,#f5f5f5 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fdfdfd,endColorstr=#f5f5f5,GradientType=0);
+}
+
+.datagrid-resize-proxy {
+    background: #bfbfbf;
+}
+
+.datagrid-mask-msg {
+    border-color: #D3D3D3;
+}
+
+
+.datagrid-header,
+.datagrid-toolbar,
+.datagrid-pager,
+.datagrid-footer-inner {
+    border-color:#B4B4B4;
+}
+
+.datagrid-header td,
+.datagrid-body td,
+.datagrid-footer td {
+    border-color:#B4B4B4;
+}
+
+.datagrid-row:nth-of-type(odd) {
+    background: #F9FBFC;
+}
+.zzp-easyui_gehang1 .datagrid-row:nth-of-type(odd) {
+    background: none;
+}
+.zzp-easyui_gehang1 .datagrid-row:nth-of-type(4n+1) {
+    background: #F9FBFC;
+}
+.zzp-easyui_gehang1 .datagrid-body tr.datagrid-row-over{
+    background:#EAEFF5;/*zzp-easyui_gehang1»¬¹ýÐ§¹û*/
+    color: #000000;
+    cursor: default;
+}
+.datagrid-body tr.datagrid-row-selected {
+    background:#DEEAF7;/*Ñ¡ÖÐÐÐ±³¾°*/
+    color: #000;
+}
+.datagrid-body tr.datagrid-row-over{
+    background:#EAEFF5;/*±í¸ñ¿Ø¼þÊó±ê»¬¹ýÐ§¹û*/
+    color: #000000;
+    cursor: default;
+}
+.datagrid-body tr.datagrid-row-selected:hover {
+    background:#DEEAF7;/*Ñ¡ÖÐÐÐ»¬¹ýÐ§¹û*/
+    color: #000;
+}
+.datagrid-header td.datagrid-header-over {background: #e2e2e2;}
+.datagrid-body .datagrid-editable .datagrid-editable-input {
+    border-color: #D3D3D3;
+}
+
+.datagrid .datagrid-pager {
+    border-width:0;
+}
+
+/*datagrid新样式 End*/

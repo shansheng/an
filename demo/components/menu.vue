@@ -3,7 +3,6 @@
   <!-- :to="{path:i.to?i.to:'javascript:;'}" :class="[i.disabled]"-->
   <div class="left">
       <ul class="nav">
-          
           <li  v-for="item in $route.query.menu" class="active"><a href="javascript:;">{{item.title}}</a>
              <ul class="nav">
                  <li v-for="i in item.children">
