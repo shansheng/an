@@ -171,7 +171,7 @@ const menuArry={
         {
           title:"iconfont图标库",
           path:'icon',
-          iframe:'https://lastsoup.github.io/Nifty/icons-ionicons.html',
+          iframe:'https://lastsoup.github.io/themes/nifty/icons-ionicons.html',
           component: icon
         }
       ]

@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>anUI</title>
-    <script type="text/javascript" src="https://lastsoup.github.io/Nifty/js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="https://lastsoup.github.io/Nifty/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://lastsoup.github.io/themes/nifty/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="https://lastsoup.github.io/themes/nifty/js/bootstrap.js"></script>
     <!--Open Sans Font [ OPTIONAL ]-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
-    <link href="https://lastsoup.github.io/Nifty/css/demo/nifty-demo-icons.min.css" rel="stylesheet" type="text/css">
+    <link href="https://lastsoup.github.io/themes/nifty/css/demo/nifty-demo-icons.min.css" rel="stylesheet" type="text/css">
+    <!--BaseStyle[ OPTIONAL ]-->
     <link href="css/Tables.css" rel="stylesheet" type="text/css">
     <link href="css/DataTables.css" rel="stylesheet" type="text/css">
     <!--DataTables[ OPTIONAL ]-->
@@ -18,6 +19,23 @@
 <body>
     <div>
       <center>
+            <textarea>
+                    public class PageList
+                    {
+                        //一页多少个
+                        public int length { get; set; }
+                        //第几个开始
+                        public int start { get; set; }
+                        //查询条件
+                        public string search { get; set; }
+                        //数据
+                        public object data { get; set; }
+                        //总数
+                        public int recordsTotal { get; set; }
+                        //数量
+                        public int recordsFiltered { get; set; }
+                    }
+                 </textarea> 
             <a style="text-decoration: underline;" target="_blank" href="http://www.datatables.club/example/">DataTables官方文档</a>
             <a style="text-decoration: underline;" target="_blank" href="https://blog.csdn.net/auven_zj/article/details/73731390">DataTables使用心得</a>
       </center>
