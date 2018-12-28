@@ -334,6 +334,12 @@ const routes = [
     meta:{title:"Donwload（下载）",active:"download"}, 
     component: menu,
     children: menuRoutes(null,"download")
+  },
+  { 
+    path: '/docs', 
+    meta:{title:"Document（帮助文档）",active:"docs"}, 
+    component: menu,
+    children: null
   }
 ]
 
