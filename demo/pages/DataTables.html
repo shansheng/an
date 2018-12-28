@@ -98,6 +98,18 @@
         $('#demo-dt-delete-btn').click( function () {
             rowDeletion.row('.selected').remove().draw( false );
         } );
+
+        $.ajax({
+                type: "POST",
+                contentType:"application/json",
+                dataType: "json",
+                url: "http://192.168.0.9:8080/api/WebAPI/GetJWT",
+                data: JSON.stringify({name:"admin",password:"12345"}),
+                success: function(msg) {
+                    $("#token").html(msg)
+                }
+            });
+
     
         $('#table-server').DataTable( {
             "responsive": true,
@@ -112,11 +124,13 @@
             "processing": true,
             "serverSide":true,
             "ajax": {
-                "url":"http://192.168.0.9:8080/Home/GetUserList",
+                "url":"http://212.64.80.101:8085/api/WebAPI/GetUserList",
                 "type": "post",
                 //"dataSrc": "",
+                "contentType":"application/json",
                 "data": function (d) {
-                    return {"length": d.length,"start": d.start,"search": d.search.value}
+                    var jsonstr={"length": d.length,"start": d.start,"search": d.search.value};
+                    return  JSON.stringify(jsonstr)
                 }
             },
             "columns": [

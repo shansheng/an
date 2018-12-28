@@ -160,15 +160,18 @@
       );
     
            $('#table-server2').bootstrapTable({
-           contentType: "application/x-www-form-urlencoded",
-           url:"http://192.168.0.9:8080/Home/GetUserList",
+            contentType: "application/x-www-form-urlencoded",
+           //contentType:"application/json",
+           url:"http://212.64.80.101:8085/api/WebAPI/GetPostParams",
+           method: "post",
            sidePagination: 'server',
            columns:  [
                 { "field": "Id","title": "Id",sortable:true },
                 { "field": "Name","title": "Name",sortable:true, editable: {type: 'text'} }
             ],
            queryParams:function(d) {
-                return {"length": d.limit, "start": d.offset,"search": d.search}
+                 var jsonstr={"length": d.limit, "start": d.offset,"search": d.search};
+                 return  jsonstr;
            },
            responseHandler:function(res) {
               return {

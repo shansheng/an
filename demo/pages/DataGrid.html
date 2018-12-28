@@ -60,7 +60,7 @@
     $(document).ready(function () {
            subdemo.init();
            $('#dg2').datagrid({
-            url:'http://192.168.0.9:8080/Home/GetUserList',
+            url:'http://212.64.80.101:8085/api/WebAPI/GetPostParams',
             queryParams: {
             "length" : function(){
                return $('#dg2').datagrid("getPager").pagination("options").pageSize;
