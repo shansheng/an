@@ -18,6 +18,7 @@
     <script src="/js/plugins/easyui/base/jquery.pagination.js" type="text/javascript"></script>
     <script src="/js/plugins/easyui/base/jquery.panel.js" type="text/javascript"></script>
     <script src="/js/plugins/easyui/plugins/jquery.datagrid.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </head>
 <body>
         <div class="table-responsive">
@@ -50,7 +51,7 @@
 <thead>
 <tr>
     <th data-options="field:'Id',sortable:true,width:1">Id </th>
-    <th data-options="field:'Name',sortable:true,width:2">Name</th>
+    <th data-options="field:'UserName',sortable:true,width:2">Name</th>
 </tr>
 </thead>
 </table>
@@ -61,6 +62,7 @@
            subdemo.init();
            $('#dg2').datagrid({
             url:'http://212.64.80.101:8085/api/WebAPI/GetPostParams',
+            headers:{"Authorization":"Bearer " + Cookies.get('ANTOKEN')},
             queryParams: {
             "length" : function(){
                return $('#dg2').datagrid("getPager").pagination("options").pageSize;

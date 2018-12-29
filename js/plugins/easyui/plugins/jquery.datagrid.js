@@ -2337,7 +2337,7 @@ var opts=$(this).datagrid("options");
 if(!opts.url){
 return false;
 }
-$.ajax({type:opts.method,url:opts.url,data:_239,dataType:"json",success:function(data){
+$.ajax({type:opts.method,url:opts.url,headers:opts.headers,data:_239,dataType:"json",success:function(data){
 _23a(data);
 },error:function(){
 _23b.apply(this,arguments);

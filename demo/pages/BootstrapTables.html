@@ -16,6 +16,7 @@
     <script src="/js/plugins/bootstraptables/bootstrap-table.js"></script>
     <script src="/js/plugins/editable/bootstrap-editable.js"></script>
     <script src="/js/plugins/bootstraptables/bootstrap-table-editable.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </head>
 <body>
     <div>
@@ -158,16 +159,20 @@
            showPaginationSwitch:true
          }
       );
-    
+
            $('#table-server2').bootstrapTable({
-            contentType: "application/x-www-form-urlencoded",
-           //contentType:"application/json",
-           url:"http://212.64.80.101:8085/api/WebAPI/GetPostParams",
+           //contentType: "application/x-www-form-urlencoded",
+           //url:"http://212.64.80.101:8085/api/WebAPI/GetPostParams",
+           contentType:"application/json",
+           url:"http://212.64.80.101:8085/api/WebAPI/GetUserList",
            method: "post",
            sidePagination: 'server',
+           ajaxOptions:{ 
+               headers: {"Authorization":"Bearer " + Cookies.get('ANTOKEN')}
+           },
            columns:  [
                 { "field": "Id","title": "Id",sortable:true },
-                { "field": "Name","title": "Name",sortable:true, editable: {type: 'text'} }
+                { "field": "UserName","title": "Name",sortable:true, editable: {type: 'text'} }
             ],
            queryParams:function(d) {
                  var jsonstr={"length": d.limit, "start": d.offset,"search": d.search};

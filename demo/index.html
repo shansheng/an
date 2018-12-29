@@ -10,6 +10,7 @@
     <link href="https://lastsoup.github.io/themes/nifty/css/demo/nifty-demo-icons.min.css" rel="stylesheet" type="text/css">
     <!--obfuscator[ OPTIONAL ]-->
     <script src="/js/plugins/javascript-obfuscator/index.browser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </head>
 <body>
     <div id="app" class="page">
@@ -32,4 +33,20 @@
         <router-view></router-view>
       </div>
     </body>
+    <script>
+        $(function () { 
+        $.ajax({
+                type: "POST",
+                contentType:"application/json",
+                dataType: "json",
+                //async:false,
+                url: "http://212.64.80.101:8085/api/WebAPI/GetJWT",
+                data: JSON.stringify({ UserName: "admin", PassWord:"12345"}),
+                success: function (msg) {
+                    //获取到token mark  1成功   0失败  msg 
+                    Cookies.set('ANTOKEN', msg.token);  
+                }
+            });
+        });
+    </script>
 </html>

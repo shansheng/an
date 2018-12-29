@@ -15,6 +15,7 @@
     <script src="/js/plugins/datatables/jquery.dataTables.js"></script>
     <script src="/js/plugins/datatables/dataTables.bootstrap.js"></script>
     <script src="/js/plugins/datatables/dataTables.responsive.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 </head>
 <body>
     <div>
@@ -99,18 +100,7 @@
             rowDeletion.row('.selected').remove().draw( false );
         } );
 
-        $.ajax({
-                type: "POST",
-                contentType:"application/json",
-                dataType: "json",
-                url: "http://192.168.0.9:8080/api/WebAPI/GetJWT",
-                data: JSON.stringify({name:"admin",password:"12345"}),
-                success: function(msg) {
-                    $("#token").html(msg)
-                }
-            });
-
-    
+      
         $('#table-server').DataTable( {
             "responsive": true,
             "dom":'<"newtoolbar"f<"clear">>rt<"bottom"ilp<"clear">>',
@@ -126,6 +116,7 @@
             "ajax": {
                 "url":"http://212.64.80.101:8085/api/WebAPI/GetUserList",
                 "type": "post",
+                "headers":{"Authorization":"Bearer " + Cookies.get('ANTOKEN')}, 
                 //"dataSrc": "",
                 "contentType":"application/json",
                 "data": function (d) {
@@ -135,7 +126,7 @@
             },
             "columns": [
                 { "data": "Id","title": "Id",display:true },
-                { "data": "Name","title": "Name",display:false }
+                { "data": "UserName","title": "Name",display:false }
             ]
         } );
     

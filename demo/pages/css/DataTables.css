@@ -1,14 +1,14 @@
 
 table.dataTable thead .sorting_asc {
-    background: url(https://lastsoup.github.io/Nifty/plugins/datatables/media/images/sort_asc.png) no-repeat center right;
+    background: url(https://lastsoup.github.io/themes/nifty/plugins/datatables/media/images/sort_asc.png) no-repeat center right;
 }
 
 table.dataTable thead .sorting {
-    background: url(https://lastsoup.github.io/Nifty/plugins/datatables/media/images/sort_both.png) no-repeat center right;
+    background: url(https://lastsoup.github.io/themes/nifty/plugins/datatables/media/images/sort_both.png) no-repeat center right;
 }
 
 table.dataTable thead .sorting_desc {
-    background: url(https://lastsoup.github.io/Nifty/plugins/datatables/media/images/sort_desc.png) no-repeat center right;
+    background: url(https://lastsoup.github.io/themes/nifty/plugins/datatables/media/images/sort_desc.png) no-repeat center right;
 }
 
 .dataTables_wrapper{
