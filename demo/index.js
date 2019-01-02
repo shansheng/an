@@ -51,31 +51,31 @@ const menuArry={
         {
           title:"Static Tables",
           path:'StaticTables',
-          iframe:"demo/pages/StaticTables.html"
+          iframe:"demo/pages/demo/datagrid/StaticTables.html"
           //component:StaticTables
         },
         {
           title:"Data Tables",
           path:"DataTables",
-          iframe:"demo/pages/DataTables.html"
+          iframe:"demo/pages/demo/datagrid/DataTables.html"
          //component:DataTables
         },
         {
           title:"Foo Tables",
           path:"FooTables",
-          iframe:"demo/pages/FooTables.html"
+          iframe:"demo/pages/demo/datagrid/FooTables.html"
           //component:FooTables
         },
         {
           title:"Bootstrap Tables",
           path:"BootstrapTables",
-          iframe:"demo/pages/BootstrapTables.html"
+          iframe:"demo/pages/demo/datagrid/BootstrapTables.html"
           //component:BootstrapTables
         },
         {
           title:"DataGrid",
           path:"DataGrid",
-          iframe:"demo/pages/DataGrid.html"
+          iframe:"demo/pages/demo/datagrid/DataGrid.html"
           //component:DataGrid
         }
       ]
@@ -90,7 +90,8 @@ const menuArry={
         },
         {
           title:"zTree",
-          disabled:true
+          path:"zTree",
+          iframe:"demo/pages/demo/tree/zTree_v3/api/API_cn.html"
         }
       ]
     },
