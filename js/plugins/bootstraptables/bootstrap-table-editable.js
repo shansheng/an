@@ -83,6 +83,7 @@
 
     BootstrapTable.prototype.initBody = function () {
         var that = this;
+        $.fn.editable.defaults.mode = "popup"; //'inline';
         _initBody.apply(this, Array.prototype.slice.apply(arguments));
 
         if (!this.options.editable) {

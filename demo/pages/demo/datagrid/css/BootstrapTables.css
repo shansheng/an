@@ -198,21 +198,9 @@
 
 .fixed-table-loading {
   display: none;
-  background-color: #FFFFFF;
-  border: 1px solid #DDDDDD;
-  color: #999999;
-  font-size: 14px;
-  height: 40px;
-  line-height: 40px;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  width: 250px;
-  margin-left: -125px;
   text-align: center;
   z-index: 1;
-}
-
+} 
 .fixed-table-body .card-view .title {
   font-weight: bold;
   display: inline-block;
