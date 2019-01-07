@@ -151,8 +151,7 @@ const menuArry={
       [
         {
           title:"基础脚本",
-          path:'base',
-          component: base
+          path:'base'
         },
         {
           title:"扩展脚本",
@@ -160,28 +159,6 @@ const menuArry={
         }
       ]
     },
-    {
-      title:"Tool（工具）",
-      children:
-      [
-        {
-          title:"混淆加密",
-          path:'encrypt',
-          component: dencrypt
-        },
-        {
-          title:"iconfont图标库",
-          path:'icon',
-          iframe:'https://lastsoup.github.io/themes/nifty/icons-ionicons.html',
-          component: icon
-        }
-      ]
-    },
-    
-  ]
-  ,
-  extend:
-  [
     {
       title:"手机（WebApp）",
       children:
@@ -202,26 +179,88 @@ const menuArry={
       ]
     },
     {
+      title:"Tool（工具）",
+      children:
+      [
+        {
+          title:"混淆加密",
+          path:'encrypt',
+          component: dencrypt
+        },
+        {
+          title:"iconfont图标库",
+          path:'icon',
+          iframe:'https://lastsoup.github.io/themes/nifty/icons-ionicons.html'
+        }
+      ]
+    },
+    
+  ]
+  ,
+  extend:
+  [
+   
+    {
       title:"甘特图（Gantt）",
       children:
       [
         {
           title:"示例",
-          disabled:true
+          path:"gantt",
+          iframe:"demo/pages/extension/gantt.html"
         }
       ]
     },
     {
-      title:"Mobile示例",
+      title:"移动前端（Mobile）",
       children:
       [
         {
           title:"示例1",
-          disabled:true
+          path:'mobile1',
+          iframe:'https://lastsoup.github.io/mobile/boluoyuan'
         },
         {
           title:"示例2",
-          disabled:true
+          path:'mobile2',
+          iframe:'https://lastsoup.github.io/mobile/yui'
+        }
+      ]
+    },
+    {
+      title:"打印（Print）",
+      children:
+      [
+        {
+          title:"示例1",
+          path:'print1',
+          iframe:'http://www.zfxxgk.suzhou.gov.cn/sxqzf/szsrmzf/201801/t20180112_946803.html'
+        },
+        {
+          title:"示例2",
+          path:'print2',
+          iframe:'http://adminlte.la998.com/pages/examples/invoice-print.html'
+        },
+      ]
+    },
+    {
+      title:"主题（Theme）",
+      children:
+      [
+        {
+          title:"Nifty",
+          path:'nifty',
+          iframe:'https://lastsoup.github.io/themes/nifty'
+        },
+        {
+          title:"Ace",
+          path:'ace',
+          iframe:'https://lastsoup.github.io/themes/ace'
+        },
+        {
+          title:"AdminLTE",
+          path:'adminlte',
+          iframe:'http://adminlte.la998.com/'
         }
       ]
     }
@@ -234,16 +273,18 @@ const menuArry={
       [
         {
           title:"HTML5",
-          path:'base',
-          component: base
+          path:'html5',
+          iframe:'http://www.w3school.com.cn/html5/index.asp'
         },
         {
           title:"CSS3",
-          disabled:true
+          path:'css3',
+          iframe:'http://www.w3school.com.cn/css3/index.asp'
         },
         {
           title:"Flex",
-          disabled:true
+          path:'flex',
+          iframe:'http://www.runoob.com/w3cnote/flex-grammar.html'
         }
       ]
     },
@@ -253,11 +294,44 @@ const menuArry={
       [
         {
           title:"Vue",
-          disabled:true
+          path:'vue',
+          iframe:'https://cn.vuejs.org/v2/guide/'
         },
         {
-          title:"Koa",
-          disabled:true
+          title:"Vue Router",
+          path:'vue-router',
+          iframe:'https://router.vuejs.org/zh/'
+        },
+        {
+          title:"Koa2",
+          path:'koa2',
+          iframe:'https://chenshenhai.github.io/koa2-note/'
+        }
+      ]
+    },
+    {
+      title:"WebGL",
+      children:
+      [
+        {
+          title:"threejs",
+          path:'threejs',
+          iframe:'https://threejs.org/examples/'
+        },
+        {
+          title:"babylonjs",
+          path:'babylonjs',
+          iframe:'https://www.babylonjs.com/'
+        },
+        {
+          title:"claygl",
+          path:'claygl',
+          iframe:'http://examples.claygl.xyz/'
+        },
+        {
+          title:"hightopo",
+          path:'hightopo',
+          iframe:'http://www.hightopo.com/demos/index.html'
         }
       ]
     }
@@ -318,14 +392,14 @@ const routes = [
   },
   { 
     path: '/extend', 
-    default:'/extend/base',
+    default:'/extend/gantt',
     meta:{title:"Extension（扩展）",active:"extend"}, 
     component: menu,
     children: menuRoutes(menuArry.extend,"extend")
   },
   { 
     path: '/library', 
-    default:'/library/base',
+    default:'/library/html5',
     meta:{title:"Library（藏书阁）",active:"library"}, 
     component: menu,
     children: menuRoutes(menuArry.library,"library")
