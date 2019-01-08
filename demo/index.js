@@ -199,18 +199,6 @@ const menuArry={
   ,
   extend:
   [
-   
-    {
-      title:"甘特图（Gantt）",
-      children:
-      [
-        {
-          title:"示例",
-          path:"gantt",
-          iframe:"demo/pages/extension/gantt.html"
-        }
-      ]
-    },
     {
       title:"移动前端（Mobile）",
       children:
@@ -241,6 +229,11 @@ const menuArry={
           path:'print2',
           iframe:'http://adminlte.la998.com/pages/examples/invoice-print.html'
         },
+        {
+          title:"printArea",
+          path:'printArea',
+          iframe:'demo/pages/extension/print.html'
+        }
       ]
     },
     {
@@ -261,6 +254,17 @@ const menuArry={
           title:"AdminLTE",
           path:'adminlte',
           iframe:'http://adminlte.la998.com/'
+        }
+      ]
+    },
+    {
+      title:"甘特图（Gantt）",
+      children:
+      [
+        {
+          title:"示例",
+          path:"gantt",
+          iframe:"demo/pages/extension/gantt.html"
         }
       ]
     }
@@ -392,7 +396,7 @@ const routes = [
   },
   { 
     path: '/extend', 
-    default:'/extend/gantt',
+    default:'/extend/mobile1',
     meta:{title:"Extension（扩展）",active:"extend"}, 
     component: menu,
     children: menuRoutes(menuArry.extend,"extend")

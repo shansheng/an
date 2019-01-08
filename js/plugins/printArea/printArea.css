@@ -1,0 +1,207 @@
+﻿body, .printArea
+{
+    color: #000000;
+    margin: 0 auto;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    overflow-x: hidden;
+}
+.vertical
+{
+    width: 750px;
+}
+.horizontal
+{
+    width: 1050px;
+}
+
+div, form, p, i, img, ul, li, ol, dl, dt, dd, table, tr, td, th, fieldset, label, legend, select, button, input
+{
+    margin: 0px;
+    padding: 0px;
+}
+img, a img
+{
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+table
+{
+    border-top: 1px solid #000000;
+    border-right: 1px solid #000000;
+    width: 100%;
+    table-layout: fixed;
+}
+td, th
+{
+    padding: 3px 5px;
+    border-bottom: 1px solid #000000;
+    border-left: 1px solid #000000;
+    height: 100%;
+    line-height: 1.5em;
+    font-size: 14px;
+}
+table thead th, table thead td
+{
+    text-align: center;
+    font-weight: bold;
+}
+input[type="checkbox"], input[type="radio"] {
+    margin-right: 5px;
+}
+
+/*打印工具栏*/
+.printToolbar
+{
+    width: 100%;
+    margin: 0px auto;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    background: #fff;
+    left: 0px;
+    z-index: 999;
+    font-size: 14px;
+    border-top: 1px solid #000000;
+}
+.printToolbar span
+{
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.printToolbar select
+{
+    margin-right: 10px;
+}
+.printToolbar span img
+{
+    margin-right: 5px;
+}
+
+/*报表标题栏*/
+.reportTitle
+{
+	font-size: 30px;
+	height: auto;
+	line-height: 1.5em;
+	margin-bottom: 10px;
+	text-align: center;
+	width: 100%;
+	display: inline-block;
+}
+
+/*分页*/
+.pageSplit
+{
+    width: 100%;
+    text-align: center;
+    height: auto;
+    line-height: 1.5em;
+    background-color: blue;
+    color: #FFFFFF;
+}
+.printPagination
+{
+    page-break-after: always;
+    height: 0px;
+}
+
+/*打印内容区*/
+.printContent
+{
+    margin: 0px auto;
+    margin-bottom: 45px;
+}
+
+/*表单表格*/
+table.new_from tr.b_none
+{
+    height: 0px;
+}
+table.new_from tr.b_none td
+{
+    border: none;
+}
+table.new_from tr.b_none td
+{
+    padding: 0px;
+    height: 0px;
+    border-bottom: none;
+    border-left: none;
+}
+tr.bline td.OAHeaderStyle
+{
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    height: 40px;
+    line-height: 40px;
+    font-size: 26px;
+}
+.new_from .bline .table_fontbg
+{
+    font-weight: bold;
+    text-align: right;
+}
+
+/*流程审核节点图*/
+.zzp-opration-area
+{
+    position: static;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.thumbnailFlow
+{
+    padding-top: 5px;
+    padding-bottom: 4px;
+    position: relative;
+    position: static\0;
+}
+.btn_gray
+{
+    border: 1px solid #000000;
+    padding-right: 24px;
+}
+.btn_blue, .btn_red, .btn_gray
+{
+    display: inline-block;
+    min-width: 24px;
+    line-height: 16px;
+    line-height: 17px\9\0;
+    _overflow-y: hidden;
+    padding: 6px 15px;
+    margin: 0;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: default;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    white-space: normal;
+}
+a.processPic
+{
+    display: none;
+}
+
+/*明细表表头*/
+.detailHeader {
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+    height: 36px;
+    line-height: 36px;
+    font-size: 20px;
+    border: none;
+    border-left: solid 1px #000;
+    border-right: solid 1px #000;
+}
