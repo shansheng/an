@@ -127,20 +127,6 @@ const menuArry={
           disabled:true
         }
       ]
-    },
-    {
-      title:"Map（地图）",
-      children:
-      [
-        {
-          title:"百度地图（在线）",
-          disabled:true
-        },
-        {
-          title:"百度地图（本地）",
-          disabled:true
-        }
-      ]
     }
   ],
   plugins:
@@ -265,6 +251,25 @@ const menuArry={
           title:"示例",
           path:"gantt",
           iframe:"demo/pages/extension/gantt.html"
+        }
+      ]
+    },
+    {
+      title:"Map（地图）",
+      children:
+      [
+        {
+          title:"百度地图（在线）",
+          disabled:true
+        },
+        {
+          title:"百度地图（本地）",
+          disabled:true
+        },
+        {
+          title:"Mapbox",
+          path:'mapbox',
+          iframe:'https://www.mapbox.com'
         }
       ]
     }
