@@ -14,6 +14,7 @@
       </ul>
    </div>
    <div class="content">
+       <div style="width: 100%; height: 100%; overflow: hidden;"><iframe id='iframeId' src="http://www.0non0.com" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div>
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
     <router-view></router-view>
@@ -29,7 +30,8 @@
         },
         methods:{
             goLink:function(){
-            alert(3);
+            document.getElementById('iframeId').src = this.$route.meta.src;
+            $("#iframeId").loadIframe();
         }},
          watch: {
           // 如果路由有变化，会再次执行该方法

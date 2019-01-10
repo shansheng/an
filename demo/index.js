@@ -367,11 +367,12 @@ const menuRoutes=function(arr,active){
     for(var j = 0; j <item.length; j++){
       var oldchild=item[j];
       if(!oldchild.path)continue;
-      oldchild["meta"]={active:active,title:arr[i].title};
+      var src=oldchild.iframe?oldchild.iframe:"http://www.0non0.com";
+      oldchild["meta"]={active:active,title:arr[i].title,src:src};
       //router-view换成Iframe
-      var iframeStr='<div style="width:100%;height:100%;overflow: hidden;"><iframe src="'+(oldchild.iframe?oldchild.iframe:"http://www.0non0.com")+'" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div>';
-      var Iframe = {template:iframeStr}
-      oldchild.component=Iframe;
+      //var iframeStr='<div style="width:100%;height:100%;overflow: hidden;"><iframe src="'+(oldchild.iframe?oldchild.iframe:"http://www.0non0.com")+'" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div>';
+      //var Iframe = {template:iframeStr}
+      //oldchild.component=Iframe;
       //router-view换成Iframe
       children.push(oldchild);
     }
