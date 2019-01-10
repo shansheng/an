@@ -31,7 +31,7 @@
         methods:{
             goLink:function(){
             document.getElementById('iframeId').src = this.$route.meta.src;
-            $("#iframeId").loadIframe();
+            //$("#iframeId").loadIframe();
         }},
          watch: {
           // 如果路由有变化，会再次执行该方法
