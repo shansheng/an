@@ -15,7 +15,7 @@ import menu from './components/menu.vue';
 /*Plugins（插件）*/
 import base from './components/plugins/base.vue';
 import dencrypt from './components/plugins/encrypt.vue';
-import icon from './components/plugins/icon.vue';
+
 
 // import JavaScriptObfuscator from 'javascript-obfuscator';
 

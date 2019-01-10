@@ -7,7 +7,7 @@
              <ul class="nav">
                  <li v-for="i in item.children">
                      <router-link v-if="i.disabled" :to="{path:i.path?i.path:'javascript:;'}"  class="disabled" event="">{{i.title}}</router-link>
-                     <router-link v-else :to="{path:i.path?i.path:'javascript:;'}">{{i.title}}</router-link>
+                     <router-link v-else :to="{path:i.path?i.path:'javascript:;'}" >{{i.title}}</router-link>
                  </li>
              </ul>
           </li>
@@ -26,6 +26,14 @@
             return {
                 msg: 'Hello 6World!'
             }
+        },
+        methods:{
+            goLink:function(){
+            alert(3);
+        }},
+         watch: {
+          // 如果路由有变化，会再次执行该方法
+          "$route": "goLink"
         }
     }
 </script>

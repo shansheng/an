@@ -24,7 +24,46 @@
         var opt = $.extend({},defaults, options);
     }
 
-    
+    $.fn.loadIframe = function (options) {
+        var el = $(this);
+        if (el.length == 0) return;
+        var iframe=this[0];
+        var defaults = {
+            loadImage:'/js/plugins/easyui/themes/default/images/loading1.gif'
+        }
+        var opt = $.extend(true, defaults,options);
+        $tabBody=$(".content");
+         //销毁已有的iframe
+        $tabBody.css({'overflow':'hidden','position':'relative'});
+        var $mask = $('<div style="position:absolute;z-index:2;width:100%;height:100%;background:#ccc;z-index:1000;opacity:0.3;filter:alpha(opacity=30);"><div>').prependTo($tabBody);
+        var $maskMessage = $('<div class="mask-message" style="z-index:3;width:auto;height:16px;line-height:16px;position:absolute;top:50%;left:50%;margin-top:-20px;margin-left:-92px;border:2px solid #d4d4d4;padding: 12px 5px 10px 45px;'+
+        'background: #ffffff url('+opt.loadImage+') no-repeat scroll 5px center">' + (iframe.message || '正在加载,请稍候 ...') + '</div>').prependTo($tabBody);
+        var $containterMask = $('<div style="position:absolute;width:100%;height:100%;z-index:1;background:#fff;"></div>').appendTo($tabBody);
+        //var $containter = $('<div style="position:absolute;width:100%;height:100%;z-index:0;"></div>').prependTo($tabBody);
+        if (iframe.attachEvent){
+            iframe.attachEvent("onload", function(){
+                $([$mask[0],$maskMessage[0]]).fadeOut(iframe.delay || 'slow',function(){
+                    $(this).remove();
+                    if($(this).hasClass('mask-message')){
+                        $containterMask.fadeOut(iframe.delay || 'slow',function(){
+                            $(this).remove();
+                        });
+                    }
+                });
+            });
+        } else {
+            iframe.onload = function(){
+                $([$mask[0],$maskMessage[0]]).fadeOut(iframe.delay || 'slow',function(){
+                    $(this).remove();
+                    if($(this).hasClass('mask-message')){
+                        $containterMask.fadeOut(iframe.delay || 'slow',function(){
+                            $(this).remove();
+                        });
+                    }
+                });
+            };
+        }
+    };
 
     /**
     * @author {CaoGuangHui}
