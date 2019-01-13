@@ -155,8 +155,7 @@ const menuArry={
         },
         {
           title:"Swiper",
-          path:'base',
-          component: base
+          disabled:true
         },
         {
           title:"Iscroll",

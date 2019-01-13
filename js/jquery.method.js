@@ -25,9 +25,6 @@
     }
 
     $.loadIframe = function (options) {
-        // var el = $(this);
-        // if (el.length == 0) return;
-        // var iframe=this[0];
         var defaults = {
             loadImage:'/js/plugins/easyui/themes/default/images/loading1.gif',
             message:"正在加载,请稍候 ...",
