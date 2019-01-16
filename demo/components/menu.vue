@@ -13,12 +13,23 @@
           </li>
       </ul>
    </div>
-   <div class="content">
-       <!-- <div style="width: 100%; height: 100%; overflow: hidden;"><iframe id='iframeId' src="http://www.0non0.com" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div> -->
+   <div class="content"  v-if="$route.params.showtabs">
+    <!-- <div style="width: 100%; height: 100%; overflow: hidden;"><iframe id='iframeId' src="http://www.0non0.com" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div> -->
     <!-- 路由出口 -->
     <!-- 路由匹配到的组件将渲染在这里 -->
+    <div id="tabs" class="easyui-tabs"  fit="true" border="false" ></div>
+    <div id="mm" class="easyui-menu cs-tab-menu" style="display: none;">
+        <div id="mm-tabupdate">刷新</div>
+        <div class="menu-sep"></div>
+        <div id="mm-tabclose">关闭</div>
+        <div id="mm-tabcloseother">关闭其他</div>
+        <div id="mm-tabcloseall">关闭全部</div>
+    </div>
     <router-view></router-view>
    </div>
+    <div class="content" v-else>
+         <router-view></router-view>
+    </div>
   </div>
 </template>
 <script>
@@ -29,15 +40,31 @@
             }
         },
         methods:{
+            initTab:function(){
+                // $('#tabs').tabs('addIframeTab',{
+                //     tab:{title:"欢迎使用",closable:false},
+                //     iframe:{src:"http://www.0non0.com"}
+                // });
+            },
+            addTab:function(){},
             goLink:function(){
-            $.loadIframe({src:this.$route.meta.src});
-        }},
+                $.loadIframe({src:this.$route.meta.src});
+            }
+        },
          mounted:function(){
-             this.goLink()
+            if(this.$route.params.showtabs)
+                this.initTab();
+            else
+                this.goLink()
          },
          watch: {
           // 如果路由有变化，会再次执行该方法
-          "$route": "goLink"
+          "$route"(to, from){
+               if(this.$route.params.showtabs)
+                this.addTab();
+            else
+                this.goLink()
+          }
         }
     }
 </script>

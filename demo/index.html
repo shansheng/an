@@ -11,7 +11,12 @@
     <!--obfuscator[ OPTIONAL ]-->
     <script src="/js/plugins/javascript-obfuscator/index.browser.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <!--Tabs[ OPTIONAL ]-->
+    <link href="/js/plugins/easyui/themes/metro/easyui.css" rel="stylesheet" />
+    <script src="/js/plugins/easyui/base/jquery.parser.js"></script>
+    <script src="/js/plugins/easyui/base/jquery.panel.js"></script>
     <script src="/js/plugins/easyui/plugins/jquery.tabs.js"></script>
+    <script src="/js/plugins/easyui/plugins/jquery.menu.js"></script>
     <script src="/js/jquery.method.js"></script>
 </head>
 <body>
@@ -38,6 +43,10 @@
 
     <script>
         $(function () { 
+            $('#tabs').tabs('addIframeTab',{
+                    tab:{title:"欢迎使用",closable:false},
+                    iframe:{src:"http://www.0non0.com"}
+                });
         $.ajax({
                 type: "POST",
                 contentType:"application/json",

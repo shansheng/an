@@ -169,8 +169,9 @@ const menuArry={
       [
         {
           title:"混淆加密",
-          path:'encrypt',
-          component: dencrypt
+          disabled:true
+          //path:'encrypt',
+          //component: dencrypt
         },
         {
           title:"iconfont图标库",
@@ -439,6 +440,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   to.query["head"]=routes;
   to.query["menu"]=menuArry[to.meta.active];
+  to.params["showtabs"]=true;
   if (to.meta.title) {
       document.title = "anUI "+to.meta.title;
   }
