@@ -368,7 +368,7 @@ const menuRoutes=function(arr,active){
       var oldchild=item[j];
       if(!oldchild.path)continue;
       var src=oldchild.iframe?oldchild.iframe:"http://www.0non0.com";
-      oldchild["meta"]={active:active,title:arr[i].title,src:src};
+      oldchild["meta"]={active:active,group:arr[i].title,title:oldchild.title,src:src};
       //router-view换成Iframe
       // var iframeStr='<div style="width:100%;height:100%;overflow: hidden;"><iframe src="'+(oldchild.iframe?oldchild.iframe:"http://www.0non0.com")+'" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div>';
       // var Iframe = {template:iframeStr}
@@ -441,8 +441,8 @@ router.beforeEach((to, from, next) => {
   to.query["head"]=routes;
   to.query["menu"]=menuArry[to.meta.active];
   to.params["showtabs"]=true;
-  if (to.meta.title) {
-      document.title = "anUI "+to.meta.title;
+  if (to.meta.group) {
+      document.title = "anUI "+to.meta.group;
   }
   console.log(to);
   next()

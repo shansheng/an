@@ -14,10 +14,7 @@
       </ul>
    </div>
    <div class="content"  v-if="$route.params.showtabs">
-    <!-- <div style="width: 100%; height: 100%; overflow: hidden;"><iframe id='iframeId' src="http://www.0non0.com" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div> -->
-    <!-- 路由出口 -->
-    <!-- 路由匹配到的组件将渲染在这里 -->
-    <div id="tabs" class="easyui-tabs"  fit="true" border="false" ></div>
+    <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
     <div id="mm" class="easyui-menu cs-tab-menu" style="display: none;">
         <div id="mm-tabupdate">刷新</div>
         <div class="menu-sep"></div>
@@ -25,10 +22,15 @@
         <div id="mm-tabcloseother">关闭其他</div>
         <div id="mm-tabcloseall">关闭全部</div>
     </div>
+    </div>
+    <!-- 路由出口 -->
+    <!-- 路由匹配到的组件将渲染在这里 -->
     <router-view></router-view>
    </div>
     <div class="content" v-else>
-         <router-view></router-view>
+        <!-- <div style="width: 100%; height: 100%; overflow: hidden;"><iframe id='iframeId' src="http://www.0non0.com" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div> -->
+        <!-- 路由匹配到的组件将渲染在这里 -->
+        <router-view></router-view>
     </div>
   </div>
 </template>
@@ -41,12 +43,10 @@
         },
         methods:{
             initTab:function(){
-                // $('#tabs').tabs('addIframeTab',{
-                //     tab:{title:"欢迎使用",closable:false},
-                //     iframe:{src:"http://www.0non0.com"}
-                // });
             },
-            addTab:function(){},
+            addTab:function(){
+               $.addTab(this.$route.meta.title,this.$route.meta.src);
+            },
             goLink:function(){
                 $.loadIframe({src:this.$route.meta.src});
             }
