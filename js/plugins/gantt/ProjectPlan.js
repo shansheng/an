@@ -568,30 +568,30 @@ var pageData= {
     Name: "加州城三期室外沥青道路工程成本总计划",
     Note: null,
     OriginalUID: null,
-ProcessInstanceID:"fa346709bc5647139a1471441f445a8d",
-ProjectID:1442799957495,
-ProjectName:"加州城三期室外沥青道路工程",
- RangeType:1,
-RelatedUID:null,
-ResponsibleDept:null,
-ResponsibleDeptManager:null,
-StartDate:"/Date(1441036800000)/",
-State:4,
-TargetCost:8,
-UID:"175b4400-9cd5-4941-9802-5b75598ac069",
-operationState:0
+    ProcessInstanceID:"fa346709bc5647139a1471441f445a8d",
+    ProjectID:1442799957495,
+    ProjectName:"加州城三期室外沥青道路工程",
+    RangeType:1,
+    RelatedUID:null,
+    ResponsibleDept:null,
+    ResponsibleDeptManager:null,
+    StartDate:"/Date(1441036800000)/",
+    State:4,
+    TargetCost:8,
+    UID:"175b4400-9cd5-4941-9802-5b75598ac069",
+    operationState:0
 }
 //数据加载
 function loadGantt() {
     //加载控件及控件高度调整
     initialGantt();
-
-    //var topHeight = $("[name='top']").height() - ($("#mini-toolbar").height() + 7); //7为分割线高度
-    var h=$("body").height()-($("#mini-toolbar").height() + 17); //7为分割线高度;
-    project.setStyle("width:100%;height:"+h+"px");
-    window.onresize = function () {
+    var setWH=function(){
         var h=$("body").height()-($("#mini-toolbar").height() + 17); //7为分割线高度;
         project.setStyle("width:100%;height:"+h+"px");
+    }
+    setWH();
+    window.onresize = function () {
+        setWH();
     }
     project.render(document.getElementById("viewCt"));
     //加载数据

@@ -24,6 +24,8 @@
         <div class="top">
         <h1>anUI</h1>
         <div>
+            <input id="firstTitle" type="hidden" :value="$route.meta.title" />
+            <input id="firstSrc" type="hidden" :value="$route.meta.src" />
           <!-- 使用 router-link 组件来导航. -->
           <!-- 通过传入 `to` 属性指定链接. -->
           <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
@@ -43,22 +45,23 @@
 
     <script>
         $(function () { 
-            $('#tabs').tabs('addIframeTab',{
+               $('#tabs').tabs('addIframeTab',{
                     tab:{title:"欢迎使用",closable:false},
                     iframe:{src:"http://www.0non0.com"}
                 });
-        $.ajax({
-                type: "POST",
-                contentType:"application/json",
-                dataType: "json",
-                //async:false,
-                url: "http://212.64.80.101:8085/api/WebAPI/GetJWT",
-                data: JSON.stringify({ UserName: "admin", PassWord:"12345"}),
-                success: function (msg) {
-                    //获取到token mark  1成功   0失败  msg 
-                    Cookies.set('ANTOKEN', msg.token);  
-                }
-            });
+                $.addTab($("#firstTitle").val(),$("#firstSrc").val());
+                $.ajax({
+                        type: "POST",
+                        contentType:"application/json",
+                        dataType: "json",
+                        //async:false,
+                        url: "http://212.64.80.101:8085/api/WebAPI/GetJWT",
+                        data: JSON.stringify({ UserName: "admin", PassWord:"12345"}),
+                        success: function (msg) {
+                            //获取到token mark  1成功   0失败  msg 
+                            Cookies.set('ANTOKEN', msg.token);  
+                        }
+                    });
         });
     </script>
 </html>

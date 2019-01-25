@@ -1,5 +1,4 @@
 
-///�������� �������β��Ű� ���ڹ��̼ƻ�ҳ��
 function DataReset(dataTask, ChangeFlag) {
 
 

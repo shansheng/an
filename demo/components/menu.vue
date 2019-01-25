@@ -42,8 +42,6 @@
             }
         },
         methods:{
-            initTab:function(){
-            },
             addTab:function(){
                $.addTab(this.$route.meta.title,this.$route.meta.src);
             },
@@ -52,9 +50,7 @@
             }
         },
          mounted:function(){
-            if(this.$route.params.showtabs)
-                this.initTab();
-            else
+            if(!this.$route.params.showtabs)
                 this.goLink()
          },
          watch: {
