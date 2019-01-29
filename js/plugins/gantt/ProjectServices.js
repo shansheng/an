@@ -13,6 +13,22 @@
     //初始化甘特图
     mini.parse();
     var project = new PlusProject();
+    var pageData={
+        UID:"001",
+        Name:"测试项目",
+        Number:"1",
+        StartDate:"/Date(1441036800000)/",
+        FinishDate: "/Date(1476201599000)/",
+        Duration: 0,
+        Tasks:[{
+            UID:"1-1",
+            Name:"测试任务1",
+            Number:"100",
+            CreateTime:"/Date(1441036800000)/",
+            Finish: "/Date(1476201599000)/",
+            Duration: 88
+        }]
+    }
 
     PS.prototype={
         setStyle:function(){
@@ -42,7 +58,7 @@
                 return mini.copyTo({
                     name: "ID",
                     header: "序号",
-                    field: "ID",
+                    field: "UID",
                     width: 50,
                     cellCls: "mini-indexcolumn",
                     align: "center",
@@ -53,7 +69,7 @@
 
             var NameColumn = {
                 header: "<center>名称</center>", field: "Name", width: 100, editor: { type: "textbox" }, renderer: function (J) {
-                    PorjectPlanDefault.CurrentForcusTaskID = J.record.ID;
+                    
                 }
             };
 
@@ -104,6 +120,12 @@
              //自定义条形图label内容
              project.on("drawitem", function (e) {});
         
+        },
+        loadData:function(){
+            project.loading();
+            pageData = mini.decode(pageData); //数据格式转换
+            project.loadData(pageData);
+            project.unmask();
         }
     }
 
@@ -111,6 +133,7 @@
         this.setStyle();
         this.setCustomSetting();
         project.render(document.getElementById("viewCt"));
+        this.loadData();
         this.initEvent();
     }
 
