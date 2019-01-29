@@ -38,7 +38,7 @@ document.write('<script src="' + bootPATH + 'miniui/locale/zh_CN.js" type="text/
 //project
 //document.write('<script src="' + bootPATH + 'ThirdLibs/DatePicker/WdatePicker.js" type="text/javascript"></script>');
 document.write('<script src="' + bootPATH + 'plusproject/js/CalendarWindow.js" type="text/javascript"></script>');
-//document.write('<script src="' + bootPATH + 'plusproject/js/ProjectMenu.js" type="text/javascript"></script>');
+document.write('<script src="' + bootPATH + 'plusproject/js/ProjectMenu.js" type="text/javascript"></script>');
 document.write('<script src="' + bootPATH + 'plusproject/js/StatusColumn.js" type="text/javascript"></script>');
 document.write('<script src="' + bootPATH + 'plusproject/js/TaskWindow.js" type="text/javascript"></script>');
 document.write('<script src="' + bootPATH + 'plusproject/js/ProjectServices.js" type="text/javascript"></script>');
