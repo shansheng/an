@@ -120,17 +120,54 @@
         this.setDefaultColumns();
         project.render(document.getElementById("viewCt"));
         this.loadJSONProject();
+        this.initToolbar();
         this.initEvent();
     }
 
-    //项目
-    var taskWindow = null;
-    var calendarWindow = null;
-    PS.prototype.initEvent=function(){
+    //接口
+    PS.prototype.Extend={
+        //判断节点的层级
+        isLimitTask:function(task){
+            var taskparent = project.getTaskByID(1);
+            var childtask = project.getChildTasks(taskparent);
+            if (task == taskparent)
+                return 1;
+            else if ($.inArray(task, childtask) >= 0)
+                return 2;
+            else
+                return -1;
+        }
+    }
+    PS.prototype.initToolbar=function(){
         var el=this;
-        $(window).on("resize",function(e){
-            el.setStyle();
-         });
+          //升级
+          this.toolbar.find(".upgrade").on("click",function(){
+            var task = project.getSelected();
+            var level = el.Extend.isLimitTask(project.getParentTask(task));
+            if (level == 1 || level == 2) {
+                alert("无法升级");
+                return;
+            }
+            if (task) {
+                project.upgradeTask(task);
+            } else {
+                alert("请选选中任务");
+            }
+        })
+        //降级
+        this.toolbar.find(".downgrade").on("click",function(){
+            var task = project.getSelected();
+            var level = el.Extend.isLimitTask(task);
+            if (level == 1 || level == 2) {
+                alert("无法降级");
+                return;
+            }
+            if (task) {
+                project.downgradeTask(task);
+            } else {
+                alert("请选选中任务");
+            }
+        })
         //锁定列
         this.toolbar.find(".lock").on("click",function(){
             var checked = $(this).hasClass("mini-button-checked");
@@ -139,6 +176,14 @@
             } else {
                 project.unfrozenColumn();
             }
+        })
+        //放大
+        this.toolbar.find(".zoomin").on("click",function(){
+            project.zoomIn();
+        })
+        //缩小
+        this.toolbar.find(".zoomout").on("click",function(){
+            project.zoomOut();
         })
          //创建任务面板 
          this.toolbar.find(".taskwin").on("click",function(){
@@ -189,6 +234,15 @@
                 }
             );
          })
+    }
+    //项目
+    var taskWindow = null;
+    var calendarWindow = null;
+    PS.prototype.initEvent=function(){
+        var el=this;
+        $(window).on("resize",function(e){
+            el.setStyle();
+         });
     }
 
 

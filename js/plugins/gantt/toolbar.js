@@ -10,13 +10,13 @@ toolbar += '<a class="mini-button" plain="true" iconCls="icon-remove" onclick="r
 //}
 
 //toolbar += '<span class="separator"></span>	';
-toolbar += '<a class="mini-button" plain="true" iconCls="icon-upgrade" onclick="upgradeTask()">升级</a>';
-toolbar += '<a class="mini-button" plain="true" iconCls="icon-downgrade" onclick="downgradeTask()">降级</a>	';
+toolbar += '<a class="mini-button upgrade" plain="true" iconCls="icon-upgrade">升级</a>';
+toolbar += '<a class="mini-button downgrade" plain="true" iconCls="icon-downgrade">降级</a>	';
 toolbar += '<span class="separator"></span>';
 toolbar += '<a class="mini-button lock" plain="true" iconCls="icon-lock"  checkOnClick="true">锁定列</a>';
 toolbar += '<span class="separator"></span>';
-toolbar += '<a class="mini-button" plain="true" iconCls="icon-zoomin" onclick="zoomIn()">放大</a>';
-toolbar += '<a class="mini-button" plain="true" iconCls="icon-zoomout" onclick="zoomOut()">缩小</a>';
+toolbar += '<a class="mini-button zoomin" plain="true" iconCls="icon-zoomin">放大</a>';
+toolbar += '<a class="mini-button zoomout"  plain="true" iconCls="icon-zoomout">缩小</a>';
 toolbar += '<span class="separator"></span>';
 toolbar += '<span id="export" style="display: none;"><input name="mppVersion" type="radio" value="03"/><span>2003</span><input name="mppVersion" type="radio" value="07" /><span>2007</span><input name="mppVersion" type="radio" value="10" checked="checked" /><span>2010</span><a class="mini-button" plain="true" iconCls="icon-download" onclick="exportMmp()">导出</a></span>';
 toolbar += '<span class="separator" style="display: none;"></span>';
