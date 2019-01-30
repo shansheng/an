@@ -13,7 +13,7 @@ toolbar += '<a class="mini-button" plain="true" iconCls="icon-remove" onclick="r
 toolbar += '<a class="mini-button" plain="true" iconCls="icon-upgrade" onclick="upgradeTask()">升级</a>';
 toolbar += '<a class="mini-button" plain="true" iconCls="icon-downgrade" onclick="downgradeTask()">降级</a>	';
 toolbar += '<span class="separator"></span>';
-toolbar += '<a class="mini-button" plain="true" iconCls="icon-lock" onclick="onLockClick" checkOnClick="true">锁定列</a>';
+toolbar += '<a class="mini-button lock" plain="true" iconCls="icon-lock"  checkOnClick="true">锁定列</a>';
 toolbar += '<span class="separator"></span>';
 toolbar += '<a class="mini-button" plain="true" iconCls="icon-zoomin" onclick="zoomIn()">放大</a>';
 toolbar += '<a class="mini-button" plain="true" iconCls="icon-zoomout" onclick="zoomOut()">缩小</a>';
@@ -21,8 +21,9 @@ toolbar += '<span class="separator"></span>';
 toolbar += '<span id="export" style="display: none;"><input name="mppVersion" type="radio" value="03"/><span>2003</span><input name="mppVersion" type="radio" value="07" /><span>2007</span><input name="mppVersion" type="radio" value="10" checked="checked" /><span>2010</span><a class="mini-button" plain="true" iconCls="icon-download" onclick="exportMmp()">导出</a></span>';
 toolbar += '<span class="separator" style="display: none;"></span>';
 //toolbar += '<span class="separator"></span>';
-toolbar += '<a class="mini-button" iconCls="icon-node" onclick="editTaskByTaskWindow()">任务面板</a>	';
-toolbar += '<a class="mini-button" iconCls="icon-date" onclick="showCalendars()">日历面板</a>';
+toolbar += '<a class="mini-button taskwin" iconCls="icon-node">任务面板</a>	';
+toolbar += '<a class="mini-button datewin" iconCls="icon-date">日历面板</a>&nbsp;';
+
 
 $("#mini-toolbar").html(toolbar);
 
@@ -55,3 +56,4 @@ chgTimeSet += '<input type="checkbox" id="trackcheck" onclick="oncheckedchanged(
 chgTimeSet += '<input type="checkbox" id="criticalcheck" onclick="isShowCritical(this)"/><label for="criticalcheck">关键路劲</label>';
 chgTimeSet += '<input type="checkbox" id="sortstartcheck" onclick="isSortByStart(this)"/><label for="sortstartcheck">起始时间排序</label>';
 $("#chgTimeSet").html(chgTimeSet);
+

@@ -18,7 +18,7 @@ mini.extend(ProjectMenu, mini.Menu, {
             { type: "menuitem", iconCls: "icon-remove", text: mini.Gantt.Remove_Text, name: "remove" },
             '-',
             { type: "menuitem", iconCls: "icon-zoomin", text: mini.Gantt.ZoomIn_Text, name: "zoomin" },
-            { type: "menuitem", iconCls: "icon-zoomout", text: mini.Gantt.ZoomOut_Text, name: "zoomout" }
+            { type: "menuitem", iconCls: "icon-zoomout", text: mini.Gantt.ZoomOut_Text, name: "zoomout" }            
         ];
         this.setItems(menuItems);
 
@@ -57,48 +57,28 @@ mini.extend(ProjectMenu, mini.Menu, {
         gantt.zoomOut();
     },
     __OnUpgrade: function (e) {
-        upgradeTask(this.owner);
-        //        var gantt = this.owner;
-        //        var task = gantt.getSelected();
-        //        var level = isLimitTask(project.getParentTask(task));
-        //        if (level == 1) {
-        //            alert("无法升级");
-        //            return;
-        //        }
-        //        if (task) {
-        //            gantt.upgradeTask(task);
-        //        }
-
+        var gantt = this.owner;
+        var task = gantt.getSelected();
+        if (task) {
+            gantt.upgradeTask(task);
+        }
     },
     __OnDowngrade: function (e) {
-        downgradeTask(this.owner);
-
-        //        var gantt = this.owner;
-        //        var task = gantt.getSelected();
-        //        var level = isLimitTask(task);
-        //        if (level == 1) {
-        //            alert("无法降级");
-        //            return;
-        //        }
-        //        if (task) {
-        //            gantt.downgradeTask(task);
-        //        }
-
+        var gantt = this.owner;
+        var task = gantt.getSelected();
+        if (task) {
+            gantt.downgradeTask(task);
+        }
     },
     __OnAdd: function (e) {
-        addTask(this.owner);
-        //        var gantt = this.owner;
-        //        var targetTask = gantt.getSelected();
-        //        var level = isLimitTask(targetTask);
-        //        if (level == 1) {
-        //            alert("无法新增");
-        //            return;
-        //        }
-        //        var task = gantt.newTask();
-        //        task.Name = '<新增任务>';    //初始化任务属性
-        //        //加到选中任务之内        
-        //        task.operationState = ironman3.operationState.added;
-        //        gantt.addTask(task, "add", PorjectPlanDefault.AddTargetTask);
+        var gantt = this.owner;
+        var targetTask = gantt.getSelected();
+        var task = gantt.newTask();
+        //加到选中任务之前        
+        gantt.addTask(task, "after", targetTask);
+
+        //加到子任务
+        //gantt.addTask(task, "append", targetTask);
     },
     __OnEdit: function (e) {
         var gantt = this.owner;
@@ -108,26 +88,15 @@ mini.extend(ProjectMenu, mini.Menu, {
         }
     },
     __OnRemove: function (e) {
-        removeTask(this.owner);
-
-//        var gantt = this.owner;
-//        var task = gantt.getSelected();
-//        var level = isLimitTask(task);
-//        if (level == 1) {
-//            alert("无法删除");
-//            return;
-//        }
-//        if (task) {
-//            if (confirm("确定删除任务 \"" + task.Name + "\" ？")) {
-//                removeTaskUID.push(task);
-//                gantt.removeTask(task);
-//                //           task.operationState = ironman3.operationState.deleted;
-//                //         project.addTaskCls(task, "displanNone");
-//            }
-//        } else {
-//            alert("请选择要删除的任务");
-        //        }
-        
+        var gantt = this.owner;
+        var task = gantt.getSelected();
+        if (task) {
+            if (confirm("确定删除任务 \"" + task.Name + "\" ？")) {
+                gantt.removeTask(task);
+            }
+        } else {
+            alert("请选择要删除的任务");
+        }
     }
 
 });

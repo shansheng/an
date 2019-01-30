@@ -13,22 +13,6 @@
     //初始化甘特图
     mini.parse();
     var project = new PlusProject();
-    var pageData={
-        UID:"001",
-        Name:"测试项目",
-        Number:"1",
-        StartDate:"/Date(1441036800000)/",
-        FinishDate: "/Date(1476201599000)/",
-        Duration: 0,
-        Tasks:[{
-            UID:"1-1",
-            Name:"测试任务1",
-            Number:"100",
-            CreateTime:"/Date(1441036800000)/",
-            Finish: "/Date(1476201599000)/",
-            Duration: 88
-        }]
-    }
 
     PS.prototype={
         setStyle:function(){
@@ -36,7 +20,7 @@
             project.setStyle("width:100%;height:"+h+"px");
         },
         setDefaultColumns:function(){
-            //默认
+            //创建列
             project.setColumns([
                 new PlusProject.IDColumn(),
                 new PlusProject.StatusColumn(),
@@ -51,10 +35,13 @@
                 new PlusProject.PrincipalColumn(),
                 new PlusProject.AssignmentsColumn()
             ]);
+             //创建右键菜单
+            var menu = new ProjectMenu();
+            project.setContextMenu(menu);
         },
-        setCustomSetting:function(){
+        setCustomColumns:function(){
               //创建列
-             PlusProject.IDColumn = function ($) {
+              PlusProject.IDColumn = function ($) {
                 return mini.copyTo({
                     name: "ID",
                     header: "序号",
@@ -96,53 +83,113 @@
                 ];
             project.setColumns(columns);
 
-             //创建右键菜单
-             var menu = new ProjectMenu();
-             project.setContextMenu(menu);
-             menu.edit.on("click", function (e) {});
+        },
+        setSetting:function(){
              project.on('taskdblclick', function(e){});
              project.on('taskclick', function(e){});
              project.on("drawcell", function (e) {
                 var task = e.record, column = e.column, field = e.field;
              });
-
-             project.on("cellbeginedit", function (e) {
-                var task = e.record, column = e.column, field = e.field;
-             });
-
-             project.on("CellCommitEdit", function (e) {
-                var task = e.record, column = e.column, field = e.field, value = e.value;
-             });
-
-             project.on("itemdragstart", function (e) {
-                e.cancel = true;
-             });
+             project.on("cellbeginedit", function (e) {});
+             project.on("CellCommitEdit", function (e) {});
+             project.on("itemdragstart", function (e) {e.cancel = true;});
              //自定义条形图label内容
              project.on("drawitem", function (e) {});
-        
         },
-        loadData:function(){
-            project.loading();
-            pageData = mini.decode(pageData); //数据格式转换
-            project.loadData(pageData);
-            project.unmask();
+        loadJSONProject:function(){
+            //project.loading();
+            project.mask("数据加载中，请稍后...");
+            $.ajax({
+                url:"/js/plugins/gantt/project.txt",
+                cache: false,
+                success: function (text) {
+                    var dataProject = mini.decode(text);
+                    project.loadData(dataProject);
+                    project.unmask();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("加载失败, 错误码：" + textStatus);
+                    project.unmask();
+                }
+            });
         }
     }
 
     PS.prototype.init=function(){
         this.setStyle();
-        this.setCustomSetting();
+        this.setDefaultColumns();
         project.render(document.getElementById("viewCt"));
-        this.loadData();
+        this.loadJSONProject();
         this.initEvent();
     }
 
     //项目
+    var taskWindow = null;
+    var calendarWindow = null;
     PS.prototype.initEvent=function(){
         var el=this;
         $(window).on("resize",function(e){
             el.setStyle();
          });
+        //锁定列
+        this.toolbar.find(".lock").on("click",function(){
+            var checked = $(this).hasClass("mini-button-checked");
+            if (!checked) {
+                project.frozenColumn(0, 2);
+            } else {
+                project.unfrozenColumn();
+            }
+        })
+         //创建任务面板 
+         this.toolbar.find(".taskwin").on("click",function(){
+            var task = project.getSelected();
+            if (task) {
+                if (!taskWindow) {
+                    taskWindow = new TaskWindow();
+                }
+                taskWindow.setTitle("编辑任务");
+                taskWindow.show();
+                taskWindow.setData(task, project,
+                    function (action) {
+        
+                        if (action == 'ok') {
+                            try {
+                                var taskData = taskWindow.getData();
+                                project.updateTask(task, taskData);
+                            } catch (ex) {
+                                alert("error:" + ex.message);
+                                return false;
+                            }
+                        }
+                    }
+                );
+            } else {
+                alert("请先选择任务");
+            }
+         })
+
+         //日历面板
+         this.toolbar.find(".datewin").on("click",function(){
+            if (!calendarWindow) {
+                calendarWindow = new CalendarWindow();
+            }
+            calendarWindow.show();
+            calendarWindow.setData(project.getCalendars(), project,
+                function (action) {
+                    if (action == "ok") {
+        
+                        var calendars = calendarWindow.getData();
+                        var calendarUID = calendarWindow.CalendarsCombo.getValue();
+        
+                        project.beginUpdate();
+                        project.setCalendars(calendars);
+                        project.setCalendarUID(calendarUID);
+                        project.endUpdate();
+                    }
+                }
+            );
+         })
     }
+
 
 } ());

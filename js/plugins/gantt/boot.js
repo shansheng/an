@@ -41,7 +41,7 @@ document.write('<script src="' + bootPATH + 'plusproject/js/CalendarWindow.js" t
 document.write('<script src="' + bootPATH + 'plusproject/js/ProjectMenu.js" type="text/javascript"></script>');
 document.write('<script src="' + bootPATH + 'plusproject/js/StatusColumn.js" type="text/javascript"></script>');
 document.write('<script src="' + bootPATH + 'plusproject/js/TaskWindow.js" type="text/javascript"></script>');
-document.write('<script src="' + bootPATH + 'plusproject/js/ProjectServices.js" type="text/javascript"></script>');
+// document.write('<script src="' + bootPATH + 'plusproject/js/ProjectServices.js" type="text/javascript"></script>');
 
 document.write('<script src="' + bootPATH + 'ThirdLibs/swfobject/swfobject.js" type="text/javascript"></script>');
 
