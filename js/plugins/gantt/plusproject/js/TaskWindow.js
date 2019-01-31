@@ -5,7 +5,7 @@ TaskWindow = function () {
     this.initEvents();
 }
 mini.extend(TaskWindow, mini.Window, {
-    url: "/js/plugins/gantt/TaskWindow.html", 
+    url: "/js/plugins/gantt/plusproject/js/TaskWindow.html", 
     width: 580,
     height: 380,
     showFooter: true,

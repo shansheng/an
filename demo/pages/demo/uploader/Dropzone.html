@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>anUI</title>
+    <script type="text/javascript" src="https://lastsoup.github.io/themes/nifty/js/jquery-2.2.4.min.js"></script>
+    <!-- <link href="https://lastsoup.github.io/themes/nifty/css/nifty.css" rel="stylesheet"> -->
+    <link href="https://lastsoup.github.io/themes/nifty/css/demo/nifty-demo-icons.min.css" rel="stylesheet" type="text/css">
+
+    <!--上传控件[ OPTIONAL ]-->
+    <link href="/js/plugins/dropzone/dropzone.css" rel="stylesheet">
+    <script src="/js/plugins/dropzone/dropzone.js"></script>
+    <script src="/js/plugins/dropzone/DropzoneServices.js"></script>
+    <style>
+        body {
+            background-color: #ecf0f5;
+            font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            font-weight: normal;
+            font-variant: normal;
+            color: #758697;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased !important;
+        }
+        .icon-5x {
+            font-size: 5em;
+            line-height: 1em;
+        }
+
+        ::selection {
+            background-color: #42a5f5;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!--Dropzonejs-->
+    <!--===================================================-->
+    <div id="my-dropzone"  class="dropzone form-dropzone">
+            <input id="hidden_attachList" type="hidden" value="" name="attachList" />
+            <div class="dz-default dz-message">
+                <div class="dz-icon">
+                    <i class="demo-pli-upload-to-cloud icon-5x"></i>
+                </div>
+                <div>
+                    <span class="dz-text">拖动文件上传</span>
+                    <p class="text-sm text-muted">或者点击面板上传</p>
+                </div>
+            </div>
+            <div class="fallback">
+                <input name="file" type="file" multiple style="display: none;">
+            </div>
+        </div>
+        <!--===================================================-->
+        <!-- End Dropzonejs -->
+</body>
+<script type="text/javascript">
+new Uploader()
+</script>
+</html>

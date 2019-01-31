@@ -39269,7 +39269,7 @@ $(function() {
    window.alert = function (e) {
        if (e != null && e.indexOf("www.miniui.com") > -1)
    {
-       //��г��
+       //禁止alert
    }
    else
    {

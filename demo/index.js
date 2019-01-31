@@ -124,7 +124,8 @@ const menuArry={
       [
         {
           title:"Dropzone",
-          disabled:true
+          path:"Dropzone",
+          iframe:"demo/pages/demo/uploader/Dropzone.html"
         }
       ]
     }
