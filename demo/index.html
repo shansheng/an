@@ -5,6 +5,7 @@
     <title>anUI</title>
     <script type="text/javascript" src="https://lastsoup.github.io/themes/nifty/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="https://lastsoup.github.io/themes/nifty/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/plugins/data.js"></script>
     <!--Open Sans Font [ OPTIONAL ]-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css">
     <link href="https://lastsoup.github.io/themes/nifty/css/demo/nifty-demo-icons.min.css" rel="stylesheet" type="text/css">
@@ -55,8 +56,8 @@
                         contentType:"application/json",
                         dataType: "json",
                         //async:false,
-                        url: "https://www.kaoshicat.com/api/WebAPI/GetJWT",
-                        data: JSON.stringify({ UserName: "admin", PassWord:"12345"}),
+                        url: host+"/api/WebAPI/GetJWT",
+                        data: JSON.stringify({ Name: "admin", Password:"12345"}),
                         success: function (msg) {
                             //获取到token mark  1成功   0失败  msg 
                             Cookies.set('ANTOKEN', msg.token);  

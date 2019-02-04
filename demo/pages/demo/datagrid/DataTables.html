@@ -114,7 +114,7 @@
             "processing": true,
             "serverSide":true,
             "ajax": {
-                "url":"https://www.kaoshicat.com/api/WebAPI/GetUserList",
+                "url":parent.host+"/api/WebAPI/GetUserList",
                 "type": "post",
                 "headers":{"Authorization":"Bearer " + Cookies.get('ANTOKEN')}, 
                 //"dataSrc": "",
@@ -125,8 +125,8 @@
                 }
             },
             "columns": [
-                { "data": "Id","title": "Id",display:true },
-                { "data": "UserName","title": "Name",display:false }
+                { "data": "ID","title": "ID",display:true },
+                { "data": "Name","title": "Name",display:false }
             ]
         } );
     

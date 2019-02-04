@@ -164,15 +164,15 @@
            //contentType: "application/x-www-form-urlencoded",
            //url:"http://212.64.80.101:8085/api/WebAPI/GetPostParams",
            contentType:"application/json",
-           url:"https://www.kaoshicat.com/api/WebAPI/GetUserList",
+           url:parent.host+"/api/WebAPI/GetUserList",
            method: "post",
            sidePagination: 'server',
            ajaxOptions:{ 
                headers: {"Authorization":"Bearer " + Cookies.get('ANTOKEN')}
            },
            columns:  [
-                { "field": "Id","title": "Id",sortable:true },
-                { "field": "UserName","title": "Name",sortable:true, editable: {type: 'text'} }
+                { "field": "ID","title": "ID",sortable:true },
+                { "field": "Name","title": "Name",sortable:true, editable: {type: 'text'} }
             ],
            queryParams:function(d) {
                  var jsonstr={"length": d.limit, "start": d.offset,"search": d.search};

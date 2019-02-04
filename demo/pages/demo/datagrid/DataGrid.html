@@ -50,8 +50,8 @@
         fitColumns:true" style="width:100%;">
 <thead>
 <tr>
-    <th data-options="field:'id',sortable:true,width:1">Id </th>
-    <th data-options="field:'name',sortable:true,width:2">Name</th>
+    <th data-options="field:'ID',sortable:true,width:1">Id </th>
+    <th data-options="field:'Name',sortable:true,width:2">Name</th>
 </tr>
 </thead>
 </table>
@@ -61,7 +61,7 @@
     $(document).ready(function () {
            subdemo.init();
            $('#dg2').datagrid({
-            url:'https://58.213.48.24:3005/api/WebAPI/GetPostParams',
+            url:parent.host+'/api/WebAPI/GetPostParams',
             headers:{"Authorization":"Bearer " + Cookies.get('ANTOKEN')},
             queryParams: {
             "length" : function(){
