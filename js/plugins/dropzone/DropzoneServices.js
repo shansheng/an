@@ -9,7 +9,7 @@
     Uploader.prototype.Dropzone={
         Dropzone:null,
         uploadFilesObj:[],
-        uploadFileUrl:"https://www.kaoshicat.com/api/WebAPI/FileUpLoad",
+        uploadFileUrl:parent.host+"/api/WebAPI/Upload",
         deleteFileUrl:"/Attach/DelAttachFile",
         init:function(){
             this.DropzoneClear();
@@ -56,13 +56,16 @@
                 dictCancelUploadConfirmation:"你确定想要取消这个上传？",
                 layer:true,
                 success: function(file, data,e,i) {
-                    var item = data.fileState[i];
+                    var item = data;
                     if (item.upload_State) {
                         var newitem = {AttachName: item.file_Name, AttachPath: item.file_Path,AttachSize:file.size+";"+file.type};
                         el.uploadFilesObj=el.uploadFilesObj?el.uploadFilesObj:[];
                         el.uploadFilesObj.push(newitem);
                         $(file.previewElement).find(".dz-download").attr("href",item.file_Path);
                         $(file.previewElement).data("file_Path", item.file_Path);
+                    }else
+                    {
+                        alert(item.msg);
                     }
                 },
                 removedfile: function(file) {
@@ -77,8 +80,12 @@
                             file.previewElement.remove();
                             alert("删除成功");
                         }
-                        $.fn.ajaxHandler({url: deleteUrl, data: {file_Path: filepath,AttachGuid:fileid}}).done(deleteSucess);
-
+                        $.ajax({
+                            type: "POST",
+                            url: deleteUrl,
+                            data: {file_Path: filepath,AttachGuid:fileid},
+                            success:  deleteSucess
+                        });
                     }else
                     {
                         file.previewElement.remove();
