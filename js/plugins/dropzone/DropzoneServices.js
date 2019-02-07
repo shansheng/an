@@ -9,8 +9,10 @@
     Uploader.prototype.Dropzone={
         Dropzone:null,
         uploadFilesObj:[],
+        host:parent.host,
+        getFileListUrl:parent.host+"/api/WebAPI/GetFileList",
         uploadFileUrl:parent.host+"/api/WebAPI/Upload",
-        deleteFileUrl:"/Attach/DelAttachFile",
+        deleteFileUrl:parent.host+"/api/WebAPI/DeleteFile",
         init:function(){
             this.DropzoneClear();
             this.uploadFilesObj=null;
@@ -55,14 +57,30 @@
                 dictCancelUpload:"取消上传",
                 dictCancelUploadConfirmation:"你确定想要取消这个上传？",
                 layer:true,
+                isGoOn:function(file){
+                  var name=file.name;
+                  var arry=$.grep(el.uploadFilesObj,function(n,i){
+                     return n.AttachName==name;
+                  })
+                  if(arry.length>0)
+                  {
+                    alert("该文件名已存在");
+                    return false;
+                  }else
+                  {
+                    return true;
+                  }
+                 
+                },
                 success: function(file, data,e,i) {
                     var item = data;
                     if (item.upload_State) {
-                        var newitem = {AttachName: item.file_Name, AttachPath: item.file_Path,AttachSize:file.size+";"+file.type};
+                        var newitem = {AttachID:item.file_ID,AttachName: item.file_Name, AttachPath: el.host+item.file_Path,AttachSize:file.size,AttachType:file.type};
                         el.uploadFilesObj=el.uploadFilesObj?el.uploadFilesObj:[];
                         el.uploadFilesObj.push(newitem);
                         $(file.previewElement).find(".dz-download").attr("href",item.file_Path);
                         $(file.previewElement).data("file_Path", item.file_Path);
+                        $(file.previewElement).data("file_ID", item.file_ID);
                     }else
                     {
                         alert(item.msg);
@@ -70,20 +88,24 @@
                 },
                 removedfile: function(file) {
                     //删除服务器的文件
-                    var filepath=$(file.previewElement).data("file_Path");
+                    var filepath=$(file.previewElement).data("file_Path").replace(el.host,"");
                     var fileid=$(file.previewElement).data("file_ID");
                     var deleteUrl=el.deleteFileUrl;
                     if(typeof(filepath)!="undefined") {
                         var deleteSucess = function (data) {
-                            var index=$(file.previewElement).index()-2;
-                            el.uploadFilesObj.splice(index, 1);
-                            file.previewElement.remove();
-                            alert("删除成功");
+                            if(data.IsSuccess){
+                                var index=$(file.previewElement).index()-2;
+                                el.uploadFilesObj.splice(index, 1);
+                                file.previewElement.remove();
+                                alert("删除成功");
+                            }else{
+                                alert(data.Message);
+                            }
                         }
                         $.ajax({
                             type: "POST",
                             url: deleteUrl,
-                            data: {file_Path: filepath,AttachGuid:fileid},
+                            data: {file_Path: filepath,file_ID:fileid},
                             success:  deleteSucess
                         });
                     }else
@@ -93,12 +115,27 @@
                 },
                 init: function () {
                     var dropzone=this;
-                    $.each(el.uploadFilesObj,function(n,item){
-                        var arrySize=item.AttachSize?item.AttachSize.split(";"):[0,"未知"];
-                        var file={id:item.AttachGuid,name:item.AttachName,size:arrySize[0],status:"success",type:arrySize[1],url:item.AttachPath,showfirst:true};
-                        dropzone.files.push(file);
-                        dropzone.emit("addedfile", file);
+                    $.ajax({
+                        type: "POST",
+                        url:el.getFileListUrl,
+                        success: function(data){
+                            if(data.IsSuccess){
+                                el.uploadFilesObj=data.BaseData;
+                                $.each(el.uploadFilesObj,function(n,item){
+                                    var file={id:item.AttachID,name:item.AttachName,size:item.AttachSize,status:"success",type:item.AttachType,url:el.host+item.AttachPath,showfirst:true};
+                                    dropzone.files.push(file);
+                                    dropzone.emit("addedfile", file);
+                                });
+                            }else{
+                                alert(data.Message);
+                            }
+                        }
                     });
+                    // $.each(el.uploadFilesObj,function(n,item){
+                    //     var file={id:item.AttachID,name:item.AttachName,size:item.AttachSize,status:"success",type:item.AttachType,url:item.AttachPath,showfirst:true};
+                    //     dropzone.files.push(file);
+                    //     dropzone.emit("addedfile", file);
+                    // });
 
                 }
             };

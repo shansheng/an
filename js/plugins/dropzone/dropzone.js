@@ -249,6 +249,12 @@
         return this.element.classList.remove("dz-started");
       },
       addedfile: function(file) {
+        //cqy start-20171123
+        if(!file.showfirst&&!this.options.isGoOn(file))
+        {
+           return false;
+        }
+        //cqy end-20171123
         var node, removeFileEvent, removeLink, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
         if (this.element === this.previewsContainer) {
           this.element.classList.add("dz-started");
