@@ -252,7 +252,8 @@
         //cqy start-20171123
         if(!file.showfirst&&!this.options.isGoOn(file))
         {
-           return false;
+          this.cancelUpload(file);
+          return false;
         }
         //cqy end-20171123
         var node, removeFileEvent, removeLink, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
@@ -268,6 +269,7 @@
           {
               $(file.previewElement).find(".dz-progress").remove();
               $(file.previewElement).find(".dz-download").attr("href",file.url);
+             // this.createThumbnail(file);
               $(file.previewElement).find(".dz-image img").attr("alt",file.name).attr("src",file.url).width("100%").height("100%");
               $(file.previewElement).data("file_Path", file.url);
               $(file.previewElement).data("file_ID", file.id);
@@ -1606,22 +1608,11 @@
   };
 
   Dropzone.confirm = function(question, accepted, rejected) {
-    if(this.options.myDropzone.layer)
-    {
-        var index=layer.confirm(question,function(){
-            layer.close(index);
-            return accepted();
-        },function(){
-            if (rejected != null)
-                return rejected();
-        });
-    }else {
-        if (window.confirm(question)) {
+      if (window.confirm(question)) {
             return accepted();
         } else if (rejected != null) {
             return rejected();
         }
-    }
   };
 
   Dropzone.isValidFile = function(file, acceptedFiles) {

@@ -75,11 +75,12 @@
                 success: function(file, data,e,i) {
                     var item = data;
                     if (item.upload_State) {
-                        var newitem = {AttachID:item.file_ID,AttachName: item.file_Name, AttachPath: el.host+item.file_Path,AttachSize:file.size,AttachType:file.type};
+                        var filePath=el.host+item.file_Path;
+                        var newitem = {AttachID:item.file_ID,AttachName: item.file_Name, AttachPath: filePath,AttachSize:file.size,AttachType:file.type};
                         el.uploadFilesObj=el.uploadFilesObj?el.uploadFilesObj:[];
                         el.uploadFilesObj.push(newitem);
-                        $(file.previewElement).find(".dz-download").attr("href",item.file_Path);
-                        $(file.previewElement).data("file_Path", item.file_Path);
+                        $(file.previewElement).find(".dz-download").attr("href",filePath);
+                        $(file.previewElement).data("file_Path", filePath);
                         $(file.previewElement).data("file_ID", item.file_ID);
                     }else
                     {
@@ -88,6 +89,10 @@
                 },
                 removedfile: function(file) {
                     //删除服务器的文件
+                    if(file.status!="success"){
+                        file.previewElement.remove();
+                        return;
+                    }
                     var filepath=$(file.previewElement).data("file_Path").replace(el.host,"");
                     var fileid=$(file.previewElement).data("file_ID");
                     var deleteUrl=el.deleteFileUrl;
@@ -112,6 +117,7 @@
                     {
                         file.previewElement.remove();
                     }
+                    
                 },
                 init: function () {
                     var dropzone=this;
