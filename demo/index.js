@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import './assets/base.css';
 import './assets/main.css';
 
+
 /*左侧菜单栏 */
 import menu from './components/menu.vue';
 /*Demo（教程） */
@@ -441,7 +442,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   to.query["head"]=routes;
   to.query["menu"]=menuArry[to.meta.active];
-  to.params["showtabs"]=true;
+  to.params["showtabs"]=false;
   if (to.meta.group) {
       document.title = "anUI "+to.meta.group;
   }

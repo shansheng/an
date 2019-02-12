@@ -18,6 +18,29 @@
             this.uploadFilesObj=null;
             this.upload();
         },
+        getBase64:function(img){
+            function getBase64Image(img,width,height) {//width、height调用时传入具体像素值，控制大小 ,不传则默认图像大小
+                var canvas = document.createElement("canvas");
+                canvas.width = width ? width : img.width;
+                canvas.height = height ? height : img.height;
+       
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                var dataURL = canvas.toDataURL();
+                return dataURL;
+              }
+              var image = new Image();
+              image.setAttribute('crossOrigin', 'anonymous');
+              image.crossOrigin = "*";
+              image.src = img;
+              var deferred=$.Deferred();
+              if(img){
+                image.onload =function (){
+                  deferred.resolve(getBase64Image(image,120,120));//将base64传给done上传处理
+                }
+                return deferred.promise();//问题要让onload完成后再return sessionStorage['imgTest']
+              }
+        },
         LoadDropzoneData:function(data){
            this.uploadFilesObj=data;
         },
@@ -90,9 +113,10 @@
                 removedfile: function(file) {
                     //删除服务器的文件
                     if(file.status!="success"){
-                        file.previewElement.remove();
+                        $(file.previewElement).remove();
                         return;
                     }
+                  
                     var filepath=$(file.previewElement).data("file_Path").replace(el.host,"");
                     var fileid=$(file.previewElement).data("file_ID");
                     var deleteUrl=el.deleteFileUrl;
@@ -101,21 +125,24 @@
                             if(data.IsSuccess){
                                 var index=$(file.previewElement).index()-2;
                                 el.uploadFilesObj.splice(index, 1);
-                                file.previewElement.remove();
-                                alert("删除成功");
+                                $(file.previewElement).remove();
+                                //alert("删除成功");
                             }else{
                                 alert(data.Message);
                             }
                         }
-                        $.ajax({
-                            type: "POST",
-                            url: deleteUrl,
-                            data: {file_Path: filepath,file_ID:fileid},
-                            success:  deleteSucess
-                        });
+                        if(window.confirm("是否删除文件？")){
+                            $.ajax({
+                                type: "POST",
+                                async:false,
+                                url: deleteUrl,
+                                data: {file_Path: filepath,file_ID:fileid},
+                                success:  deleteSucess
+                            });
+                        }
                     }else
                     {
-                        file.previewElement.remove();
+                        $(file.previewElement).remove();
                     }
                     
                 },
@@ -137,12 +164,15 @@
                             }
                         }
                     });
-                    // $.each(el.uploadFilesObj,function(n,item){
-                    //     var file={id:item.AttachID,name:item.AttachName,size:item.AttachSize,status:"success",type:item.AttachType,url:item.AttachPath,showfirst:true};
-                    //     dropzone.files.push(file);
-                    //     dropzone.emit("addedfile", file);
-                    // });
 
+                    //el.getBase64('https://csdnimg.cn/cdn/content-toolbar/spring-logo.png')
+                   el.getBase64('https://www.kaoshicat.com/upload/bf565534gy1foab4znl0lj20qo0qomzx.jpg')
+                    .then(function(base64){
+                           $("#img").attr("src",base64);
+                          console.log(base64);//处理成功打印在控制台
+                    },function(err){
+                          console.log(err);//打印异常信息
+                    });           
                 }
             };
 

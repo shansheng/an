@@ -249,13 +249,6 @@
         return this.element.classList.remove("dz-started");
       },
       addedfile: function(file) {
-        //cqy start-20171123
-        if(!file.showfirst&&!this.options.isGoOn(file))
-        {
-          this.cancelUpload(file);
-          return false;
-        }
-        //cqy end-20171123
         var node, removeFileEvent, removeLink, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
         if (this.element === this.previewsContainer) {
           this.element.classList.add("dz-started");
@@ -269,7 +262,7 @@
           {
               $(file.previewElement).find(".dz-progress").remove();
               $(file.previewElement).find(".dz-download").attr("href",file.url);
-             // this.createThumbnail(file);
+              //this.createThumbnail(file);
               $(file.previewElement).find(".dz-image img").attr("alt",file.name).attr("src",file.url).width("100%").height("100%");
               $(file.previewElement).data("file_Path", file.url);
               $(file.previewElement).data("file_ID", file.id);
@@ -996,6 +989,13 @@
     };
 
     Dropzone.prototype.addFile = function(file) {
+      //cqy start-20171123
+      var isGoOn=this.options.isGoOn(file);
+      if(!isGoOn){
+        this.cancelUpload(file);
+        return false;
+      }
+      //cqy end-20171123
       file.upload = {
         progress: 0,
         total: file.size,
