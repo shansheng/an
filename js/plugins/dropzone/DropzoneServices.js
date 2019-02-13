@@ -144,6 +144,8 @@
                     });        
                     $(file.previewElement).data("file_Path", file.url);
                     $(file.previewElement).data("file_ID", file.id);
+                    $(file.previewElement).attr("title",file.name);
+                    if(file.type.indexOf("image")!= -1)
                     $(file.previewElement).addClass("dz-image-preview").removeClass("dz-file-preview");
                 },
                 success: function(file, data,e,i) {
@@ -156,6 +158,7 @@
                         $(file.previewElement).find(".dz-download").attr("href",filePath);
                         $(file.previewElement).data("file_Path", filePath);
                         $(file.previewElement).data("file_ID", item.file_ID);
+                        $(file.previewElement).attr("title",file.name);
                     }else
                     {
                         $(file.previewElement).remove();
