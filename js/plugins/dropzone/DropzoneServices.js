@@ -19,26 +19,65 @@
             this.upload();
         },
         getBase64:function(img){
-            function getBase64Image(img,width,height) {//width、height调用时传入具体像素值，控制大小 ,不传则默认图像大小
-                var canvas = document.createElement("canvas");
-                canvas.width = width ? width : img.width;
-                canvas.height = height ? height : img.height;
-       
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                var dataURL = canvas.toDataURL();
-                return dataURL;
+              var  resize=function(img,thumbnailWidth,thumbnailHeight){
+                var info, srcRatio, trgRatio;
+                info = {
+                    srcX: 0,
+                    srcY: 0,
+                    srcWidth: img.width,
+                    srcHeight:img.height
+                  };
+                  srcRatio =img.width / img.height;
+                  info.optWidth = thumbnailWidth;
+                  info.optHeight = thumbnailHeight;
+                  if ((info.optWidth == null) && (info.optHeight == null)) {
+                    info.optWidth = info.srcWidth;
+                    info.optHeight = info.srcHeight;
+                  } else if (info.optWidth == null) {
+                    info.optWidth = srcRatio * info.optHeight;
+                  } else if (info.optHeight == null) {
+                    info.optHeight = (1 / srcRatio) * info.optWidth;
+                  }
+                  trgRatio = info.optWidth / info.optHeight;
+                  if (img.height < info.optHeight || img.width < info.optWidth) {
+                    info.trgHeight = info.srcHeight;
+                    info.trgWidth = info.srcWidth;
+                  } else {
+                    if (srcRatio > trgRatio) {
+                      info.srcHeight = img.height;
+                      info.srcWidth = info.srcHeight * trgRatio;
+                    } else {
+                      info.srcWidth = img.width;
+                      info.srcHeight = info.srcWidth / trgRatio;
+                    }
+                  }
+                  info.srcX = (img.width - info.srcWidth) / 2;
+                  info.srcY = (img.height - info.srcHeight) / 2;
+                  return info;
               }
               var image = new Image();
-              image.setAttribute('crossOrigin', 'anonymous');
               image.crossOrigin = "*";
               image.src = img;
               var deferred=$.Deferred();
               if(img){
                 image.onload =function (){
-                  deferred.resolve(getBase64Image(image,120,120));//将base64传给done上传处理
+                    var canvas, ctx, resizeInfo, thumbnail, _ref, _ref1, _ref2, _ref3;
+                    var resizeInfo=resize(image,120,120);
+                    if (resizeInfo.trgWidth == null) {
+                        resizeInfo.trgWidth = resizeInfo.optWidth;
+                    }
+                    if (resizeInfo.trgHeight == null) {
+                        resizeInfo.trgHeight = resizeInfo.optHeight;
+                    }
+                    canvas = document.createElement("canvas");
+                    ctx = canvas.getContext("2d");
+                    canvas.width = resizeInfo.trgWidth;
+                    canvas.height = resizeInfo.trgHeight;
+                    Dropzone.drawImageIOSFix(ctx, image, (_ref = resizeInfo.srcX) != null ? _ref : 0, (_ref1 = resizeInfo.srcY) != null ? _ref1 : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, (_ref2 = resizeInfo.trgX) != null ? _ref2 : 0, (_ref3 = resizeInfo.trgY) != null ? _ref3 : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
+                    thumbnail = canvas.toDataURL("image/png");
+                    deferred.resolve(thumbnail);
                 }
-                return deferred.promise();//问题要让onload完成后再return sessionStorage['imgTest']
+                return deferred.promise();
               }
         },
         LoadDropzoneData:function(data){
@@ -95,6 +134,18 @@
                   }
                  
                 },
+                firstDone:function(file){
+                    $(file.previewElement).find(".dz-progress").remove();
+                    $(file.previewElement).find(".dz-download").attr("href",file.url);
+                    el.getBase64(file.url).then(function(base64){
+                        $(file.previewElement).find(".dz-image img").attr("alt",file.name).attr("src",base64);
+                    },function(err){
+                          console.log(err);
+                    });        
+                    $(file.previewElement).data("file_Path", file.url);
+                    $(file.previewElement).data("file_ID", file.id);
+                    $(file.previewElement).addClass("dz-image-preview").removeClass("dz-file-preview");
+                },
                 success: function(file, data,e,i) {
                     var item = data;
                     if (item.upload_State) {
@@ -107,6 +158,7 @@
                         $(file.previewElement).data("file_ID", item.file_ID);
                     }else
                     {
+                        $(file.previewElement).remove();
                         alert(item.msg);
                     }
                 },
@@ -163,16 +215,7 @@
                                 alert(data.Message);
                             }
                         }
-                    });
-
-                    //el.getBase64('https://csdnimg.cn/cdn/content-toolbar/spring-logo.png')
-                   el.getBase64('https://www.kaoshicat.com/upload/bf565534gy1foab4znl0lj20qo0qomzx.jpg')
-                    .then(function(base64){
-                           $("#img").attr("src",base64);
-                          console.log(base64);//处理成功打印在控制台
-                    },function(err){
-                          console.log(err);//打印异常信息
-                    });           
+                    });          
                 }
             };
 

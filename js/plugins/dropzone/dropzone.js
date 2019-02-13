@@ -260,12 +260,12 @@
           //cqy start-20171123
           if(file.showfirst)
           {
-              $(file.previewElement).find(".dz-progress").remove();
-              $(file.previewElement).find(".dz-download").attr("href",file.url);
-              //this.createThumbnail(file);
-              $(file.previewElement).find(".dz-image img").attr("alt",file.name).attr("src",file.url).width("100%").height("100%");
-              $(file.previewElement).data("file_Path", file.url);
-              $(file.previewElement).data("file_ID", file.id);
+              this.options.firstDone(file);
+              // $(file.previewElement).find(".dz-progress").remove();
+              // $(file.previewElement).find(".dz-download").attr("href",file.url);
+              // $(file.previewElement).find(".dz-image img").attr("alt",file.name).attr("src",file.url).width("100%").height("100%");
+              // $(file.previewElement).data("file_Path", file.url);
+              // $(file.previewElement).data("file_ID", file.id);
           }
           //cqy end-20171123
           _ref = file.previewElement.querySelectorAll("[data-dz-name]");
@@ -1139,7 +1139,7 @@
           ctx = canvas.getContext("2d");
           canvas.width = resizeInfo.trgWidth;
           canvas.height = resizeInfo.trgHeight;
-          drawImageIOSFix(ctx, img, (_ref = resizeInfo.srcX) != null ? _ref : 0, (_ref1 = resizeInfo.srcY) != null ? _ref1 : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, (_ref2 = resizeInfo.trgX) != null ? _ref2 : 0, (_ref3 = resizeInfo.trgY) != null ? _ref3 : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
+          Dropzone.drawImageIOSFix(ctx, img, (_ref = resizeInfo.srcX) != null ? _ref : 0, (_ref1 = resizeInfo.srcY) != null ? _ref1 : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, (_ref2 = resizeInfo.trgX) != null ? _ref2 : 0, (_ref3 = resizeInfo.trgY) != null ? _ref3 : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
           thumbnail = canvas.toDataURL("image/png");
           _this.emit("thumbnail", file, thumbnail);
           if (callback != null) {
@@ -1711,7 +1711,7 @@
     }
   };
 
-  drawImageIOSFix = function(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
+  Dropzone.drawImageIOSFix = function(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
     var vertSquashRatio;
     vertSquashRatio = detectVerticalSquash(img);
     return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);

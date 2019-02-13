@@ -7,6 +7,7 @@ import './assets/main.css';
 
 /*左侧菜单栏 */
 import menu from './components/menu.vue';
+import index from './components/index.vue';
 /*Demo（教程） */
 // import StaticTables from './components/demo/StaticTables.vue';
 // import DataTables from './components/demo/DataTables.vue';
@@ -245,17 +246,17 @@ const menuArry={
         }
       ]
     },
-    {
-      title:"甘特图（Gantt）",
-      children:
-      [
-        {
-          title:"示例",
-          path:"gantt",
-          iframe:"demo/pages/extension/gantt.html"
-        }
-      ]
-    },
+    // {
+    //   title:"甘特图（Gantt）",
+    //   children:
+    //   [
+    //     {
+    //       title:"示例",
+    //       path:"gantt",
+    //       iframe:"demo/pages/extension/gantt.html"
+    //     }
+    //   ]
+    // },
     {
       title:"Map（地图）",
       children:
@@ -425,8 +426,7 @@ const routes = [
   { 
     path: '/docs', 
     meta:{title:"Document（帮助文档）",active:"docs"}, 
-    component: menu,
-    children: null
+    component: index
   }
 ]
 
