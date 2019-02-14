@@ -7,7 +7,7 @@ import './assets/main.css';
 
 /*左侧菜单栏 */
 import menu from './components/menu.vue';
-import index from './components/index.vue';
+import home from './components/home.vue';
 /*Demo（教程） */
 // import StaticTables from './components/demo/StaticTables.vue';
 // import DataTables from './components/demo/DataTables.vue';
@@ -15,8 +15,7 @@ import index from './components/index.vue';
 // import BootstrapTables from './components/demo/BootstrapTables.vue';
 // import DataGrid from './components/demo/DataGrid.vue';
 /*Plugins（插件）*/
-import base from './components/plugins/base.vue';
-import dencrypt from './components/plugins/encrypt.vue';
+
 
 
 // import JavaScriptObfuscator from 'javascript-obfuscator';
@@ -128,6 +127,11 @@ const menuArry={
           title:"Dropzone",
           path:"Dropzone",
           iframe:"demo/pages/demo/uploader/Dropzone.html"
+        },
+        {
+          title:"tUpload（仿微博上传头像）",
+          path:"tUpload",
+          iframe:"demo/pages/demo/uploader/tUpload.html"
         }
       ]
     }
@@ -173,8 +177,6 @@ const menuArry={
         {
           title:"混淆加密",
           disabled:true
-          //path:'encrypt',
-          //component: dencrypt
         },
         {
           title:"iconfont图标库",
@@ -386,8 +388,14 @@ const menuRoutes=function(arr,active){
 const routes = [
   { 
     path: '/',
-    redirect:'/demo/StaticTables',
+    redirect:'/home',
     meta:{title:"首页",active:"home"}
+  },
+  { 
+    path: '/home', 
+    default:'/home',
+    meta:{title:"Home（首页）",active:"home"}, 
+    component:home 
   },
   { 
     path: '/demo', 
@@ -425,8 +433,7 @@ const routes = [
   },
   { 
     path: '/docs', 
-    meta:{title:"Document（帮助文档）",active:"docs"}, 
-    component: index
+    meta:{title:"Document（帮助文档）",active:"docs"}
   }
 ]
 

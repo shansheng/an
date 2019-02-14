@@ -7,6 +7,7 @@
     };
     
     Uploader.prototype.Dropzone={
+        id:"#my-dropzone",
         Dropzone:null,
         uploadFilesObj:[],
         host:parent.host,
@@ -218,11 +219,12 @@
                                 alert(data.Message);
                             }
                         }
-                    });          
+                    });  
+                      
                 }
             };
 
-            this.Dropzone=new Dropzone("#my-dropzone",dzoptions);
+            this.Dropzone=new Dropzone(this.id,dzoptions);
 
         }
     }

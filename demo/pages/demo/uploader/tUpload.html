@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>anUI</title>
+    <script type="text/javascript" src="http://www.0non0.com/Scripts/ananas.min/jquery-1.8.3.min.js"></script>
+    <!-- <link href="https://lastsoup.github.io/themes/nifty/css/nifty.css" rel="stylesheet"> -->
+    <link href="https://lastsoup.github.io/themes/nifty/css/demo/nifty-demo-icons.min.css" rel="stylesheet" type="text/css">
+    <!--上传控件[ OPTIONAL ]-->
+    <link href="css/Upload.css" rel="stylesheet" type="text/css">
+    <script src="/js/plugins/upload/telerik.common.js"></script>
+    <script src="/js/plugins/upload/telerik.upload.js"></script>
+    <script src="/js/plugins/upload/services.js"></script>
+</head>
+<body> 
+  <!--tUploadjs-->
+  <!--===================================================-->
+<div id="attachments">
+ <div class="t-widget t-toolbar t-floatwrap">  
+    <input accept=".png,.jpg,.jpeg,.gif,.bmp" name="attachments" type="file" multiple="multiple" autocomplete="off" />
+</div>
+<ul  class="t-reset t-floats t-tiles t-editor-image-list" style="height:auto;min-height: 100px; margin:0;padding:0; padding-top:20px;padding-left: 20px;"></ul>
+</div>
+  <!--tUploadjs-->
+  <!--===================================================-->
+</body>
+<script type="text/javascript">
+new Uploader()
+</script>
+</html>
