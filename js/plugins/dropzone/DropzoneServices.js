@@ -195,6 +195,8 @@
                                 data: {file_Path: filepath,file_ID:fileid},
                                 success:  deleteSucess
                             });
+                        }else{
+                            return false;
                         }
                     }else
                     {

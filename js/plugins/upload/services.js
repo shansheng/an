@@ -115,12 +115,13 @@
         },
         _uploadSuccess: function (e) {
            var data=e.response;
+           window.location.reload();
         },
         _uploadSelect: function (e) {
 
         },
         upload:function(){
-            var upload=$(this.id).find("input");
+            var upload=$(this.id).find("input[type='file']");
             upload.tUpload({ 
                 async: { "saveUrl": this.uploadFileUrl, "autoUpload": true }, 
                 showFileList: false, 

@@ -10,21 +10,116 @@
     <link href="css/Upload.css" rel="stylesheet" type="text/css">
     <script src="/js/plugins/upload/telerik.common.js"></script>
     <script src="/js/plugins/upload/telerik.upload.js"></script>
+    <!--裁剪图片插件start-->
+    <link href="/js/plugins/upload/jquery.Jcrop/css/jquery.Jcrop.css" rel="stylesheet" type="text/css">
+    <script src="/js/plugins/upload/jquery.Jcrop/jquery.Jcrop.js"></script>
     <script src="/js/plugins/upload/services.js"></script>
+    <script src="/js/plugins/upload/servicesTx.js"></script>
 </head>
 <body> 
   <!--tUploadjs-->
   <!--===================================================-->
 <div id="attachments">
  <div class="t-widget t-toolbar t-floatwrap">  
-    <input accept=".png,.jpg,.jpeg,.gif,.bmp" name="attachments" type="file" multiple="multiple" autocomplete="off" />
+    <input accept=".png,.jpg,.jpeg,.gif,.bmp"  type="file" multiple="multiple" autocomplete="off" />
 </div>
 <ul  class="t-reset t-floats t-tiles t-editor-image-list" style="height:auto;min-height: 100px; margin:0;padding:0; padding-top:20px;padding-left: 20px;"></ul>
 </div>
   <!--tUploadjs-->
   <!--===================================================-->
+  <center>
+  <h2>仿微博头像上传</h2>
+   <!--仿微博头像上传-->
+  <!--===================================================-->
+  <div id="txUp" class="layer_edit_avatar W_layer">
+     <!--顶部按钮-->
+    <div class="WB_minitab">
+      <ul class="minitb_ul S_line1 clearfix">
+        <li class="minitb_item current S_line1" node-type="local_tab"> <a class="minitb_lk S_txt1 S_bg2" href="javascript:void(0);" action-type="switchTab" action-data="tab=local">本地上传</a><span class="cur_block"></span></li>
+        <li class="minitb_item S_line1" node-type="book_tab"> <a class="minitb_lk S_txt1" href="javascript:void(0);" action-type="switchTab" action-data="tab=photobook">空间图片</a><span class="cur_block"></span></li>
+     </ul>
+    </div>
+    <!--1-头像上传-->
+    <div class="edit_avatar clearfix" node-type="local">
+       <!--左侧上传-->
+      <div class="edit_left W_fl">
+         <div class="initial_pic">
+          <!--头像加载进度条-->
+          <div class="loading_block" style="display:none;" node-type="local_loading"><i class="W_loading_big"></i></div>
+          <!--头像选择区域-->
+          <div class="choose_pic W_tc" node-type="choose_form">
+            <a class="W_btn_b" href="javascript:void(0);" node-type="file_select" style="position: relative;overflow: hidden;"> 
+              <em class="W_ficon ficon_add S_ficon">+</em>选择图片
+            </a>
+            <input id="attachmentsTx" accept=".png,.jpg,.jpeg,.gif,.bmp" name="attachments" type="file" multiple="multiple" autocomplete="off"  />
+            <p class="S_txt2" style="display:block;">只支持JPG、PNG、GIF，大小不超过5M</p>
+            <p class="tips S_txt2" node-type="err_tip" style="display:none;">
+              <span class="W_icon icon_rederrorS"></span>
+              <span node-type="err_msg">上传失败！上传图片宽度不能小于100px</span>
+            </p>
+            </div>
+            <!--头像编辑区域-->
+            <div class="edit_pic" node-type="edit_form" style="display:none;">
+              <img name="target" alt="[Jcrop Example]"/>
+            </div>
+         </div>
+         <div class="fun_area clearfix" node-type="tools">
+          <a class="W_btn_b W_fl" href="javascript:void(0);" >确定上传 </a>
+          <a class="W_btn_b W_fr" href="javascript:void(0);" >重新上传</a>
+        </div>
+      </div>
+      <!--右侧预览-->
+      <div class="edit_right W_fr">
+        <div class="preview W_tc">
+          <p class="tit">预览</p>
+           <!--100X100预览-->
+          <div class="avatar avatar_100">
+            <div class="pic_wrap">
+              <div class="preview-pane">
+                <div class="preview-container" style=" width:100px; height:100px;">
+                  <img name="preview-target1" src="@tximageurl"  class="jcrop-preview" alt=""  style=" width:100px; height:100px;" />
+                </div>
+              </div>
+            </div>
+            <span class="S_txt2">100px x 100px</span>
+          </div>
+          <!--50X50预览-->
+          <div class="avatar avatar_50">
+            <div class="pic_wrap">
+              <div class="preview-pane">
+                <div class="preview-container" style=" width:50px; height:50px;">
+                  <img name="preview-target2" src="@tximageurl" class="jcrop-preview" alt="" style=" width:50px; height:50px; " />
+                </div>
+              </div>
+            </div>
+            <span class="S_txt2">50px x 50px</span>
+          </div>
+          <!--30X30预览-->
+          <div class="avatar avatar_30">
+            <div class="pic_wrap">
+              <div class="preview-pane">
+                <div class="preview-container" style=" width:30px; height:30px;">
+                  <img name="preview-target3" src="@tximageurl" class="jcrop-preview" alt="" style=" width:30px; height:30px; " />
+                </div>
+              </div>
+            </div>
+            <span class="S_txt2">30px x 30px</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--2-空间图片区域-->
+    <div id="jstxScroll" class="albums t-widget" node-type="photobook" style="display:none; outline:none;">
+      <ul id="t-changeTxImage-list"  style="overflow:hidden;zoom:1;width:100%;padding-top:15px;padding-left: 20px;"></ul>
+    </div>
+  </div>
+  
+</center>
+   <!--访微博头像上传-->
+  <!--===================================================-->
 </body>
 <script type="text/javascript">
-new Uploader()
+new Uploader();
+new txUploader();
 </script>
 </html>

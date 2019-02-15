@@ -1077,8 +1077,8 @@
       if (file.status === Dropzone.UPLOADING) {
         this.cancelUpload(file);
       }
-      this.files = without(this.files, file);
       this.emit("removedfile", file);
+      this.files = without(this.files, file);
       if (this.files.length === 0) {
         return this.emit("reset");
       }
