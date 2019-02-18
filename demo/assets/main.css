@@ -116,3 +116,12 @@ font-weight: 400;
 .tabs-panels .panel-body {
     padding: 0;
 }
+
+.heart{
+    animation:heart 1s ease infinite;
+}
+
+@keyframes heart {
+    0% {border-color:red;}
+    100%{border-color:#fff;}
+}

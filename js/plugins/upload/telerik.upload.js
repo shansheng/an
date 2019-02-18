@@ -308,8 +308,14 @@
                 uploadButton =
                     this._renderAction("", this.localization["uploadSelectedFiles"])
                     .addClass("t-upload-selected");
+               
             }
-
+            if(this.showUploadButton){
+                $(uploadButton).show();
+            }else
+            {
+                $(uploadButton).hide();
+            }
             this.wrapper.append(uploadButton);
         },
 
@@ -517,7 +523,7 @@
                 if (upload._supportsRemove()) {
                     this.upload._setFileAction(fileEntry, "remove");
                 }
-
+                
                 upload._showUploadButton();
             }
         },
@@ -747,7 +753,9 @@
                     if (upload._supportsRemove()) {
                         upload._setFileAction(this, "remove");
                     }
+                   
                     upload._showUploadButton();
+
                 }
             });
         },

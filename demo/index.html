@@ -36,6 +36,7 @@
           <router-link exact v-if="item.path!='/'" v-for="item in $route.query.head" :class="[$route.meta.active ===item.meta.active ? 'router-link-active' : '']"  :to="{path:item.default}" >
               {{item.meta.title}}
           </router-link>
+          <a id="checkSSL"  target="_blank" style="border:dashed 1px #fff;color:red;text-decoration: underline;cursor: pointer;">SSL证书检测</a>
         </div>
        </div>
         <!-- 路由出口 -->
@@ -46,6 +47,25 @@
 
     <script>
         $(function () { 
+            var url="https://58.213.48.24:3001/api/workitemlist?state=0";
+                $.ajax({
+                    type: "GET",
+                    url:url,
+                    cache: false,
+                    async: true,
+                    dataType: "jsonp",
+                    jsonp: 'callback',
+                    timeout:2000,
+                    success: function (data) {},
+                    error: function (e) {
+                        if(confirm("可能是证书错误引起的超时，请打开SSL证书检测链接！"))
+                        {
+                          $("#checkSSL").attr("href",url);
+                          $("#checkSSL").addClass("heart");
+                        }
+                    }
+                });
+               
                $('#tabs').tabs('addIframeTab',{
                     tab:{title:"欢迎使用",closable:false},
                     iframe:{src:"http://www.0non0.com"}

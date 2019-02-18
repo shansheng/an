@@ -118,7 +118,16 @@ const menuArry={
         }
       ]
     },
-    {title:"Dialog（弹出框）"},
+    {
+      title:"Dialog（弹出框）",
+      children:
+      [
+        {
+          title:"图片预览（仿QQ空间预览）",
+          disabled:true
+        }
+      ]
+    },
     {
       title:"Uploader（上传）",
       children:

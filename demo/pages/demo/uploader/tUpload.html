@@ -27,11 +27,11 @@
 </div>
   <!--tUploadjs-->
   <!--===================================================-->
-  <center>
   <h2>仿微博头像上传</h2>
    <!--仿微博头像上传-->
   <!--===================================================-->
-  <div id="txUp" class="layer_edit_avatar W_layer">
+  <img style="width:80px;height:80px;"/>
+  <div id="txUp" class="layer_edit_avatar W_layer" style="margin:50px auto;">
      <!--顶部按钮-->
     <div class="WB_minitab">
       <ul class="minitb_ul S_line1 clearfix">
@@ -51,7 +51,7 @@
             <a class="W_btn_b" href="javascript:void(0);" node-type="file_select" style="position: relative;overflow: hidden;"> 
               <em class="W_ficon ficon_add S_ficon">+</em>选择图片
             </a>
-            <input id="attachmentsTx" accept=".png,.jpg,.jpeg,.gif,.bmp" name="attachments" type="file" multiple="multiple" autocomplete="off"  />
+            <input accept=".png,.jpg,.jpeg,.gif,.bmp" name="attachments" type="file" multiple="multiple" autocomplete="off"  />
             <p class="S_txt2" style="display:block;">只支持JPG、PNG、GIF，大小不超过5M</p>
             <p class="tips S_txt2" node-type="err_tip" style="display:none;">
               <span class="W_icon icon_rederrorS"></span>
@@ -64,8 +64,8 @@
             </div>
          </div>
          <div class="fun_area clearfix" node-type="tools">
-          <a class="W_btn_b W_fl" href="javascript:void(0);" >确定上传 </a>
-          <a class="W_btn_b W_fr" href="javascript:void(0);" >重新上传</a>
+          <a class="W_btn_b W_fl" href="javascript:void(0);" action-button="okClick" >确定上传 </a>
+          <a class="W_btn_b W_fr" href="javascript:void(0);" action-button="reloadClick">重新上传</a>
         </div>
       </div>
       <!--右侧预览-->
@@ -113,8 +113,7 @@
       <ul id="t-changeTxImage-list"  style="overflow:hidden;zoom:1;width:100%;padding-top:15px;padding-left: 20px;"></ul>
     </div>
   </div>
-  
-</center>
+
    <!--访微博头像上传-->
   <!--===================================================-->
 </body>

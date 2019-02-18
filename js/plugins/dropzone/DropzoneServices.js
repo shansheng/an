@@ -138,8 +138,9 @@
                 firstDone:function(file){
                     $(file.previewElement).find(".dz-progress").remove();
                     $(file.previewElement).find(".dz-download").attr("href",file.url);
+                    $(file.previewElement).find(".dz-image img").attr("alt",file.name).attr("src","/js/plugins/upload/loading.gif");
                     el.getBase64(file.url).then(function(base64){
-                        $(file.previewElement).find(".dz-image img").attr("alt",file.name).attr("src",base64);
+                        $(file.previewElement).find(".dz-image img").attr("src",base64);
                     },function(err){
                           console.log(err);
                     });        

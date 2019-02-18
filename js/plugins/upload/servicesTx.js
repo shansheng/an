@@ -21,14 +21,32 @@
           boundy:null
         },
         init:function(){
+            this.clear();
             this.list();
             this.upload();
             this.initEvent();
         },
+        clear:function(){
+            var el=$(this.id);
+            var jcrop_api=this.preview.jcrop_api;
+            $(".choose_pic",el).show();
+            $(".edit_pic",el).hide();
+            $("[node-type='local_loading']",el).hide();
+            if (jcrop_api != null) {
+                jcrop_api.destroy();
+            }
+        },
         initEvent:function(){
           var dom=this;
+          var el=$(this.id);
           //切换tab页
-          $("a[action-type='switchTab']",$(this.id)).click(function(){dom._switchTabClick(this,dom)});
+          $("a[action-type='switchTab']",el).click(function(){dom._switchTabClick(this,dom)});
+          $("a[action-button='okClick']",el).click(function(){
+            $(".t-upload-selected",el).click();
+          });
+          $("a[action-button='reloadClick']",el).click(function(){
+            dom.clear();
+          });
         },
         _switchTabClick:function(c,dom){
             var el=$(dom.id);
@@ -118,50 +136,45 @@
               $(".jcrop-holder").css({ left: newcss.left, top: newcss.top });
           });
         },
-        btnOk:function(){
-          if (jcrop_api != null) {
-            var select = jcrop_api.tellSelect();
-            var dw = 180, dh = 180;
-            var rx = dw / select.w;
-            var ry = dh / select.h;
-            var width = Math.round(rx * boundx);
-            var height = Math.round(ry * boundy);
-            var w = dw;
-            var h = dh;
-            var x = Math.round(rx * select.x);
-            var y = Math.round(ry * select.y);
-            var strdatabase = $("#target").attr("src");
-            ananas.ajaxHandler("file/SaveTxImage", { strbase64: strdatabase, width: width, height: height, w: w, h: h, x: x, y: y })
-            .done(function (data) {
-                $("#tximageShow,#preview-target1,#preview-target2,#preview-target3").attr("src", data.ImageUrl);
-                as("#changeTXWindow").tclose();
-            }).fail(function (res) {
-                alert("保存出错！");
-            });
-        }
-        },
         upload:function(){
             var dom=this;
             var el=$(dom.id);
             var upload=$("input[type='file']",el);
             var loadingDom= $("[node-type='local_loading']",el);
             var onSuccessUpload = function (e) {
-              var data = e.response;
-              if(data.upload_State){
-                loadingDom.hide();
-                var url=dom.host+data.file_Path;
-                dom._sImage(url);
-              }else{
-                alert(data.msg);
-              }
+                alert(1);
+           
+                var jcrop_api=dom.preview.jcrop_api,boundx=dom.preview.boundx,boundy=dom.preview.boundy;
+                if (jcrop_api != null) {
+                 var select = jcrop_api.tellSelect();
+                 var dw = 180, dh = 180;
+                 var rx = dw / select.w;
+                 var ry = dh / select.h;
+                 var width = Math.round(rx * boundx);
+                 var height = Math.round(ry * boundy);
+                 var w = dw;
+                 var h = dh;
+                 var x = Math.round(rx * select.x);
+                 var y = Math.round(ry * select.y);
+                
+                }
             }
             var onSelectUpload = function (e) {
-              loadingDom.show();
+                loadingDom.show();
+                var file=e.files[0].rawFile;
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function (e) {
+                    var database64 = e.target.result;
+                    dom._sImage(database64);
+                    loadingDom.hide();
+                }
             }
             upload.tUpload({ 
-                async: { "saveUrl": this.uploadFileUrl, "autoUpload": true }, 
+                async: { "saveUrl": this.uploadFileUrl, "autoUpload": false }, 
                 multiple: false,
-                localization: { "select": "" }, 
+                showUploadButton:false,
+                localization: { "select": "","uploadSelectedFiles":"确定" }, 
                 showFileList: false, 
                 onSelect: onSelectUpload, onSuccess: onSuccessUpload
              });

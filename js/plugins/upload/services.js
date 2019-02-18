@@ -139,12 +139,13 @@
                     if(data.IsSuccess){
                         $.each(data.BaseData,function(n,item){
                             var url=el.host+item.AttachPath;
+                            var imgli=$(' <li class="fl " style="margin:0 20px 20px 0;border: 1px solid #ddd;height: 80px;min-width:80px;" >'+
+                            '<img src="/js/plugins/upload/loading.gif"/></li> ');
+                            imagelist.append(imgli);
                             el.getBase64(url).then(function(base64){
-                               var img=' <li class="fl " style="margin:0 20px 20px 0;border: 1px solid #ddd;height: 80px;" >'+
-                               '<img  style="height:80px;" src="'+base64+'"/></li> '
-                               imagelist.append(img);
+                              imgli.find("img").attr("src",base64)
                             },function(err){
-                                  console.log(err);
+                                console.log(err);
                             });      
                         });
                     }else{
