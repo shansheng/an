@@ -14774,7 +14774,7 @@ var administrative=[
         "name": "澳门特别行政区"
     }
 ];
-
+//http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2018/index.html
 //var host="https://localhost:5001";
 var host="https://58.213.48.24:3005";
 //var host="http://127.0.0.1:8011";
