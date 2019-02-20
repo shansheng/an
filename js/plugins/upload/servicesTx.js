@@ -59,13 +59,30 @@
             var p=dom.preview;
             var jcrop_api=p.jcrop_api;
             if (jcrop_api != null) {
-               var size=dom.getCutSize(p);
-               var image = p.image;
-            //    dom.drawCanvasImage(image,size).then(function(base64){
-            //        $("#testTX").attr("src",base64);
-            //     },function(err){
-            //         console.log(err);
-            //     });  
+               var image = p.image,degree=p.degree,
+               thumbnailWidth=p.thumbnailWidth,thumbnailHeight=p.thumbnailHeight,boundx=p.boundx;
+               var select = jcrop_api.tellSelect();
+               if(degree!=0){
+                 var iosbase64=this.rotateIosImage(image,degree);
+                 var iosimage = new Image();
+                 iosimage.onload =function (){
+                    var size=dom.getCutSize(iosimage,thumbnailWidth,thumbnailHeight,boundx,select);
+                    dom.drawCanvasImage(iosimage,size).then(function(base64){
+                        $("#testTX").attr("src",base64);
+                     },function(err){
+                         console.log(err);
+                     }); 
+                 }
+                 iosimage.src=iosbase64;
+               }else
+               {    
+                    var size=dom.getCutSize(image,thumbnailWidth,thumbnailHeight,boundx,select);
+                    dom.drawCanvasImage(image,size).then(function(base64){
+                        $("#testTX").attr("src",base64);
+                    },function(err){
+                        console.log(err);
+                    }); 
+               }
                 //触发上传
                 //$(".t-upload-selected",el).click();    
             }
@@ -83,19 +100,14 @@
                 $("[node-type='photobook']",el).show();
             }
         },
-        getCutSize:function(p){
-            var jcrop_api=p.jcrop_api;
-            var degree=p.degree,dw =p.thumbnailWidth,dh=p.thumbnailHeight,boundx=p.boundx,boundy=p.boundy;
-            var select = jcrop_api.tellSelect();
-            var image = p.image;
-            var imgWidth=image.width,imgHeight=image.height;
+        getCutSize:function(image,dw,dh,boundx,select){
+            var imgWidth=image.width;
             var Ratio=imgWidth/boundx;
             var srcWidth=Math.round(Ratio * select.w);
             var srcHeight=Math.round(Ratio * select.h);
             var srcX=Math.round(Ratio * select.x);
             var srcY=Math.round(Ratio * select.y);
             var size={sx:srcX, sy:srcY, sw:srcWidth, sh:srcHeight, dx:0, dy:0, dw:dw, dh:dh};
-            this.rotateIosImage(image,degree);
             return size;
         },
         rotateIosImage:function(image,degree){
@@ -112,10 +124,14 @@
                         h = -height;
                         break;
                     case 90:
+                       canvas.width = height;
+                       canvas.height = width;
                        w = width;
                        h = -height;
                        break;
                     case 270:
+                       canvas.width = height;
+                       canvas.height = width;
                        w = -width;
                        h = height;
                        break;
@@ -123,7 +139,6 @@
                 ctx.rotate(degree * Math.PI / 180);
                 ctx.drawImage(image,0,0,w,h);
                 base64 = canvas.toDataURL();
-                $("#testTX").attr("src",base64)
                 return base64;
             }
         },
