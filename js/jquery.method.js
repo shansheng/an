@@ -8,22 +8,24 @@
 /*------通用的控件库 by:cqy 2017-5-18------*/
 /*------处理参数比较多的控件------*/
 (function ($) {
-    $.fn.objectDemo = function (options) {
-        var el = $(this);
-        if (el.length == 0) return;
-        var defaults = {
-            defaultV: null
-        }
-        var opt = $.extend(true, defaults,options);
-    };
+    // $.fn.objectDemo = function (options) {
+    //     var el = $(this);
+    //     if (el.length == 0) return;
+    //     var defaults = {
+    //         defaultV: null
+    //     }
+    //     var opt = $.extend(true, defaults,options);
+    // };
 
-    $.staticDemo=function(options){
-        var defaults = {
-            defaultV: null
-        }
-        var opt = $.extend({},defaults, options);
-    }
-
+    // $.staticDemo=function(options){
+    //     var defaults = {
+    //         defaultV: null
+    //     }
+    //     var opt = $.extend({},defaults, options);
+    // }
+    
+    
+    /**Tab控件封装S 需要引入esyui的相关tab插件*/
     $.addTab=function(title, url){
         if ($('#tabs').tabs('exists', title)){
             $('#tabs').tabs('select', title);//选中并刷新
@@ -258,5 +260,7 @@
             });
         }
     });
+
+    /**Tab控件封装E*/
 
 })(jQuery);

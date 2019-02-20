@@ -16,40 +16,6 @@
             this.list();
             this.upload();
         },
-        detectVerticalSquash:function(img) {
-            var alpha, canvas, ctx, data, ey, ih, iw, py, ratio, sy;
-            iw = img.naturalWidth;
-            ih = img.naturalHeight;
-            canvas = document.createElement("canvas");
-            canvas.width = 1;
-            canvas.height = ih;
-            ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
-            data = ctx.getImageData(0, 0, 1, ih).data;
-            sy = 0;
-            ey = ih;
-            py = ih;
-            while (py > sy) {
-              alpha = data[(py - 1) * 4 + 3];
-              if (alpha === 0) {
-                ey = py;
-              } else {
-                sy = py;
-              }
-              py = (ey + sy) >> 1;
-            }
-            ratio = py / ih;
-            if (ratio === 0) {
-              return 1;
-            } else {
-              return ratio;
-            }
-        },
-        drawImageIOSFix:function(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh){
-            var vertSquashRatio;
-            vertSquashRatio = this.detectVerticalSquash(img);
-            return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
-        },
         getBase64:function(img){
                 var  resize=function(img,thumbnailWidth,thumbnailHeight){
                 var info, srcRatio, trgRatio;
@@ -106,7 +72,7 @@
                     ctx = canvas.getContext("2d");
                     canvas.width = resizeInfo.trgWidth;
                     canvas.height = resizeInfo.trgHeight;
-                    el.drawImageIOSFix(ctx, image, (_ref = resizeInfo.srcX) != null ? _ref : 0, (_ref1 = resizeInfo.srcY) != null ? _ref1 : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, (_ref2 = resizeInfo.trgX) != null ? _ref2 : 0, (_ref3 = resizeInfo.trgY) != null ? _ref3 : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
+                    $.drawImageIOSFix(ctx, image, (_ref = resizeInfo.srcX) != null ? _ref : 0, (_ref1 = resizeInfo.srcY) != null ? _ref1 : 0, resizeInfo.srcWidth, resizeInfo.srcHeight, (_ref2 = resizeInfo.trgX) != null ? _ref2 : 0, (_ref3 = resizeInfo.trgY) != null ? _ref3 : 0, resizeInfo.trgWidth, resizeInfo.trgHeight);
                     thumbnail = canvas.toDataURL("image/png");
                     deferred.resolve(thumbnail);
                 }
@@ -155,5 +121,39 @@
             });  
         }
     }
+
+    $.drawImageIOSFix = function(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh){
+      var detectVerticalSquash = function(image) {
+          var alpha, canvas, ctx, data, ey, ih, iw, py, ratio, sy;
+          iw = image.naturalWidth;
+          ih = image.naturalHeight;
+          canvas = document.createElement("canvas");
+          canvas.width = 1;
+          canvas.height = ih;
+          ctx = canvas.getContext("2d");
+          ctx.drawImage(image, 0, 0);
+          data = ctx.getImageData(0, 0, 1, ih).data;
+          sy = 0;
+          ey = ih;
+          py = ih;
+          while (py > sy) {
+            alpha = data[(py - 1) * 4 + 3];
+            if (alpha === 0) {
+              ey = py;
+            } else {
+              sy = py;
+            }
+            py = (ey + sy) >> 1;
+          }
+          ratio = py / ih;
+          if (ratio === 0) {
+            return 1;
+          } else {
+            return ratio;
+          }
+      }
+      var vertSquashRatio = detectVerticalSquash(img);
+      return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
+  }
 
 })(jQuery);

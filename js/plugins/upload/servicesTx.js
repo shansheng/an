@@ -15,7 +15,8 @@
         deleteFileUrl:parent.host+"/api/WebAPI/DeleteFile",
         uploader:null,
         preview:{
-          src:null,
+          image:null,
+          degree:0,
           imgWrapWidth:360,
           imgWrapHeight:360,
           jcrop_api:null,
@@ -58,23 +59,13 @@
             var p=dom.preview;
             var jcrop_api=p.jcrop_api;
             if (jcrop_api != null) {
-               var imgSrc=p.src,dw =p.thumbnailWidth,dh=p.thumbnailHeight,boundx=p.boundx,boundy=p.boundy;
-               var select = jcrop_api.tellSelect();
-               var image = new Image();
-               image.crossOrigin = "*";
-               image.src =imgSrc;
-               var imgWidth=image.width,imgHeight=image.height;
-               var Ratio=imgWidth/boundx;
-               var srcWidth=Math.round(Ratio * select.w);
-               var srcHeight=Math.round(Ratio * select.h);
-               var srcX=Math.round(Ratio * select.x);
-               var srcY=Math.round(Ratio * select.y);
-               var size={sx:srcX, sy:srcY, sw:srcWidth, sh:srcHeight, dx:0, dy:0, dw:dw, dh:dh}
-               dom.getBase64(p.src,size).then(function(base64){
-                   $("#testTX").attr("src",base64)
-                },function(err){
-                    console.log(err);
-                });  
+               var size=dom.getCutSize(p);
+               var image = p.image;
+            //    dom.drawCanvasImage(image,size).then(function(base64){
+            //        $("#testTX").attr("src",base64);
+            //     },function(err){
+            //         console.log(err);
+            //     });  
                 //触发上传
                 //$(".t-upload-selected",el).click();    
             }
@@ -92,24 +83,64 @@
                 $("[node-type='photobook']",el).show();
             }
         },
-        getBase64:function(img,size){
-              var image = new Image();
-              image.crossOrigin = "*";
-              image.src = img;
-              var deferred=$.Deferred();
-              if(img){
-                image.onload =function (){
-                    var canvas, ctx, thumbnail;
-                    canvas = document.createElement("canvas");
-                    ctx = canvas.getContext("2d");
-                    canvas.width = size.dw;
-                    canvas.height =  size.dh;
-                    ctx.drawImage(image,size.sx, size.sy, size.sw, size.sh, size.dx, size.dy, size.dw, size.dh);
-                    thumbnail = canvas.toDataURL();
-                    deferred.resolve(thumbnail);
+        getCutSize:function(p){
+            var jcrop_api=p.jcrop_api;
+            var degree=p.degree,dw =p.thumbnailWidth,dh=p.thumbnailHeight,boundx=p.boundx,boundy=p.boundy;
+            var select = jcrop_api.tellSelect();
+            var image = p.image;
+            var imgWidth=image.width,imgHeight=image.height;
+            var Ratio=imgWidth/boundx;
+            var srcWidth=Math.round(Ratio * select.w);
+            var srcHeight=Math.round(Ratio * select.h);
+            var srcX=Math.round(Ratio * select.x);
+            var srcY=Math.round(Ratio * select.y);
+            var size={sx:srcX, sy:srcY, sw:srcWidth, sh:srcHeight, dx:0, dy:0, dw:dw, dh:dh};
+            this.rotateIosImage(image,degree);
+            return size;
+        },
+        rotateIosImage:function(image,degree){
+            if(image)
+            {
+                var canvas, ctx,w = width = image.width,h = height = image.height;
+                canvas = document.createElement("canvas");
+                ctx = canvas.getContext("2d");
+                canvas.width = w;
+                canvas.height =  h;
+                switch (degree) {
+                    case 180:
+                        w = -width;
+                        h = -height;
+                        break;
+                    case 90:
+                       w = width;
+                       h = -height;
+                       break;
+                    case 270:
+                       w = -width;
+                       h = height;
+                       break;
                 }
-                return deferred.promise();
-              }
+                ctx.rotate(degree * Math.PI / 180);
+                ctx.drawImage(image,0,0,w,h);
+                base64 = canvas.toDataURL();
+                $("#testTX").attr("src",base64)
+                return base64;
+            }
+        },
+        drawCanvasImage:function(image,size){
+            var deferred=$.Deferred();
+            if(image)
+            {
+                var canvas, ctx, thumbnail;
+                canvas = document.createElement("canvas");
+                ctx = canvas.getContext("2d");
+                canvas.width = size.dw;
+                canvas.height =  size.dh;
+                ctx.drawImage(image,size.sx, size.sy, size.sw, size.sh, size.dx, size.dy, size.dw, size.dh);
+                thumbnail = canvas.toDataURL("image/png");
+                deferred.resolve(thumbnail);
+            }
+            return deferred.promise();
         },
         _sImage: function (url) {
           //图片加载
@@ -142,7 +173,8 @@
           var ptarget1= $("img[name='preview-target1']",el);
           var ptarget2= $("img[name='preview-target2']",el);
           var ptarget3= $("img[name='preview-target3']",el);
-          var newcss = $.fn.calculateImage({ img: img, imgWrapWidth:preview.imgWrapWidth, imgWrapHeight: preview.imgWrapHeight });
+          var newcss = $.calculateImage({ img: img, imgWrapWidth:preview.imgWrapWidth, imgWrapHeight: preview.imgWrapHeight });
+          preview.degree=newcss.degree;
           target.attr("src", url);
           $("[node-type='local_loading']",el).hide();
           target.width(newcss.width).height(newcss.height);
@@ -199,13 +231,11 @@
             var onSelectUpload = function (e) {
                 loadingDom.show();
                 var file=e.files[0].rawFile;
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = function (e) {
-                    var database64 = e.target.result;
-                    dom.preview.src=database64;
-                    dom._sImage(database64);
-                }
+                $.FixIosSize(file).then(function(base64){
+                    dom.preview.image=dom._sImage(base64);
+                  },function(err){
+                      console.log(err);
+                  });       
             }
             upload.tUpload({ 
                 async: { "saveUrl": this.uploadFileUrl, "autoUpload": false }, 
@@ -235,9 +265,107 @@
         }
     }
 
+     $.FixIosSize =function (file) {
+        var deferred=$.Deferred(); 
+        if(file){
+            var orientation;
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                var dataURL = e.target.result;
+                deferred.resolve(dataURL);
+                //判断是否是IOS设备FixIOS
+                // var isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+                // if(isiOS){
+                //     var img = new Image();
+                //     img.src=dataURL;
+                //     img.onload = function(e) {
+                //         var that=this;
+                //         //判断图片方向，重置canvas大小，确定旋转角度，iphone默认的是home键在右方的横屏拍摄方式
+                //         EXIF.getData(img, function() {
+                //             orientation = EXIF.getTag(this, 'Orientation');
+                //         });
+                //         var canvas, ctx, degree = 0,w = that.width,
+                //         h = that.height;
+                //         canvas = document.createElement("canvas");
+                //         ctx = canvas.getContext("2d");
+                //         canvas.width = width = w;
+                //         canvas.height = height = h;
+                //         //判断图片方向，重置canvas大小，确定旋转角度，iphone默认的是home键在右方的横屏拍摄方式
+                //         switch (orientation) {
+                //                //iphone横屏拍摄，此时home键在左侧
+                //             case 3:
+                //                 degree = 180;
+                //                 w = -width;
+                //                 h = -height;
+                //                 break;
+                //                 //iphone竖屏拍摄，此时home键在下方(正常拿手机的方向)
+                //             case 6:
+                //                 canvas.width = height;
+                //                 canvas.height = width;
+                //                 degree = 90;
+                //                 w = width;
+                //                 h = -height;
+                //                 break;
+                //                 //iphone竖屏拍摄，此时home键在上方
+                //             case 8:
+                //                 canvas.width = height;
+                //                 canvas.height = width;
+                //                 degree = 270;
+                //                 w = -width;
+                //                 h = height;
+                //                 break;
+                //         }
+                //         //ctx.rotate(degree * Math.PI / 180);
+                //         ctx.drawImage(that, 0, 0, w, h);
+                //         var base64=canvas.toDataURL("image/png");
+                //         deferred.resolve(base64);
+                //     }
+                // }else
+                // {
+                //     deferred.resolve(dataURL);
+                // }
+            }
+            return deferred.promise();
+        }
+     }
+
+     $.drawImageIOSFix = function(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh){
+        var detectVerticalSquash = function(image) {
+            var alpha, canvas, ctx, data, ey, ih, iw, py, ratio, sy;
+            iw = image.naturalWidth;
+            ih = image.naturalHeight;
+            canvas = document.createElement("canvas");
+            canvas.width = 1;
+            canvas.height = ih;
+            ctx = canvas.getContext("2d");
+            ctx.drawImage(image, 0, 0);
+            data = ctx.getImageData(0, 0, 1, ih).data;
+            sy = 0;
+            ey = ih;
+            py = ih;
+            while (py > sy) {
+              alpha = data[(py - 1) * 4 + 3];
+              if (alpha === 0) {
+                ey = py;
+              } else {
+                sy = py;
+              }
+              py = (ey + sy) >> 1;
+            }
+            ratio = py / ih;
+            if (ratio === 0) {
+              return 1;
+            } else {
+              return ratio;
+            }
+        }
+        var vertSquashRatio = detectVerticalSquash(img);
+        return ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
+    }
 
       /*按原比例缩放图片设置相对位置*/
-      $.fn.calculateImage = function (settings) {
+      $.calculateImage = function (settings) {
         var defaultSettings = {
             img: null,
             imgWrapWidth: 0,
@@ -250,7 +378,9 @@
         , imgWrapWidth = options.imgWrapWidth
         , imgWrapHeight = options.imgWrapHeight
         , newWidth = 0
-        , newHeight = 0;
+        , newHeight = 0
+        , degree=0;
+        var isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
         if (originalWidth <= imgWrapWidth && originalHeight <= imgWrapHeight) {
             newWidth = originalWidth;
             newHeight = originalHeight;
@@ -266,11 +396,37 @@
                 newHeight = (originalHeight) / (originalWidth / imgWrapWidth);
             }
         }
+        if(isiOS){
+            var orientation,w=newWidth,h=newHeight;
+            EXIF.getData(img, function() {
+                orientation = EXIF.getTag(this, 'Orientation');
+            });
+            //判断图片方向，重置大小，确定旋转角度，iphone默认的是home键在右方的横屏拍摄方式
+            switch (orientation) {
+                //iphone横屏拍摄，此时home键在右侧orientation为1，不需要变换
+                //iphone横屏拍摄，此时home键在左侧
+                case 3:
+                    degree = 180;
+                    break;
+                //iphone竖屏拍摄，此时home键在下方(正常拿手机的方向)
+                case 6:
+                    degree = 90;
+                    newWidth=h;
+                    newHeight=w;
+                    break;
+                //iphone竖屏拍摄，此时home键在上方
+                case 8:
+                    degree = 270;
+                    newWidth=h;
+                    newHeight=w;
+                    break;
+            }
+        }
         var left = ((imgWrapWidth - newWidth) / 2);
         var top = newHeight == imgWrapHeight ? 0 : (imgWrapHeight - newHeight) / 2;
         newWidth = newWidth;
         newHeight = newHeight == imgWrapHeight ? imgWrapHeight : newHeight;
-        return { left: left, top: top, width: newWidth, height: newHeight };
+        return { left: left, top: top, width: newWidth, height: newHeight,degree:degree};
     };
 
 })(jQuery);
