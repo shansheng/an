@@ -95,11 +95,11 @@ module.exports = {
       inject: true,
       hash: true
     })
-  ],
-  devtool: '#eval-source-map'
+  ]
+  //devtool: '#eval-source-map'
 };
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map';
+  
   module.exports.plugins = (module.exports.plugins || []).concat([
     //混淆
     new webpack.optimize.UglifyJsPlugin({
@@ -117,4 +117,6 @@ if (process.env.NODE_ENV === 'production') {
       rotateUnicodeArray: true
     }, [])
   ])
+}else{
+   module.exports.devtool = '#source-map';
 }

@@ -171,6 +171,7 @@
                     //删除服务器的文件
                     if(file.status!="success"){
                         $(file.previewElement).remove();
+                        file["isremove"]=true;
                         return;
                     }
                   
@@ -183,8 +184,9 @@
                                 var index=$(file.previewElement).index()-2;
                                 el.uploadFilesObj.splice(index, 1);
                                 $(file.previewElement).remove();
-                                //alert("删除成功");
+                                file["isremove"]=true;
                             }else{
+                                file["isremove"]=false;
                                 alert(data.Message);
                             }
                         }
@@ -197,7 +199,7 @@
                                 success:  deleteSucess
                             });
                         }else{
-                            return false;
+                            file["isremove"]=false;
                         }
                     }else
                     {

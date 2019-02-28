@@ -86,10 +86,6 @@ const menuArry={
       children:
       [
         {
-          title:"anTree",
-          disabled:true
-        },
-        {
           title:"zTree",
           path:"zTree",
           iframe:"demo/pages/demo/tree/zTree_v3/api/API_cn.html"
