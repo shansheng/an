@@ -1,12 +1,12 @@
 /* 标准方法：上传插件加载方法。
 -----------------------------------------------------------------------------*/
 (function ($) {
-    window.Uploader = function () {
+    window.tUploader = function () {
         this.tUpload.init();
         return this;
     };
     
-    Uploader.prototype.tUpload={
+    tUploader.prototype.tUpload={
         host:parent.host,
         id:"#attachments",
         getFileListUrl:parent.host+"/api/WebAPI/GetFileList",

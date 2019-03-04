@@ -16,6 +16,11 @@
     <script src="/js/plugins/upload/services.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="/js/plugins/upload/servicesTx.js"></script>
+
+    <!--上传控件[ OPTIONAL ]-->
+    <link href="/js/plugins/dropzone/dropzone.css" rel="stylesheet">
+    <script src="/js/plugins/dropzone/dropzone.js"></script>
+    <script src="/js/plugins/dropzone/DropzoneServices.js"></script>
 </head>
 <body> 
   <!--tUploadjs-->
@@ -28,9 +33,10 @@
 </div>
   <!--tUploadjs-->
   <!--===================================================-->
+
   <p style="text-align: center;">
     <span style="font-weight: bold;font-size: 20px;">仿微博头像上传</span>
-  <span>解决ios设备上传长宽错误问题</span>
+  <span>解决ios设备上传长宽BUG</span>
 </p>
 <p style="text-align: center;"><img id="testTX"  style="width:80px;height:80px;"/></p>
    <!--仿微博头像上传-->
@@ -122,7 +128,7 @@
   <!--===================================================-->
 </body>
 <script type="text/javascript">
-new Uploader();
+new tUploader();
 new txUploader();
 </script>
 </html>

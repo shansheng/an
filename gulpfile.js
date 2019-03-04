@@ -5,16 +5,16 @@ rename = require('gulp-rename'),
 uglify = require("gulp-uglify");
 
 gulp.task('default', function() {
-    return gulp.src(['js/plugins/*.js','!plugins/*.min.js'])
-    .pipe(gulpjavascriptObfuscator())
-    .pipe(concat('jquery.plugin.min.js'))
+    return gulp.src(['js/*.js','!js/*.min.js'])
+    .pipe(gulpjavascriptObfuscator()) //十六进制加密
+    .pipe(concat('jquery.plugin.min.js')) //压缩到一个文件内
     .pipe(gulp.dest('build/js'));
 });
 
 // gulp.task('default', function() {
 //     return gulp.src(['plugins/*.js','!plugins/*.min.js'])
 //     .pipe(gulpjavascriptObfuscator())
-//     .pipe(rename({suffix: '.min'}))
+//     .pipe(rename({suffix: '.min'})) //重命名带min后缀
 //     .pipe(gulp.dest('build/plugins'));
 // });
 

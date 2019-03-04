@@ -2,6 +2,26 @@
  * The MIT License
  * Copyright (c) 2012 Matias Meno <m@tias.me>
  */
+ body {
+  background-color: #ecf0f5;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  font-variant: normal;
+  color: #758697;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased !important;
+}
+.icon-5x {
+  font-size: 5em;
+  line-height: 1em;
+}
+
+::selection {
+  background-color: #42a5f5;
+  color: #fff;
+}
+
 @-webkit-keyframes passing-through {
   0% {
     opacity: 0;

@@ -8,13 +8,7 @@ import './assets/main.css';
 /*左侧菜单栏 */
 import menu from './components/menu.vue';
 import home from './components/home.vue';
-/*Demo（教程） */
-// import StaticTables from './components/demo/StaticTables.vue';
-// import DataTables from './components/demo/DataTables.vue';
-// import FooTables from './components/demo/FooTables.vue';
-// import BootstrapTables from './components/demo/BootstrapTables.vue';
-// import DataGrid from './components/demo/DataGrid.vue';
-/*Plugins（插件）*/
+
 
 
 
@@ -98,11 +92,13 @@ const menuArry={
       [
         {
           title:"Validation",
-          disabled:true
+          path:"Validation",
+          iframe:"demo/pages/demo/form/form.html"
         },
         {
-          title:"AreaSelect（仿淘宝区域下拉）",
-          disabled:true
+          title:"CitySelect（仿淘宝区域下拉）",
+          path:"CitySelect",
+          iframe:"demo/pages/demo/form/form.html"
         },
         {
           title:"DatePicker",
@@ -325,6 +321,11 @@ const menuArry={
           title:"Koa2",
           path:'koa2',
           iframe:'https://chenshenhai.github.io/koa2-note/'
+        },
+        {
+          title:"webpack",
+          path:'webpack',
+          iframe:'https://www.html.cn/doc/webpack2/'
         }
       ]
     },
