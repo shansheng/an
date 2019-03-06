@@ -98,7 +98,7 @@ const menuArry={
         {
           title:"CitySelect（仿淘宝区域下拉）",
           path:"CitySelect",
-          iframe:"demo/pages/demo/form/form.html"
+          iframe:"http://58.213.48.24:3004/"
         },
         {
           title:"DatePicker",

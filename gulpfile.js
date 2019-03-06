@@ -11,6 +11,11 @@ gulp.task('default', function() {
     .pipe(gulp.dest('build/js'));
 });
 
+gulp.task('default',  function() {
+    return gulp.src(['demo/pages/**'])
+      .pipe(gulp.dest('build/demo/pages'))
+});
+
 // gulp.task('default', function() {
 //     return gulp.src(['plugins/*.js','!plugins/*.min.js'])
 //     .pipe(gulpjavascriptObfuscator())
