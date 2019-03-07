@@ -1,0 +1,126 @@
+html, body {
+    font-size: 12px;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Tahoma,Verdana,宋体";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 0;
+}
+
+select{ padding: 5px;margin:5px 0;}
+
+
+input.none {
+    resize: none;
+    outline: none;
+    word-wrap: break-word;
+    border: 0 none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    font-size: 13px;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid #e9e9e9;
+    transition-duration: .5s;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    border-color: rgb(169, 169, 169);
+    outline: none;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+.input-group .form-control {
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.form-wrap .date .form-control, .form-wrap .input-group-addon {
+    border-color: #d1d9de;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+
+.control-label i {
+    color: #F00;
+    font-family: "SimSun";
+    font-style: normal;
+    padding-right: 4px;
+}
+
+.input-group-addon {
+    border: 1px solid #e1e5ea;
+    background-color: transparent;
+    border-radius: 0;
+    min-width: 45px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-left: 0;
+}
+
+/*form表单样式 Start*/
+.view .td-data input,.view .td-data textarea,.view .td-data .bootstrap-select .btn-default,.view .td-data .input-group,.view .td-data select{display: none;}
+.edit .td-data .input-group{display: table;}
+.edit .td-data input,.edit .td-data textarea,.edit.td-data select,.edit .td-data .bootstrap-select .btn-default{display:block;}
+.form-wrap{padding:20px 50px 100px 50px;color: #333;}
+.form-wrap .formTitleDiv{text-align: center;line-height: 40px;}
+.form-wrap .title{font-weight: bold;color: #333;font-size: 25px;}
+.form-wrap table{width:100%; border-collapse: collapse; table-layout: fixed; line-height:22px; margin-top:3px;}
+.form-wrap .td-lable{background-color:#fff; text-align: right; background-color: #f1f9fe; padding: 3px; border: 1px solid #6faadb; }
+.form-wrap .td-lable label{margin-bottom: 0}
+.form-wrap .td-data{background-color:#fff; text-align: left;   padding: 6px 20px 6px 6px; border: 1px solid #6faadb; }
+.form-wrap .form-control,.form-wrap .chosen-container-single .chosen-single{border-color: rgb(169, 169, 169);}
+.form-wrap .td-data textarea{width: 60%;height: 70px;}
+.form-wrap .date .form-control,.form-wrap .input-group-addon{border-color: #d1d9de;}
+.form-wrap .has-error .form-control:focus,.form-wrap .has-error .form-control,
+.form-wrap .has-error .chosen-container-single .chosen-single{border-color: #f00;}
+.form-wrap .has-error .bootstrap-select .dropdown-toggle,.form-wrap .error .bootstrap-select .dropdown-toggle{border-color: #f00;}
+.form-wrap .btn-area {text-align: center;padding: 10px; display: none;}
+.approval-modal .select-div{line-height:30px;text-align: right;padding-right: 30px;}
+.approval-modal .textarea-div{line-height: 40px;;text-align: right;padding-right: 30px;margin-bottom: 0;}
+.approval-modal .control-label{margin-right: 10px;}
+/*form表单样式 End*/
+

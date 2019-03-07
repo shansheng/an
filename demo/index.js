@@ -91,22 +91,14 @@ const menuArry={
       children:
       [
         {
-          title:"Validation",
-          path:"Validation",
-          iframe:"demo/pages/demo/form/form.html"
-        },
-        {
           title:"CitySelect（仿淘宝区域下拉）",
           path:"CitySelect",
           iframe:"http://58.213.48.24:3004/"
         },
         {
-          title:"DatePicker",
-          disabled:true
-        },
-        {
-          title:"Chosen",
-          disabled:true
+          title:"Validation",
+          path:"Validation",
+          iframe:"demo/pages/demo/form/form.html"
         }
       ]
     },
@@ -249,17 +241,17 @@ const menuArry={
         }
       ]
     },
-    // {
-    //   title:"甘特图（Gantt）",
-    //   children:
-    //   [
-    //     {
-    //       title:"示例",
-    //       path:"gantt",
-    //       iframe:"demo/pages/extension/gantt.html"
-    //     }
-    //   ]
-    // },
+    {
+      title:"甘特图（Gantt）",
+      children:
+      [
+        {
+          title:"示例",
+          path:"gantt",
+          iframe:"demo/pages/extension/gantt.html"
+        }
+      ]
+    },
     {
       title:"Map（地图）",
       children:

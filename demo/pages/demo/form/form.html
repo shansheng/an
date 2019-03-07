@@ -4,16 +4,199 @@
     <meta charset="UTF-8">
     <title>anUI</title>
     <script type="text/javascript" src="https://lastsoup.github.io/themes/nifty/js/jquery-2.2.4.min.js"></script>
-    <!-- <link href="https://lastsoup.github.io/themes/nifty/css/nifty.css" rel="stylesheet"> -->
     <link href="https://lastsoup.github.io/themes/nifty/css/demo/nifty-demo-icons.min.css" rel="stylesheet" type="text/css">
-
-    <!--上传控件[ OPTIONAL ]-->
-
+    <link href="./css/form.css" rel="stylesheet" type="text/css">
+        <!--地区选择[ OPTIONAL ]-->
+        <link href="http://58.213.48.24:3004/public/cityselect.css" rel="stylesheet">
+        <script src="http://58.213.48.24:3004/public/json/streetdata.js"></script>
+        <script src="http://58.213.48.24:3004/public/jquery.cityselect.js"></script>
+        <!--上传控件[ OPTIONAL ]-->
+        <link href="/js/plugins/dropzone/dropzone.css" rel="stylesheet">
+        <script src="/js/plugins/dropzone/dropzone.js"></script>
+        <script src="/js/plugins/dropzone/DropzoneServices.js"></script>        
+        <!--选择控件[ OPTIONAL ]-->
+        <link href="/js/plugins/chosen/chosen.css" rel="stylesheet">
+        <script src="/js/plugins/chosen/chosen.jquery.js"></script>
+        <script src="./css/jquery.form.js"></script>
 </head>
 <body>
- 
+    <form id="config-form" class="form-wrap ecg-page"  method="post" action="">
+        <div class="formDiv">
+        <div class="formTitleDiv">
+            <div id="hidden-area">
+                <input id="hidden_ProjectGuid" type="hidden"  name="ProjectGuid"/>
+            </div>
+            <span id="formTitle" class="title">申请单</span>
+        </div>
+        <table>
+            <colgroup span="6" width="16.6%"></colgroup>
+            <tbody>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>项目名称：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <!-- <input autocomplete="off" type="text" id="txt-ProjectName" class="form-control" name="ProjectName" placeholder="" /> -->
+                    <select id="ProjectGuidSelect" data-placeholder="选择项目..."></select>
+                </td>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>项目编号：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input autocomplete="off" type="text" id="txt-ProjectNum" class="form-control" name="ProjectNum" placeholder="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>项目所属区域：</label>
+                </td>
+                <td class="td-data form-group" colspan="5">
+                    <input type="hidden" id="ProjectCityName_validator"  class="form-control" name="ProjectCityName" />
+                    <!-- suspend word-wrap -->
+                    <div class="cndzk-entrance-division "> 
+                        <div class="cndzk-entrance-division-header"><div class="cndzk-entrance-division-header-click"><span class="cndzk-entrance-division-header-click-input"><p class="placeholder" data-spm-anchor-id="0.0.0.i0.650e175cHMvmAz">请选择省/市/区/街道</p></span><span class="cndzk-entrance-division-header-click-icon"></span></div></div>
+                        <div class="cndzk-entrance-division-box" style="display:none;"><ul class="cndzk-entrance-division-box-title"><li class="cndzk-entrance-division-box-title-level active" style="width: 25%;">省</li><li class="cndzk-entrance-division-box-title-level " style="width: 25%;">市</li><li class="cndzk-entrance-division-box-title-level " style="width: 25%;">区</li><li class="cndzk-entrance-division-box-title-level " style="width: 25%;">街道</li></ul><ul class="cndzk-entrance-division-box-content"><div></div></ul></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>项目详细地址：</label>
+                </td>
+                <td class="td-data form-group" colspan="5">
+                    <textarea type="text" id="txt-ProjectAddress" placeholder="请输入详细地址信息，如道路、门牌号、小区、楼栋号、单元等信息" class="form-control" name="ProjectAddress" ></textarea>
+                    <input type="hidden" id="txt-ProjectDistricts" name="ProjectDistricts" placeholder="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>甲方公司名称：</label>
+                </td>
+                <td class="td-data form-group" colspan="5">
+                    <input type="text" autocomplete="off" id="txt-PartACompanyName" class="form-control none" name="PartACompanyName" placeholder="请填写公司名称" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>甲方联系人姓名：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off" id="txt-PartACompanyContactName" class="form-control" name="PartACompanyContactName" placeholder="" />
+                </td>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>甲方联系方式：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off" id="txt-PartACompanyContactTele" class="form-control" name="PartACompanyContactTele" placeholder="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>项目负责人：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off" id="txt-ProjectHeaderName" class="form-control" name="ProjectHeaderName" placeholder="" />
+                </td>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>项目负责人联系方式：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off"  id="txt-ProjectHeaderTele" class="form-control" name="ProjectHeaderTele" placeholder="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>预算金额：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off" id="txt-BudgetAmount" class="form-control" name="BudgetAmount" placeholder="" />
+                </td>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>预算成本金额：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off" id="txt-BudgetCost" class="form-control" name="BudgetCost" placeholder="" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>预算税：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off" style="width: 100px;" id="txt-BudgetTax" class="form-control" name="BudgetTax" placeholder="__.__%" />
+                </td>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>投标金额：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off" id="txt-TenderMoney" class="form-control" name="TenderMoney" placeholder=""/>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>投标人：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <input type="text" autocomplete="off" id="txt-TenderPerson" class="form-control" name="TenderPerson" placeholder="" />
+                </td>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>投标时间：</label>
+                </td>
+                <td class="td-data form-group" colspan="2">
+                    <div class="input-group date" id="txt-TenderTime">
+                        <input type="text" autocomplete="off" id="demo-msk-date" class="form-control" name="TenderTime" placeholder="____-__-__"/>
+                        <span class="input-group-addon"><i class="demo-pli-calendar-4"></i></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">附件：</td>
+                <td class="td-data" colspan="5" name="show">
+                       <!--Dropzonejs-->
+                        <!--===================================================-->
+                        <div id="my-dropzone"  class="dropzone form-dropzone">
+                            <input id="hidden_attachList" type="hidden" value="" name="attachList" />
+                            <div class="dz-default dz-message">
+                                <div class="dz-icon">
+                                    <i class="demo-pli-upload-to-cloud icon-5x"></i>
+                                </div>
+                                <div>
+                                    <span class="dz-text">拖动文件上传</span>
+                                    <p class="text-sm text-muted">或者点击面板上传</p>
+                                </div>
+                            </div>
+                            <div class="fallback">
+                                <input name="file" type="file" multiple style="display: none;">
+                            </div>
+                        </div>
+                        <!--===================================================-->
+                        <!-- End Dropzonejs -->
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">备注：</td>
+                <td class="td-data" colspan="5">
+                    <textarea  class="form-control" name="ProjectRemark"></textarea></td>
+            </tr>
+            <tr>
+                <td class="td-lable">测试mask：</td>
+                <td class="td-data" colspan="5">
+                    <input autocomplete="off" style="width: 150px;" type="text" id="mask-date" class="form-control" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="btn-area" id="btn-area">
+            <button type="button" class="btn btn-primary" id="form-save">保存草稿</button>&nbsp;
+            <button type="button" class="btn btn-success" id="form-submit">提交审核</button>&nbsp;
+            <button type="button" class="btn btn-danger" id="form-back">退回审核</button>
+        </div>
+        </form>
 </body>
 <script type="text/javascript">
-
+$.fn.citySelect({division:true});
+$("#ProjectGuidSelect").mychosen();
+new Uploader()
 </script>
 </html>
