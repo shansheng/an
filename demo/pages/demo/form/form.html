@@ -18,6 +18,15 @@
         <link href="/js/plugins/chosen/chosen.css" rel="stylesheet">
         <script src="/js/plugins/chosen/chosen.jquery.js"></script>
         <script src="./css/jquery.form.js"></script>
+        <!--验证控件[ OPTIONAL ]-->
+        <link href="/js/plugins/bootstrap-validator/bootstrapValidator.css" rel="stylesheet">
+        <script src="/js/plugins/bootstrap-validator/bootstrapValidator.min.js"></script>
+        <!--时间控件[ OPTIONAL ]-->
+        <link href="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+        <script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+        <!--遮罩控件[ OPTIONAL ]-->
+        <script src="/js/plugins/masked-input/jquery.maskedinput.js"></script>
+        <script src="/js/plugins/masked-input/jquery.number.js"></script>
 </head>
 <body>
     <form id="config-form" class="form-wrap ecg-page"  method="post" action="">
@@ -26,7 +35,7 @@
             <div id="hidden-area">
                 <input id="hidden_ProjectGuid" type="hidden"  name="ProjectGuid"/>
             </div>
-            <span id="formTitle" class="title">申请单</span>
+            <span id="formTitle" class="title">立项申请单</span>
         </div>
         <table>
             <colgroup span="6" width="16.6%"></colgroup>
@@ -36,7 +45,6 @@
                     <label class="control-label"><i>*</i>项目名称：</label>
                 </td>
                 <td class="td-data form-group" colspan="2">
-                    <!-- <input autocomplete="off" type="text" id="txt-ProjectName" class="form-control" name="ProjectName" placeholder="" /> -->
                     <select id="ProjectGuidSelect" data-placeholder="选择项目..."></select>
                 </td>
                 <td class="td-lable">
@@ -51,11 +59,21 @@
                     <label class="control-label"><i>*</i>项目所属区域：</label>
                 </td>
                 <td class="td-data form-group" colspan="5">
-                    <input type="hidden" id="ProjectCityName_validator"  class="form-control" name="ProjectCityName" />
                     <!-- suspend word-wrap -->
                     <div class="cndzk-entrance-division "> 
                         <div class="cndzk-entrance-division-header"><div class="cndzk-entrance-division-header-click"><span class="cndzk-entrance-division-header-click-input"><p class="placeholder" data-spm-anchor-id="0.0.0.i0.650e175cHMvmAz">请选择省/市/区/街道</p></span><span class="cndzk-entrance-division-header-click-icon"></span></div></div>
                         <div class="cndzk-entrance-division-box" style="display:none;"><ul class="cndzk-entrance-division-box-title"><li class="cndzk-entrance-division-box-title-level active" style="width: 25%;">省</li><li class="cndzk-entrance-division-box-title-level " style="width: 25%;">市</li><li class="cndzk-entrance-division-box-title-level " style="width: 25%;">区</li><li class="cndzk-entrance-division-box-title-level " style="width: 25%;">街道</li></ul><ul class="cndzk-entrance-division-box-content"><div></div></ul></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">
+                    <label class="control-label"><i>*</i>项目所属城市：</label>
+                </td>
+                <td class="td-data form-group" colspan="5">
+                    <div id="city_1">
+                        <select class="prov"></select> 
+                        <select class="city" disabled="disabled"></select>
                     </div>
                 </td>
             </tr>
@@ -87,7 +105,7 @@
                     <label class="control-label"><i>*</i>甲方联系方式：</label>
                 </td>
                 <td class="td-data form-group" colspan="2">
-                    <input type="text" autocomplete="off" id="txt-PartACompanyContactTele" class="form-control" name="PartACompanyContactTele" placeholder="" />
+                    <input type="text" autocomplete="off"  class="form-control tel" name="PartACompanyContactTele" placeholder="___-________" />
                 </td>
             </tr>
             <tr>
@@ -101,7 +119,7 @@
                     <label class="control-label"><i>*</i>项目负责人联系方式：</label>
                 </td>
                 <td class="td-data form-group" colspan="2">
-                    <input type="text" autocomplete="off"  id="txt-ProjectHeaderTele" class="form-control" name="ProjectHeaderTele" placeholder="" />
+                    <input type="text" autocomplete="off"  class="form-control tel" name="ProjectHeaderTele"  placeholder="___-________" />
                 </td>
             </tr>
             <tr>
@@ -144,7 +162,7 @@
                 </td>
                 <td class="td-data form-group" colspan="2">
                     <div class="input-group date" id="txt-TenderTime">
-                        <input type="text" autocomplete="off" id="demo-msk-date" class="form-control" name="TenderTime" placeholder="____-__-__"/>
+                        <input type="text" autocomplete="off" class="form-control" name="TenderTime" value="2018-01-20" placeholder="____-__-__"/>
                         <span class="input-group-addon"><i class="demo-pli-calendar-4"></i></span>
                     </div>
                 </td>
@@ -179,24 +197,122 @@
                     <textarea  class="form-control" name="ProjectRemark"></textarea></td>
             </tr>
             <tr>
-                <td class="td-lable">测试mask：</td>
+                <td class="td-lable">金额：</td>
                 <td class="td-data" colspan="5">
-                    <input autocomplete="off" style="width: 150px;" type="text" id="mask-date" class="form-control" />
+                    <input autocomplete="off"  value="1000"type="text" id="mask-date" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <td class="td-lable">大写金额：</td>
+                <td class="td-data" colspan="5">
+                    <input autocomplete="off"  type="text"  id="chinesenumber" class="form-control" />
                 </td>
             </tr>
             </tbody>
         </table>
         </div>
-        <div class="btn-area" id="btn-area">
-            <button type="button" class="btn btn-primary" id="form-save">保存草稿</button>&nbsp;
-            <button type="button" class="btn btn-success" id="form-submit">提交审核</button>&nbsp;
+        <div class="btn-area" id="btn-area" style="display:block;">
+            <button type="button" class="btn btn-default" id="form-save">保存草稿</button>&nbsp;
+            <button type="button" class="btn btn-primary" id="form-submit">提交审核</button>&nbsp;
             <button type="button" class="btn btn-danger" id="form-back">退回审核</button>
         </div>
         </form>
 </body>
 <script type="text/javascript">
-$.fn.citySelect({division:true});
+$(".tel").mask('999-99999999');
+$.division({validator:true,validatorForm:$("#config-form"),validatorName:"ProjectCityName"});
+$("#city_1").citySelect({nodata:"none",prov:"北京市"}); 
 $("#ProjectGuidSelect").mychosen();
-new Uploader()
+$("#txt-TenderTime").mydatepicker({format: "yyyy-mm-dd",validator:true});
+$("#mask-date").number(true,2,{thousands_sep:",",blur:function(){
+    $("#chinesenumber").val($(this).chinesenumber());
+}});
+$("#chinesenumber").val($("#mask-date").chinesenumber());
+
+new Uploader();
+var formfields={
+            ProjectName: {
+                validators: {
+                    notEmpty: {message: '项目名称不能为空'}
+                }
+            },
+            ProjectNum: {
+                validators: {
+                    notEmpty: {message: '项目编号不能为空'}
+                }
+            },
+            ProjectCityName:{
+                validators: {
+                    notEmpty: {message: '请选择项目区域'}
+                }
+            },
+            ProjectAddress: {
+                validators: {
+                    notEmpty: {message: '详细地址不能为空'}
+                }
+            },
+            PartACompanyName: {
+                validators: {
+                    notEmpty: {message: '甲方公司名称不能为空'}
+                }
+            },
+            PartACompanyContactTele: {
+                validators: {
+                    notEmpty: {message: '甲方联系方式不能为空'}
+                }
+            },
+            PartACompanyContactName: {
+                validators: {
+                    notEmpty: {message: '甲方联系人姓名不能为空'}
+                }
+            },
+            ProjectHeaderName: {
+                validators: {
+                    notEmpty: {message: '项目负责人不能为空'}
+                }
+            },
+            ProjectHeaderTele: {
+                validators: {
+                    notEmpty: {message: '项目负责人联系方式不能为空'}
+                }
+            },
+            BudgetAmount: {
+                validators: {
+                    notEmpty: {message: '预算金额不能为空'},
+                    digits: {message: '请输入数字'}
+                }
+            },
+            BudgetTax: {
+                validators: {
+                    notEmpty: {message: '预算税不能为空'}
+                }
+            },
+            BudgetCost: {
+                validators: {
+                    notEmpty: {message: '预算成本金额不能为空'},
+                    digits: {message: '请输入数字'}
+                }
+            },
+            TenderMoney: {
+                validators: {
+                    notEmpty: {message: '投标金额不能为空'},
+                    digits: {message: '请输入数字'}
+                }
+            },
+            TenderPerson: {
+                validators: {
+                    notEmpty: {message: '投标人不能为空'}
+                }
+            },
+            TenderTime: {
+                validators: {
+                    notEmpty: {message: '投标时间不能为空'}
+                }
+            }
+        }
+var form=$("#config-form").myvalidator({fields:formfields});
+$("#form-save").click(function(){
+     var isValid=form.isValid();
+});
 </script>
 </html>
