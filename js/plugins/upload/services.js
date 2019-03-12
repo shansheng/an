@@ -1,17 +1,20 @@
 /* 标准方法：上传插件加载方法。
 -----------------------------------------------------------------------------*/
 (function ($) {
-    window.tUploader = function () {
+    window.tUploader = function (options) {
+        this.tUpload.host=parent.host;
+        this.tUpload.id="#attachments";
+        this.tUpload.getFileListUrl=parent.host+"/api/WebAPI/GetFileList";
+        this.tUpload.uploadFileUrl=parent.host+"/api/WebAPI/Upload";
+        this.tUpload.deleteFileUrl=parent.host+"/api/WebAPI/DeleteFile";
+        for(var i in options) {
+          this.tUpload[i]=options[i];
+        }
         this.tUpload.init();
         return this;
     };
     
     tUploader.prototype.tUpload={
-        host:parent.host,
-        id:"#attachments",
-        getFileListUrl:parent.host+"/api/WebAPI/GetFileList",
-        uploadFileUrl:parent.host+"/api/WebAPI/Upload",
-        deleteFileUrl:parent.host+"/api/WebAPI/DeleteFile",
         init:function(){
             this.list();
             this.upload();

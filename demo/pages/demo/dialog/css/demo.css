@@ -1,0 +1,777 @@
+body, input, select, textarea, button {
+    font-family:Arial,Times New Roman, Verdana;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 12px;
+    -webkit-text-size-adjust:none;
+    width:100%;
+    height:100%;
+    position:absolute;
+}
+
+a
+{
+    text-decoration: none;
+    color:#333;
+}
+
+a:focus {
+    outline:none;
+    -moz-outline:none;
+}
+
+a img{border: 0;}
+
+ul,li
+{
+    margin: 0;
+    padding:0;
+    list-style: none;
+}
+
+input,select,textarea
+{
+    border: 0;
+    outline: 0;
+}
+
+.fl
+{
+    float: left;
+}
+
+.fr
+{
+    float: right;
+}
+
+
+/*图片 begin*/
+.kinderphotos{padding: 20px 0;}
+.kinderphotos .workarea table td{padding: 0;}
+.kinderphotos .workarea .x-button,.kinderphotos .workarea .gray-button
+{
+    padding-top:6px;padding-bottom:6px;
+    *padding-top:3px;*padding-bottom:3px;
+}
+#photo-dialog-content{display: none;}
+.photoslist ul{width:100%;}
+.photoslist li{text-align: center;float: left;margin: 0 10px 20px 10px;border: 1px solid #f9f9f9;}
+.photoslist .imgborder{border: 1px solid #eeeeee;}
+.photoslist p{height: 20px;line-height: 20px;padding: 0 8px;}
+.photoslist .name{font-size: 13px;font-weight: bold;color: #555555; text-align: left;}
+.photoslist .name a{display:block;}
+.photoslist .name a:hover{color: #f46e06}
+.photoslist .datetime{color: #999999;text-align: left;padding: 0px 8px 5px 8px;font-size:12px;}
+
+.photoslist .number{
+    width: 35px;
+    height: 35px;
+    border-radius:35px;
+    line-height:35px;
+    opacity: 0.4;
+    filter: Alpha(opacity=40);
+    background: #000;
+    position: absolute;text-align: center;
+    font-size:20px;
+    color: #fff;
+    right:0;
+    top: 75px;
+}
+.photoslist .opacity{background-color: transparent;opacity: 1;filter: Alpha(opacity=100);}
+.photoslist .number span{position: relative;}
+.photoslist .imgborder .imgcontent {
+    display: block;
+    margin: 8px;
+    position: relative;
+}
+
+.photoslist .imgborder img{     height: 110px;}
+.one-photo .imgborder .imgcontent{ display:block; margin:0;}
+.one-photo .imgborder{position: relative;}
+.one-photo img{height:120px;margin: 0;}
+.one-photo .datetime{text-align:center;height: 30px; line-height: 30px;}
+.one-photo .name{
+    width:100%;
+    height: 28px;
+    line-height:28px;
+    opacity:0.4;
+    filter:Alpha(opacity=40);
+    background:#000;
+    position: absolute;text-align: center;
+    margin: -30px 0px;
+    font-family: "Gulim";
+    color: #fff;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    left:0;
+    top:112px;
+}
+.one-photo .name span{ margin-left:5px;}
+.one-photo .clickname{ background-color:transparent;opacity:1;filter:Alpha(opacity=100);}
+
+.one-photo .editname
+{
+    height: 30px;
+    line-height:30px;
+}
+
+.one-photo .editname:hover
+{
+    box-shadow: 0 0 2px #F5B93C;
+    border: 1px solid #f5b93c;
+    cursor: text;
+}
+
+.photoslist .mod-photo-op{
+    display: none;
+    position: absolute;
+    margin-top: -138px;
+    margin-left: 122px;
+    *margin-top: 15px;
+    *margin-left:-30px;
+    font-size:12px;
+    z-index: 3;
+}
+
+.one-photo .mod-photo-op{
+    position: absolute;
+    margin-top: -115px;
+    margin-left: 132px;
+    *margin-top: 8px;
+    *margin-left:-30px;
+}
+/*图片 end*/
+
+/*图片预览 begin*/
+.photo_layer {
+    font-size: 12px;
+    outline: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    padding-top: 16px;
+    z-index: 10000;
+    position: fixed;
+    _position: absolute;
+    _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-20));
+    display: none;
+}
+
+.photo_bg_layer {
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.7);
+    filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#aa000000,EndColorStr=#aa000000);
+
+}
+
+.photo_layer, .photo_layer .c_tx2 {
+    color: #333;
+}
+
+.photo_figure {
+    width: auto;
+    margin: 0 auto;
+}
+
+.photo_figure_main {
+    padding-top: 16px;
+}
+.photo_figure_main {
+    margin: 0 auto;
+    height: 500px;
+    position: relative;
+    background: #000;
+}
+
+.photo_layer_close {
+    position: absolute;
+    z-index: 10;
+    right: -12px;
+    top: -12px;
+    height: 30px;
+    width: 30px;
+    line-height: 150px;
+    overflow: hidden;
+}
+
+.photo_layer a, .photo_layer .c_tx {
+    color: #246AB0;
+}
+
+.photo_layer_close a {
+    display: block;
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -141px -33px;
+    cursor: pointer;
+}
+
+.photo_layer_close a:hover
+{
+    background-position: -155px -64px;
+}
+
+.photo_layer_close {
+    position: absolute;
+    z-index: 10;
+    right: -12px;
+    top: -12px;
+    height: 30px;
+    width: 30px;
+    line-height: 150px;
+    overflow: hidden;
+}
+
+.figure_area {
+    min-width: 270px;
+    _width: 270px;
+    height: 500px;
+    margin-left: 10px;
+    position: relative;
+}
+
+.figure_img_loading {
+    background: url("Images/imgpreview/loading32.gif") 50% 50% no-repeat;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    position: absolute;
+    display: none;
+}
+
+.figure_area .figure_img {
+    display: block;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display:none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.figure_area .figure_img img {
+    position: absolute;
+    vertical-align: middle;
+}
+
+.figure_area .mod-figure-area {
+    position: absolute;
+    z-index: 600;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 32px;
+    overflow: visible!important;
+}
+
+.mod-figure-area .figure-desc {
+    float: left;
+    width: 50%;
+}
+.mod-figure-area .figure-desc .figure-info {
+    margin: 8px 0 0 8px;
+    position: relative;
+}
+
+.mod-figure-area .figure-desc .figure-info .device-info {
+    color: #FFF;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.device-info .js-album-number{
+    margin-left:5px;
+}
+
+.mod-figure-area .figure-desc .figure-info .device-info a, .mod-figure-area .figure-desc .figure-desc-detail a {
+    color: #FFF;
+}
+
+.figure_area .mod-figure-area .figure-area-mask {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .7;
+    filter: alpha(opacity=70);
+}
+
+.mod-figure-area .figure-handle {
+    margin-top: 4px;
+    float: right;
+}
+
+.figure-handle li {
+    float: left;
+    margin-right: 5px;
+    _display: inline;
+    min-height: 1px;
+}
+
+.figure-handle li .icon-wrap {
+    color: #FFF;
+    display: inline-block;
+    text-align: center;
+    padding: 3px 0 0 0;
+    height: 24px;
+    line-height: 25px;
+    _height: 16px;
+    _line-height: 16px;
+    _padding: 4px 5px 4px;
+    _background: url(data:);
+    opacity: .6;
+    filter: alpha(opacity=60);
+}
+
+.figure-handle li .icon-wrap:hover{opacity:1;filter:alpha(opacity=100)}
+.figure-handle li .icon-wrap-select{border-radius:0 0 2px 2px;background-color:rgba(185,185,185,.2);filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#33B9B9B9',EndColorStr='#33B9B9B9')}
+
+.figure-handle li .icon-wrap .icon-m {
+    margin-right: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0;
+    background-repeat: no-repeat;
+}
+
+
+.figure-handle li .icon-wrap .icon-zoomin {
+    width: 22px;
+    height: 20px;
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -186px -60px;
+}
+
+.figure-handle li .icon-wrap .icon-zoomout {
+    width: 22px;
+    height: 20px;
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -197px -81px;
+    margin-right: 0px;
+}
+
+.figure-handle li .icon-wrap .icon-zoomfix {
+    width: 18px;
+    height: 18px;
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -328px -50px;
+}
+
+.figure-handle li .icon-wrap .icon-zoomauto {
+    width: 18px;
+    height: 16px;
+    background-image: url("Images/imgpreview/photo-scan-layer-man.png");
+    background-position: -408px 0px;
+}
+
+.figure-handle li .icon-wrap .icon-rotate {
+    margin-right: 5px;
+    width: 18px;
+    height: 18px;
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -222px -39px;
+}
+
+.figure-handle li .icon-wrap .icon-big-view
+{
+    width: 24px;
+    height: 18px;
+    line-height: 60px;
+    overflow: hidden;
+    background-image: url("Images/imgpreview/photo-scan-layer-man.png");
+    background-position: -150px -97px;
+}
+
+.figure-handle li .icon-wrap .icon-small-view
+{
+    width: 20px;
+    height: 11px;
+    overflow: hidden;
+    background-image: url("Images/imgpreview/photo-scan-layer-man.png");
+    background-position: -312px -187px;
+    margin-top: 3px;
+}
+
+.figure_area .arrow-pre {
+    top: 50%;
+    left: 0;
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -85px 0;
+    top: 45%;display: none;
+}
+
+.figure_area .arrow-pre-hover {
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -113px 0;
+
+}
+
+
+.figure_area .arrow-next {
+    top: 50%;
+    right: 0;
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -85px -45px;
+    top: 45%;display: none;
+}
+
+.figure_area .arrow-next-hover {
+    background-image: url("Images/imgpreview/photo-scan-layer.32.png");
+    background-position: -113px -45px;
+
+}
+
+.figure_area .figure-area-arrow {
+    position: absolute;
+    z-index: 10;
+    width: 27px;
+    height: 44px;
+    line-height: 150px;
+    overflow: hidden;
+}
+
+.photo_minimap_v2 .photo_minimap_roll a span {
+    display: block;
+    height: 21px;
+    width: 13px;
+    margin: 10px 6px 0;
+}
+
+
+.photo_minimap_v2 .roll_left a span {
+    background-image:url("Images/imgpreview/photo-scan-layer-man.png");
+    background-position: 0 -178px;
+}
+
+.photo_minimap_v2 .roll_right a span {
+    background-image: url("Images/imgpreview/photo-scan-layer-man.png");
+    background-position: -14px -178px;
+}
+
+.figure-side {
+    width: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #F5F5F5;
+}
+
+.figure-side .figure-side-wrap {
+    background-color: #F5F5F5;
+}
+
+.figure-side .figure-side-bg {
+    background-color: #FFF;
+    padding-top: 20px;
+}
+
+.figure-side .figure-side-inner {
+    background-color: #F5F5F5;
+}
+
+.figure-side .figure-side-hd {
+    padding: 0 5px 20px 15px;
+    width: 280px;
+    background-color: #FFF;
+}
+
+.figure-side .handle-tab {
+    width: 300px;
+    margin-right: -5px;
+    background-color: #FFF;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    border-bottom: 1px solid #D5D5D5;
+}
+
+
+
+.figure-side .info-edit {
+    margin-left: 5px;
+    width: 260px;
+}
+
+.figure-side .info-edit p
+{
+    color: #8c8c8c;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.figure-side .info-edit .desctext{margin-top: 10px;max-height: 100px;overflow: auto;}
+
+.photo_layer .textinput, .photo_layer .textarea {
+    color: #5B5B5B;
+    border: 1px solid #D6D6D6;
+    background-color: #fff;
+}
+
+.figure-side .info-edit .tit-edit {
+    height: 22px;
+    position: relative;
+}
+
+.figure-side .info-edit .tit-edit input {
+    position: relative;
+    z-index: 15;
+    width: 215px;
+    height: 15px;
+    padding: 2px 3px 3px 3px;
+    color: #333;
+    outline: 0 none;
+    background: transparent;
+    _background: url(data:);
+    border: 0 none;
+    box-shadow: 0 none;
+}
+
+.figure-side .info-edit .datetime{margin: 10px 0;color: #555;}
+.figure-side .info-edit .desctitle
+{
+    color: #2d82d6;
+}
+
+.figure-side .info-edit .desctitle:hover
+{
+    text-decoration: underline;
+}
+
+.figure-side .info-edit .desc-edit textarea{
+    width: 200px;
+    height: 60px;
+    padding: 2px 3px 3px 3px;
+    color: #333;
+}
+
+.figure-side .info-edit .num-count {
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+}
+
+.figure-side .info-edit .num-count .num-hint {
+    color: #ff601a;
+}
+
+.figure-side .info-edit .desc-edit {
+    margin-top: 6px;
+    position: relative;
+}
+
+.figure-side .info-edit .info-submit {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.figure-side .info-edit .info-submit .info-confirm {
+    background-color: #5cAAE6;
+    border-color: #59A7E3;
+    color: #FFF;
+}
+
+.figure-side .info-edit .info-submit .info-cancel {
+    background-color: #F6F6F6;
+    border-color: #DFDFDF;
+    color: #5F5F5F;
+    margin-left: 6px;
+}
+
+.figure-side .info-edit .info-submit a {
+    display: inline-block;
+    width: 56px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+.figure-side .js-title-editor,.figure-side .js-desc-cont,.figure-side .info-submit{display: none;}
+
+.photo_minimap_v2 {
+    position: relative;
+    top: -55px;
+    margin: 0 auto;
+}
+
+.photo_minimap_v2 .photo_minimap_inner {
+    position: absolute;
+    margin-left: 14px;
+    overflow: hidden;
+}
+
+.photo_minimap_v2 .roll_left {
+    left: 0;
+}
+
+.photo_minimap_v2 .roll_right {
+    right: 0;
+}
+
+.photo_minimap_v2 .photo_minimap_roll {
+    position: absolute;
+    height: 42px;
+    width: 25px;
+    background: #080808;
+    top: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.photo_minimap_v2 .photo_mini_img {
+    margin: 0 30px;
+    _zoom: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo_minimap_v2 .photo_minimap_roll a {
+    opacity: .7;
+    filter: Alpha(Opacity=70);
+}
+.photo_minimap_v2 .photo_minimap_roll a {
+    cursor: pointer;
+}
+
+
+.photo_minimap_v2 ul {
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0px auto;
+}
+
+.photo_minimap_v2 ul li {
+    float: left;
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    background: #000;
+    position: relative;
+}
+
+.photo_minimap_v2 li{}
+
+.photo_minimap_v2 ul li .mini_img_link {
+    display: block;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    filter: Alpha(Opacity=60);
+    opacity: .6;
+}
+
+.photo_minimap_v2 ul li.on .mini_img_link{
+    height: 40px;
+    width: 40px;
+    overflow: hidden;
+    border: 5px solid #73B4E0;
+    filter: Alpha(Opacity=100);
+    opacity: 1;
+}
+
+.photo_minimap_v2 ul li a{position:absolute;top: 0;}
+
+.photo_minimap_v2 ul li a:hover{
+
+    opacity: 1;
+}
+
+.photo_minimap_v2 ul li .js-thumbNail-img
+{
+   left: 0px; top: 0px;
+}
+
+.js_fade_in {
+    -webkit-transition: opacity .4s ease;
+    -moz-transition: opacity .4s ease;
+    -o-transition: opacity .4s ease;
+    -ms-transition: opacity .4s ease;
+    transition: opacity .4s ease;
+}
+
+a.hander-button:hover
+{ 
+  color:#fff;
+}
+
+.hander-button
+{
+    height: 32px;
+    line-height: 25px;
+    width: 20px;
+    text-align:center;
+    font-size: 25px;
+    position: absolute;
+    right: 280px;
+    z-index: 1000;
+    bottom: 60px;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.3)),to(rgba(0,0,0,0.3)));
+    background-image: -moz-linear-gradient(rgba(0,0,0,0.3) 0, rgba(0,0,0,0.3) 100%);
+    background-image: -ms-linear-gradient(rgba(0,0,0,0.3) 0, rgba(0,0,0,0.3) 100%);
+    background-image: -o-linear-gradient(rgba(0,0,0,0.3) 0, rgba(0,0,0,0.3) 100%);
+    background-image: linear-gradient(rgba(0,0,0,0.3) 0, rgba(0,0,0,0.3) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c000000, endColorstr=#4c000000);
+}
+.icon-left
+{
+    right: 0px;
+}
+
+@font-face {
+    font-family: 'iconfont';  /* project id 749083 */
+    src: url('//at.alicdn.com/t/font_749083_m07zuv2twm.eot');
+    src: url('//at.alicdn.com/t/font_749083_m07zuv2twm.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_749083_m07zuv2twm.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_749083_m07zuv2twm.woff') format('woff'),
+    url('//at.alicdn.com/t/font_749083_m07zuv2twm.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_749083_m07zuv2twm.svg#iconfont') format('svg');
+  }
+
+  .fa{
+    position: absolute;
+    top: 5px;
+    font-family:"iconfont" !important;
+    font-size:20px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+  
+.hander-button .fa{
+    left: -3px;
+}
+.icon-left  .fa{
+    left: 3px;
+}
+
+/*图片预览 end*/

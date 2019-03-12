@@ -108,7 +108,8 @@ const menuArry={
       [
         {
           title:"图片预览（仿QQ空间预览）",
-          disabled:true
+          path:"qq",
+          iframe:"demo/pages/demo/dialog/qq.html"
         }
       ]
     },
@@ -125,6 +126,17 @@ const menuArry={
           title:"tUpload（仿微博上传头像）",
           path:"tUpload",
           iframe:"demo/pages/demo/uploader/tUpload.html"
+        }
+      ]
+    },
+    {
+      title:"WEBGL",
+      children:
+      [
+        {
+          title:"应用demo",
+          path:'webgl',
+          iframe:'demo/pages/demo/webgl/index.html'
         }
       ]
     }
@@ -386,15 +398,15 @@ const menuRoutes=function(arr,active){
 const routes = [
   { 
     path: '/',
-    redirect:'/home',
+    redirect:'/demo',
     meta:{title:"首页",active:"home"}
   },
-  { 
-    path: '/home', 
-    default:'/home',
-    meta:{title:"Home（首页）",active:"home"}, 
-    component:home 
-  },
+  // { 
+  //   path: '/home', 
+  //   default:'/home',
+  //   meta:{title:"Home（首页）",active:"home"}, 
+  //   component:home 
+  // },
   { 
     path: '/demo', 
     default:'/demo/StaticTables',

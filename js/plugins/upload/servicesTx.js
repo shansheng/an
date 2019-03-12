@@ -2,29 +2,31 @@
 -----------------------------------------------------------------------------*/
 (function ($) {
     
-    window.txUploader = function () {
+    window.txUploader = function (options) {
+        this.txUpload.host=parent.host;
+        this.txUpload.id="#txUp";
+        this.txUpload.getFileListUrl=parent.host+"/api/WebAPI/GetFileList";
+        this.txUpload.uploadFileUrl=parent.host+"/api/WebAPI/Upload";
+        this.txUpload.deleteFileUrl=parent.host+"/api/WebAPI/DeleteFile";
+        this.txUpload.preview={
+            image:null,
+            degree:0,
+            imgWrapWidth:360,
+            imgWrapHeight:360,
+            jcrop_api:null,
+            boundx:null,
+            boundy:null,
+            thumbnailWidth:80,
+            thumbnailHeight: 80
+          };
+        for(var i in options) {
+            this.txUpload[i]=options[i];
+        }
         this.txUpload.init();
         return this;
     };
     
     txUploader.prototype.txUpload={
-        host:parent.host,
-        id:"#txUp",
-        getFileListUrl:parent.host+"/api/WebAPI/GetFileList",
-        uploadFileUrl:parent.host+"/api/WebAPI/Upload",
-        deleteFileUrl:parent.host+"/api/WebAPI/DeleteFile",
-        uploader:null,
-        preview:{
-          image:null,
-          degree:0,
-          imgWrapWidth:360,
-          imgWrapHeight:360,
-          jcrop_api:null,
-          boundx:null,
-          boundy:null,
-          thumbnailWidth:80,
-          thumbnailHeight: 80
-        },
         init:function(){
             this.clear();
             this.list();
@@ -238,7 +240,6 @@
             var dom=this;
             var el=$(dom.id);
             var upload=$("input[type='file']",el);
-            dom.uploader=upload;
             var loadingDom= $("[node-type='local_loading']",el);
             var onSuccessUpload = function (e) {
                alert("上传成功！")
@@ -289,57 +290,6 @@
             reader.onload = function (e) {
                 var dataURL = e.target.result;
                 deferred.resolve(dataURL);
-                //判断是否是IOS设备FixIOS
-                // var isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-                // if(isiOS){
-                //     var img = new Image();
-                //     img.src=dataURL;
-                //     img.onload = function(e) {
-                //         var that=this;
-                //         //判断图片方向，重置canvas大小，确定旋转角度，iphone默认的是home键在右方的横屏拍摄方式
-                //         EXIF.getData(img, function() {
-                //             orientation = EXIF.getTag(this, 'Orientation');
-                //         });
-                //         var canvas, ctx, degree = 0,w = that.width,
-                //         h = that.height;
-                //         canvas = document.createElement("canvas");
-                //         ctx = canvas.getContext("2d");
-                //         canvas.width = width = w;
-                //         canvas.height = height = h;
-                //         //判断图片方向，重置canvas大小，确定旋转角度，iphone默认的是home键在右方的横屏拍摄方式
-                //         switch (orientation) {
-                //                //iphone横屏拍摄，此时home键在左侧
-                //             case 3:
-                //                 degree = 180;
-                //                 w = -width;
-                //                 h = -height;
-                //                 break;
-                //                 //iphone竖屏拍摄，此时home键在下方(正常拿手机的方向)
-                //             case 6:
-                //                 canvas.width = height;
-                //                 canvas.height = width;
-                //                 degree = 90;
-                //                 w = width;
-                //                 h = -height;
-                //                 break;
-                //                 //iphone竖屏拍摄，此时home键在上方
-                //             case 8:
-                //                 canvas.width = height;
-                //                 canvas.height = width;
-                //                 degree = 270;
-                //                 w = -width;
-                //                 h = height;
-                //                 break;
-                //         }
-                //         //ctx.rotate(degree * Math.PI / 180);
-                //         ctx.drawImage(that, 0, 0, w, h);
-                //         var base64=canvas.toDataURL("image/png");
-                //         deferred.resolve(base64);
-                //     }
-                // }else
-                // {
-                //     deferred.resolve(dataURL);
-                // }
             }
             return deferred.promise();
         }

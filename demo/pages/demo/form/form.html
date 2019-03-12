@@ -173,7 +173,6 @@
                        <!--Dropzonejs-->
                         <!--===================================================-->
                         <div id="my-dropzone"  class="dropzone form-dropzone">
-                            <input id="hidden_attachList" type="hidden" value="" name="attachList" />
                             <div class="dz-default dz-message">
                                 <div class="dz-icon">
                                     <i class="demo-pli-upload-to-cloud icon-5x"></i>
@@ -220,7 +219,8 @@
 </body>
 <script type="text/javascript">
 $(".tel").mask('999-99999999');
-$.division({validator:true,validatorForm:$("#config-form"),validatorName:"ProjectCityName"});
+$("#txt-BudgetTax").mask('99.99%');
+$.division({value:null,validator:true,validatorForm:$("#config-form"),validatorName:"ProjectCityName"});
 $("#city_1").citySelect({nodata:"none",prov:"北京市"}); 
 $("#ProjectGuidSelect").mychosen();
 $("#txt-TenderTime").mydatepicker({format: "yyyy-mm-dd",validator:true});

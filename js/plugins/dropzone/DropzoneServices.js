@@ -1,25 +1,36 @@
 /* 标准方法：上传插件加载方法。
 -----------------------------------------------------------------------------*/
 (function ($) {
-    window.Uploader = function () {
+    window.Uploader = function (options) {
+        this.Dropzone.id="#my-dropzone";
+        this.Dropzone.validator=true;
+		this.Dropzone.validatorForm=$("#config-form");
+		this.Dropzone.validatorName="attachList";
+        this.Dropzone.Dropzone=null;
+        this.Dropzone.uploadFilesObj=[];
+        this.Dropzone.host=parent.host;
+        this.Dropzone.thumbnailWidth=120;
+        this.Dropzone.thumbnailHeight=120;
+        this.Dropzone.getFileListUrl=parent.host+"/api/WebAPI/GetFileList";
+        this.Dropzone.uploadFileUrl=parent.host+"/api/WebAPI/Upload";
+        this.Dropzone.deleteFileUrl=parent.host+"/api/WebAPI/DeleteFile";
+        for(var i in options) {
+            this.Dropzone[i]=options[i];
+        }
         this.Dropzone.init();
         return this;
     };
     
     Uploader.prototype.Dropzone={
-        id:"#my-dropzone",
-        Dropzone:null,
-        uploadFilesObj:[],
-        host:parent.host,
-        getFileListUrl:parent.host+"/api/WebAPI/GetFileList",
-        uploadFileUrl:parent.host+"/api/WebAPI/Upload",
-        deleteFileUrl:parent.host+"/api/WebAPI/DeleteFile",
         init:function(){
             this.DropzoneClear();
             this.uploadFilesObj=null;
+            if(this.validator){
+                $(this.id).prepend('<input  type="hidden" value="" name="'+this.validatorName+'" />');
+            }
             this.upload();
         },
-        getBase64:function(img){
+        getBase64:function(img,thumbnailWidth,thumbnailHeight){
               var  resize=function(img,thumbnailWidth,thumbnailHeight){
                 var info, srcRatio, trgRatio;
                 info = {
@@ -63,7 +74,7 @@
               if(img){
                 image.onload =function (){
                     var canvas, ctx, resizeInfo, thumbnail, _ref, _ref1, _ref2, _ref3;
-                    var resizeInfo=resize(image,120,120);
+                    var resizeInfo=resize(image,thumbnailWidth,thumbnailHeight);
                     if (resizeInfo.trgWidth == null) {
                         resizeInfo.trgWidth = resizeInfo.optWidth;
                     }
@@ -86,7 +97,8 @@
         },
         ValidatorDropzone:function(){
             var jsonstr=this.uploadFilesObj?JSON.stringify(this.uploadFilesObj):null;
-            $("#hidden_attachList").val(jsonstr);
+            $(this.id).find("[type='hidden'").val(jsonstr);
+            this.validatorForm.data('bootstrapValidator').updateStatus(this.validatorName, 'NOT_VALIDATED').validateField(this.validatorName);
         },
         DropzoneClear:function(){
             if(this.Dropzone)
@@ -139,7 +151,7 @@
                     $(file.previewElement).find(".dz-progress").remove();
                     $(file.previewElement).find(".dz-download").attr("href",file.url);
                     $(file.previewElement).find(".dz-image img").attr("alt",file.name).attr("src","/js/plugins/upload/loading.gif");
-                    el.getBase64(file.url).then(function(base64){
+                    el.getBase64(file.url,120,120).then(function(base64){
                         $(file.previewElement).find(".dz-image img").attr("src",base64);
                     },function(err){
                           console.log(err);
@@ -235,3 +247,4 @@
     }
 
 })(jQuery);
+

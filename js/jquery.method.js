@@ -25,7 +25,7 @@
     // }
     
     
-    /**Tab控件封装S 需要引入esyui的相关tab插件*/
+    /*--- Tab控件封装（需要引入esyui的相关tab插件） Start -------*/
     $.addTab=function(title, url){
         if ($('#tabs').tabs('exists', title)){
             $('#tabs').tabs('select', title);//选中并刷新
@@ -261,6 +261,6 @@
         }
     });
 
-    /**Tab控件封装E*/
+    /*--- Tab控件封装 End-------*/
 
 })(jQuery);
