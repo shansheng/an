@@ -130,11 +130,11 @@ const menuArry={
       ]
     },
     {
-      title:"WEBGL",
+      title:"图形和图表",
       children:
       [
         {
-          title:"应用demo",
+          title:"WEBGL",
           path:'webgl',
           iframe:'demo/pages/demo/webgl/index.html'
         }
@@ -398,7 +398,7 @@ const menuRoutes=function(arr,active){
 const routes = [
   { 
     path: '/',
-    redirect:'/demo',
+    redirect:'/demo/StaticTables',
     meta:{title:"首页",active:"home"}
   },
   // { 

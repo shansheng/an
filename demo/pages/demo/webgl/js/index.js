@@ -2,6 +2,106 @@ var INTERSECTED;
 //几何体https://www.cnblogs.com/w-wanglei/p/6741587.html；https://blog.csdn.net/zhulx_sz/article/details/78798937
 //相机https://www.cnblogs.com/v-weiwang/p/6072235.html
 //材质https://segmentfault.com/a/1190000014639067
+var host="model/rocket";
+var jsonModels= [{
+    src: host+"/1/1",
+    emissive: host+"/1/1.jpg",
+    name: "fh"
+},
+{
+    src: host+"/2/2",
+    emissive: host+"/2/2.jpg",
+    alpha: host+"/2/2a.jpg",
+    name: "2"
+},
+{
+    src: host+"/3/3",
+    emissive: host+"/3/3.jpg",
+    name: "3"
+},
+{
+    src: host+"/4/4",
+    emissive: host+"/4/4.jpg",
+    name: "4"
+},
+{
+    src: host+"/5/5",
+    emissive: host+"/5/5.jpg",
+    name: "5"
+},
+{
+    src: host+"/6/6",
+    emissive: host+"/6/6.jpg",
+    name: "6"
+},
+{
+    src: host+"/7/7",
+    emissive: host+"/7/7.jpg",
+    name: "7"
+},
+{
+    src: host+"/8/8",
+    emissive: host+"/8/8.jpg",
+    name: "8"
+},
+{
+    src: host+"/9/9",
+    emissive: host+"/9/9.jpg",
+    alpha: host+"/9/9a.jpg",
+    name: "9"
+},
+{
+    src: host+"/10/10",
+    emissive: host+"/10/10.jpg",
+    alpha: host+"/10/10a.jpg",
+    name: "10"
+},
+{
+    src: host+"/11/111",
+    emissive: host+"/11/111.jpg",
+    alpha: host+"/11/111a.jpg",
+    name: "111"
+},
+{
+    src: host+"/11/112",
+    emissive: host+"/11/112.jpg",
+    alpha: host+"/11/112a.jpg",
+    name: "112"
+},
+{
+    src: host+"/11/113",
+    emissive: host+"/11/113.jpg",
+    alpha: host+"/11/113a.jpg",
+    name: "113"
+},
+{
+    src: host+"/11/114",
+    emissive: host+"/11/114.jpg",
+    alpha: host+"/11/114a.jpg",
+    name: "114"
+},
+{
+    src: host+"/12/12",
+    emissive: host+"/12/12.jpg",
+    name: "12"
+},
+{
+    src: host+"/13/13",
+    emissive: host+"/13/13.jpg",
+    name: "13"
+},
+{
+    src: host+"/g/g",
+    emissive: host+"/g/gnr.jpg",
+    name: "g"
+},
+{
+    src: host+"/flame/flame",
+    emissive: host+"/flame/flame.png",
+    name: "flame"
+}
+];
+var mixer;
 var main = {
     init: function(){
         this.renderer = new THREE.WebGLRenderer({
@@ -24,17 +124,18 @@ var main = {
         this.mouse = new THREE.Vector2();
 
         this.raycaster = new THREE.Raycaster();
+        this.clock = new THREE.Clock();
         //事件监听
         document.addEventListener('mousemove', this.onDocumentMouseMove, false);
         window.addEventListener('resize', this.onWindowResize, false);
         //this.addTreeMod();
         //this.addDamagedHelmetMod();
-        this.addFbxMod();
-        this.buildLightSystem();
-        this.buildAuxSystem();
+        //this.addFbxMod();
+        this.buildLightSystem();//添加光源线
+        this.buildAuxSystem();//添加坐标系统
         //this.addGround();
         //this.buildMall();
-        this.addMap();
+        this.addMap();//添加地图
        
         this.animation();
         //this.addLabel();
@@ -79,6 +180,8 @@ var main = {
     animation:function(){
         //this.LightHelper.update(); 
         requestAnimationFrame(this.animation.bind(this));
+        var delta = this.clock.getDelta();
+        if ( mixer ) mixer.update( delta );
         //this.render();
         this.renderer.render(this.scene, this.camera);
     },
@@ -223,43 +326,47 @@ var main = {
           Mesh.position.y = 100;
           Mesh.position.x = elem.geometry.boundingSphere.center.x - 200
           Mesh.position.z = elem.geometry.boundingSphere.center.z - 200
-         main.scene.add(Mesh)
+          main.scene.add(Mesh);
         })
     },
     addFbxMod:function(){
-        var loader = new THREE.FBXLoader();
+      				// model
+				var loader = new THREE.FBXLoader();//'model/fbx/Samba Dancing.fbx'
 				loader.load( 'model/fbx/Samba Dancing.fbx', function ( object ) {
-					object.mixer = new THREE.AnimationMixer( object );
-					mixers.push( object.mixer );
-					var action = object.mixer.clipAction( object.animations[ 0 ] );
+
+					mixer = new THREE.AnimationMixer( object );
+
+					var action = mixer.clipAction( object.animations[ 0 ] );
 					action.play();
+
 					object.traverse( function ( child ) {
+
 						if ( child.isMesh ) {
-                            child.scale.set(100, 100, 100);
+
 							child.castShadow = true;
 							child.receiveShadow = true;
-						}
-					} );
-					this.scene.add( object );
-				} );
 
+						}
+
+					} );
+
+					main.scene.add( object );
+				} );
     },
     addDamagedHelmetMod:function(){
         _this = this;
         var urls = [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ];
+        var hdrUrls = [ 'px.hdr', 'nx.hdr', 'py.hdr', 'ny.hdr', 'pz.hdr', 'nz.hdr' ];
+        //反射的环境图
         var JPGCubeMap = new THREE.CubeTextureLoader().setPath( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/cube/Bridge2/' ).load( urls );
-        var hdrCubeMap = new THREE.RGBELoader().load( 'textures/pisa.hdr');
-        // new THREE.RGBELoader().load( 'textures/pisa.hdr', function ( texture, textureData ) {
-        //     main.scene.background=texture;
-        // })
+        var hdrCubeMap = new THREE.HDRCubeTextureLoader().setPath( 'textures/pisaHDR/').load(THREE.UnsignedByteType,hdrUrls);
        
         var loader = new THREE.GLTFLoader();
         var path1='model/DamagedHelmet/DamagedHelmet.gltf';
-        var path2='model/CesiumMan/CesiumMan.gltf';
         loader.load(path1, function ( gltf ) {
             gltf.scene.traverse( function ( child ) {
                 if ( child.isMesh ) {
-                    child.material.envMap = JPGCubeMap;
+                    child.material.envMap = hdrCubeMap;
                     child.scale.set(100, 100, 100);
                     child.position.set(0,100, 0);
                     child.castShadow= true;
@@ -291,6 +398,46 @@ var main = {
             objLoader.setMaterials(material);
         });
     },
+    loadJsonModel:function(loader,model){
+        loader.load(model.src+".json",
+        function(geometry, materials) {
+            var material = new THREE.MeshPhongMaterial;
+            material.emissive = new THREE.Color(16777215);
+            material.color = new THREE.Color(657930);
+            material.emissiveMap = (new THREE.TextureLoader).load(model.emissive);
+            material.shading = THREE.FlatShading;
+            material.side = THREE.DoubleSide;       
+            if (model.alpha) {
+                material.alphaMap = (new THREE.TextureLoader).load(model.alpha);
+                material.alphaTest = .4;
+                material.transparent = true;
+            }
+            material.anisotropy = 16;
+            geometry.castShadow = !0;
+            geometry.receiveShadow = !1;
+            geom = new THREE.Mesh(geometry, material);
+            geom.name = model.name;
+            if (model.name == "g") {
+                material.shininess = 0
+            }
+            geom.rotateY(Math.PI/18);
+            geom.translateY(1);
+            geom.translateZ(-150);
+            main.scene.add(geom);
+        })
+    },
+    launch:function(){
+        var audio = new Audio("model/rocket/misc.mp3");
+        audio.play();
+    },
+    addRocket:function(){
+        //https://zhuanlan.zhihu.com/p/35087860?edition=yidianzixun&utm_source=yidianzixun&yidian_docid=0Ig6wFNx
+        var dom=this;
+        var loader = new THREE.JSONLoader();
+        jsonModels.forEach(function(model){
+          dom.loadJsonModel(loader,model);
+        });
+    }
 };
 
 main.init();
