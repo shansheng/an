@@ -246,6 +246,7 @@
             _mousewheel_zoom: function (e) {
                 var value = (e.wheelDelta ? e.wheelDelta / (-120) : (e.detail || 0) / 3) * Math.abs(imagesbox_zoom)
                 IMAGEBOX.TRANSFORMS.scale(value);
+                console.log(value);
                 IMAGEBOX._show();
                 e.preventDefault();
             },

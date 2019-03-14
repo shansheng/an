@@ -50,6 +50,7 @@
           //切换tab页
           $("a[action-type='switchTab']",el).click(function(){dom._switchTabClick(this,dom)});
           $("a[action-button='okClick']",el).click(function(){dom._saveTxImageClick(this,dom)});
+          //$("a[action-button='okClick']",el).click(function(){$(".t-upload-selected").click();});
           $("a[action-button='reloadClick']",el).click(function(){
             dom.clear();
           });
@@ -64,6 +65,7 @@
                var image = p.image,degree=p.degree,
                thumbnailWidth=p.thumbnailWidth,thumbnailHeight=p.thumbnailHeight,boundx=p.boundx;
                var select = jcrop_api.tellSelect();
+               //degree为0正常尺寸
                if(degree!=0){
                  var iosbase64=this.rotateIosImage(image,degree);
                  var iosimage = new Image();
@@ -78,6 +80,7 @@
                  iosimage.src=iosbase64;
                }else
                {    
+                    
                     var size=dom.getCutSize(image,thumbnailWidth,thumbnailHeight,boundx,select);
                     dom.drawCanvasImage(image,size).then(function(base64){
                         $("#testTX").attr("src",base64);
@@ -249,9 +252,10 @@
                 var file=e.files[0].rawFile;
                 $.FixIosSize(file).then(function(base64){
                     dom.preview.image=dom._sImage(base64);
-                  },function(err){
-                      console.log(err);
-                  });       
+                },function(err){
+                    console.log(err);
+                });   
+                
             }
             upload.tUpload({ 
                 async: { "saveUrl": this.uploadFileUrl, "autoUpload": false }, 

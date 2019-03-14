@@ -421,21 +421,37 @@ var main = {
                 material.shininess = 0
             }
             geom.rotateY(Math.PI/18);
-            geom.translateY(1);
+            geom.translateY(0.5);
             geom.translateZ(-150);
             main.scene.add(geom);
         })
     },
     launch:function(){
-        var audio = new Audio("model/rocket/misc.mp3");
-        audio.play();
+        var p=main.scene.getObjectByName("fh").position;
+    },
+    loading:function(){
+        THREE.DefaultLoadingManager.onStart = function(url, itemsLoaded, itemsTotal) {
+           
+        };
+
+        THREE.DefaultLoadingManager.onLoad = function() {
+           main.launch();
+        }
+
+        THREE.DefaultLoadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
+
+        }
+
+        THREE.DefaultLoadingManager.onError = function(url) {
+
+        }
     },
     addRocket:function(){
         //https://zhuanlan.zhihu.com/p/35087860?edition=yidianzixun&utm_source=yidianzixun&yidian_docid=0Ig6wFNx
-        var dom=this;
+        this.loading();
         var loader = new THREE.JSONLoader();
         jsonModels.forEach(function(model){
-          dom.loadJsonModel(loader,model);
+          main.loadJsonModel(loader,model);
         });
     }
 };

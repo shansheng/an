@@ -8,7 +8,7 @@
     <link href="./css/form.css" rel="stylesheet" type="text/css">
         <!--地区选择[ OPTIONAL ]-->
         <link href="http://58.213.48.24:3004/public/cityselect.css" rel="stylesheet">
-        <script src="http://58.213.48.24:3004/public/json/streetdata.js"></script>
+        <!-- <script src="http://58.213.48.24:3004/public/json/streetdata.js"></script> -->
         <script src="http://58.213.48.24:3004/public/jquery.cityselect.js"></script>
         <!--上传控件[ OPTIONAL ]-->
         <link href="/js/plugins/dropzone/dropzone.css" rel="stylesheet">
@@ -220,8 +220,8 @@
 <script type="text/javascript">
 $(".tel").mask('999-99999999');
 $("#txt-BudgetTax").mask('99.99%');
-$.division({value:null,validator:true,validatorForm:$("#config-form"),validatorName:"ProjectCityName"});
-$("#city_1").citySelect({nodata:"none",prov:"北京市"}); 
+$.division({url:"http://58.213.48.24:3004/public/json/city.json",value:null,validator:true,validatorForm:$("#config-form"),validatorName:"ProjectCityName"});
+$("#city_1").citySelect({url:"http://58.213.48.24:3004/public/json/city.json",nodata:"none",prov:"北京市"}); 
 $("#ProjectGuidSelect").mychosen();
 $("#txt-TenderTime").mydatepicker({format: "yyyy-mm-dd",validator:true});
 $("#mask-date").number(true,2,{thousands_sep:",",blur:function(){
