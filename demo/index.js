@@ -134,9 +134,22 @@ const menuArry={
       children:
       [
         {
-          title:"WEBGL",
+          title:"WEBGL(3D引擎)",
+          path:'webgl3d',
+          iframe:'demo/pages/demo/webgl/index.html'
+        },
+        {
+          title:"WEBGL(物理引擎)",
           path:'webgl',
           iframe:'demo/pages/demo/webgl/index.html'
+        },
+        {
+          title:"北斗地图",
+          disabled:true
+        },
+        {
+          title:"图表",
+          disabled:true
         }
       ]
     }
@@ -356,6 +369,11 @@ const menuArry={
           title:"hightopo",
           path:'hightopo',
           iframe:'http://www.hightopo.com/demos/index.html'
+        },
+        {
+          title:"Oimo.js",
+          path:'Oimo',
+          iframe:'http://lo-th.github.io/Oimo.js'
         }
       ]
     }

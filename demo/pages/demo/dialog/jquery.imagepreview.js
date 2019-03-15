@@ -244,9 +244,9 @@
             },
             //滚轮缩放函数
             _mousewheel_zoom: function (e) {
-                var value = (e.wheelDelta ? e.wheelDelta / (-120) : (e.detail || 0) / 3) * Math.abs(imagesbox_zoom)
+                var value = (e.wheelDelta ? e.wheelDelta / (-120) : (e.detail || 0) / 3) * Math.abs(imagesbox_zoom);
+                //console.log(value+":"+imagesbox_scaley);
                 IMAGEBOX.TRANSFORMS.scale(value);
-                console.log(value);
                 IMAGEBOX._show();
                 e.preventDefault();
             },
@@ -289,6 +289,9 @@
                             vZoom = getZoom(imagesbox_scalex, imagesbox_zoom);
                             if (hZoom && vZoom) {
                                 imagesbox_scaley += hZoom; imagesbox_scalex += vZoom;
+                                if(imagesbox_zoom<0&&imagesbox_scalex<0.1){
+                                    imagesbox_scaley = 0.1; imagesbox_scalex = 0.1;
+                                }
                             }
                         }
                     }
