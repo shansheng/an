@@ -8,10 +8,12 @@ center p{color: #888;}
     float: left;
     margin: 0 10px;
     color: #563d7c;
+    text-shadow: 0 0 4px rgba(0,0,0,.267);
 }
 .top a{
     padding:5px;
     color: #758697;
+    text-shadow: 0 0 4px rgba(0,0,0,.267);
 }
 a.router-link-active{font-weight:700;color: #ab46bc;}
 .nav{   
