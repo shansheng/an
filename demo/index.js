@@ -134,14 +134,14 @@ const menuArry={
       children:
       [
         {
-          title:"WEBGL(3D引擎)",
+          title:"WEBGL引擎",
           path:'webgl3d',
           iframe:'demo/pages/demo/webgl/index.html'
         },
         {
-          title:"WEBGL(物理引擎)",
+          title:"WEBGL物理引擎（仿跳一跳）",
           path:'webgl',
-          iframe:'demo/pages/demo/webgl/index.html'
+          iframe:'https://lastsoup.github.io/jump'
         },
         {
           title:"北斗地图",

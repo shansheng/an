@@ -10,6 +10,11 @@
     src: url('./fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('./fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('./fonts/glyphicons-halflings-regular.woff') format('woff'), url('./fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('./fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
+@font-face {
+    font-family: 'calligraphy';
+    src: url('./fonts/calligraphy.ttf') format('truetype');
+}
+
 html, body {
     font-family: 'Open Sans','Glyphicons Halflings','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 13px;
