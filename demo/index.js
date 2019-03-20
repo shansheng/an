@@ -144,7 +144,7 @@ const menuArry={
           iframe:'https://lastsoup.github.io/jump'
         },
         {
-          title:"北斗地图",
+          title:"北斗地图（天地图）",
           disabled:true
         },
         {
