@@ -21,9 +21,10 @@
     <script src="/js/jquery.method.js"></script>
 </head>
 <body>
-    <div id="app" class="page">
+    <div id="app" class="page" :class="[$route.path =='/404' ? 'erro' : '']">
         <div class="top">
         <h1>元</h1>
+        <!-- <input :value="$route.path"/> -->
         <div>
             <input id="firstTitle" type="hidden" :value="$route.meta.title" />
             <input id="firstSrc" type="hidden" :value="$route.meta.src" />
@@ -33,7 +34,7 @@
           <!-- <router-link :class="[$route.meta.active ==='home'? 'router-link-active' : '']" to="/" exact>首页</router-link>
           <router-link :class="[$route.meta.active ==='demo'? 'router-link-active' : '']"  to="/demo/StaticTables">anUI Demo</router-link>
           <router-link :class="[$route.meta.active ==='plugins'? 'router-link-active' : '']" to="/plugins/base">anUI 插件</router-link> -->
-          <router-link exact v-if="item.path!='/'" v-for="item in $route.query.head" :class="[$route.meta.active ===item.meta.active ? 'router-link-active' : '']"  :to="{path:item.default}" >
+          <router-link exact v-if="item.meta&&item.path!='/'" v-for="item in $route.query.head" :class="[$route.meta.active ===item.meta.active ? 'router-link-active' : '']"  :to="{path:item.default}" >
               {{item.meta.title}}
           </router-link>
           <a id="checkSSL"  target="_blank" style="border:dashed 1px #fff;color:red;text-decoration: underline;cursor: pointer;">SSL证书检测</a>

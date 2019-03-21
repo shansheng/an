@@ -42,6 +42,9 @@ button:focus{
     overflow: hidden;
     top: 0;
 }
+.erro .top{
+    display: none;
+}
 
 .main{
     position: absolute;

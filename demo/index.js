@@ -304,6 +304,11 @@ const menuArry={
       children:
       [
         {
+          title:"个人博客（仿微博）",
+          path:'blog',
+          iframe:'http://609a.com:3002'
+        },
+        {
           title:"HTML5",
           path:'html5',
           iframe:'http://www.w3school.com.cn/html5/index.asp'
@@ -400,7 +405,7 @@ const menuRoutes=function(arr,active){
     for(var j = 0; j <item.length; j++){
       var oldchild=item[j];
       if(!oldchild.path)continue;
-      var src=oldchild.iframe?oldchild.iframe:"http://www.0non0.com";
+      var src=oldchild.iframe?oldchild.iframe:"/#/404";
       oldchild["meta"]={active:active,group:arr[i].title,title:oldchild.title,src:src};
       //router-view换成Iframe
       // var iframeStr='<div style="width:100%;height:100%;overflow: hidden;"><iframe src="'+(oldchild.iframe?oldchild.iframe:"http://www.0non0.com")+'" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div>';
@@ -426,6 +431,11 @@ const routes = [
   //   component:home 
   // },
   { 
+    path: '/404', 
+    default:'/404',
+    component:{template:"<div>404</div>"}
+  },
+  { 
     path: '/demo', 
     default:'/demo/StaticTables',
     meta:{title:"Demo（教程）",active:"demo"}, 
@@ -448,7 +458,7 @@ const routes = [
   },
   { 
     path: '/library', 
-    default:'/library/html5',
+    default:'/library/blog',
     meta:{title:"Library（藏书阁）",active:"library"}, 
     component: menu,
     children: menuRoutes(menuArry.library,"library")
