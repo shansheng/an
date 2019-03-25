@@ -5,7 +5,9 @@ center p{color: #888;}
     border-bottom: 1px solid #ccc;
 }
 .top h1{
-    font-family: "calligraphy";
+
+    /* font-family: "calligraphy"; */
+    font-family: "yuan";
     float: left;
     margin: 0 10px;
     color: #563d7c;
