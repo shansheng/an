@@ -130,7 +130,7 @@ const menuArry={
       ]
     },
     {
-      title:"图形和图表",
+      title:"WEBGL & WEBGIS",
       children:
       [
         {
@@ -144,12 +144,9 @@ const menuArry={
           iframe:'https://lastsoup.github.io/jump'
         },
         {
-          title:"北斗地图（天地图）",
-          disabled:true
-        },
-        {
-          title:"图表",
-          disabled:true
+          title:"行政区域地图应用",
+          path:'map',
+          iframe:'demo/pages/extension/map.html'
         }
       ]
     }
@@ -283,16 +280,34 @@ const menuArry={
       [
         {
           title:"百度地图（在线）",
-          disabled:true
+          path:'baidumap',
+          iframe:'http://lbsyun.baidu.com/jsdemo.htm#a1_2'
         },
         {
-          title:"百度地图（本地）",
-          disabled:true
-        },
-        {
-          title:"Mapbox",
+          title:"Mapbox地图",
           path:'mapbox',
           iframe:'https://www.mapbox.com'
+        }
+      ]
+    },
+    {
+      title:"Chart（图表）",
+      children:
+      [
+        {
+          title:"EChart",
+          path:'echart',
+          iframe:'https://echarts.baidu.com/echarts2/doc/example.html'
+        },
+        {
+          title:"G2(科学VPN)",
+          path:'g2',
+          iframe:'http://antvis.github.io/g2/demo/index.html'
+        },
+        {
+          title:"D3",
+          path:'d3',
+          iframe:'https://d3js.org/'
         }
       ]
     }
