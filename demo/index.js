@@ -147,6 +147,11 @@ const menuArry={
           title:"行政区域地图应用",
           path:'map',
           iframe:'demo/pages/extension/map.html'
+        },
+        {
+          title:"3D城市（结合GIS地图）",
+          //path:'3dcity',
+          disabled:true
         }
       ]
     }
@@ -286,7 +291,7 @@ const menuArry={
         {
           title:"Mapbox地图",
           path:'mapbox',
-          iframe:'https://www.mapbox.com'
+          iframe:'https://docs.mapbox.com/mapbox-gl-js/examples/box.com'
         }
       ]
     },
