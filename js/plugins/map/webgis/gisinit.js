@@ -41,7 +41,7 @@ function initgis(){
 								  ],  
 
 								  {  
-									beginLevel: 11,              // 设置一下数据的起始层和范围,无效范围不会去访问了，从而加快数据加载
+									beginLevel: 11, // 设置一下数据的起始层和范围,无效范围不会去访问了，从而加快数据加载
 									endLevel: 18
 									//maxExtent:new LocaMap.Bounds(-180,-270,180,90), // 对于天地图数据这个必须有
 									//tileFullExtent: nanjingBounds,
