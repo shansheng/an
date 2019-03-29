@@ -83,7 +83,7 @@ var ShowMap=function(settings){
         ]
     }));
     map.enableScrollWheelZoom(true);
-    map.centerAndZoom("南京",11);
+    //map.centerAndZoom("南京",11);
     map.disableDoubleClickZoom();
     this.CommonHander.sm=this;
     this.map=this.CommonHander.map=map;
@@ -107,10 +107,10 @@ ShowMap.prototype.CommonHander={
             }
             var pointArray = [];
             for (var i = 0; i < count; i++) {
-                var ply1 = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 10,fillOpacity:"0",strokeColor: "#9ca39c",fillColor:"000"}); //建立多边形覆盖物
-               // var ply2 = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 20,fillOpacity:"0",strokeColor: "#becfbe",fillColor:"000"}); 
+                var ply1 = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 20,fillOpacity:"0",strokeColor: "#9ca39c",fillColor:"000"}); //建立多边形覆盖物
+                var ply2 = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 10,fillOpacity:"0",strokeColor: "#ddd",fillColor:"000"}); 
                 map.addOverlay(ply1);  //添加覆盖物
-                //map.addOverlay(ply2); 
+                map.addOverlay(ply2); 
                 f.setArea(ply1);
                 pointArray = pointArray.concat(ply1.getPath());
                 f.blist.push({ points: rs.boundaries[i], name: name });

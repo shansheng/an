@@ -146,12 +146,12 @@ const menuArry={
         {
           title:"行政区域地图应用",
           path:'map',
-          iframe:'demo/pages/extension/map.html'
+          iframe:'demo/pages/demo/webgl/map.html'
         },
         {
           title:"3D城市（结合GIS地图）",
-          //path:'3dcity',
-          disabled:true
+          path:'3dcity',
+          iframe:'demo/pages/demo/webgl/3dcity.html'
         }
       ]
     }

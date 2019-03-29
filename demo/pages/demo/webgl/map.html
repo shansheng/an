@@ -17,20 +17,22 @@
 <body>
    <h1>百度应用demo</h1> 
    <div id="allmap" style=" width: 100%;height: 300px;"></div>
-   <h1>地图本地化demo（无logo）</h1> 
+   <h1>地图本地化demo（自定义logo、可在线、可本地）</h1> 
+   <span>使用<a href="https://github.com/michael-laoyu/MapTileGenerator" target="_blank">MapTileGenerator</a>
+    <a href="http://cntchen.github.io/2016/05/09/国内主要地图瓦片坐标系定义及计算原理" target="_blank">瓦片坐标</a>下载地图瓦片</span>
    <div id="map" class="mapstyle" style="width: 100%;height: 300px;position: relative;" >
         <div class="anchorTR"><div style="float: left;">
             <div id="anchor0" title="显示普通地图" onclick="ChangeMapType(0);" class="selected">地图</div></div><div style="float: left;">
-            <div id="anchor1" title="显示带有街道的卫星影像" onclick="ChangeMapType(1);" class="unselected">卫星</div></div></div>
+            <div id="anchor1" title="显示带有街道的卫星影像" onclick="ChangeMapType(0);" class="unselected">卫星</div></div></div>
    </div>
    <script type="text/javascript">
     //baidu
     var f=new ShowMap({isedit:false});
     f.map.setMinZoom(10);
-    f.map.setMaxZoom(20);
+    f.map.setMaxZoom(19);
     f.CommonHander.getBoundary("南京",12);
     //webig
-    //initgis(); //gis init
+    initgis(); //gis init
    </script>
 </body>
 </html>

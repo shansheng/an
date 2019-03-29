@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- 支持 ES6 Promise 对象 -->
+    <script type="text/javascript" src="https://lastsoup.github.io/themes/nifty/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/bluebird/latest/bluebird.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script type="text/javascript" src="./js/libs/three.js"></script>
+    <script type="text/javascript" src="./js/libs/OrbitControls.js"></script>
+    <!-- SVG -->
+    <script type="text/javascript" src="./js/loaders/d3_threeD.js"></script>
+    <!-- HDR -->
+    <script type="text/javascript" src="./js/loaders/RGBELoader.js"></script>
+    <script type="text/javascript" src="./js/loaders/HDRCubeTextureLoader.js"></script>
+    <!-- OBJ&MTL模型-->
+    <script type="text/javascript" src="./js/loaders/MTLLoader.js"></script>
+    <script type="text/javascript" src="./js/loaders/OBJLoader.js"></script>
+    <!-- GLTF模型 -->
+    <script type="text/javascript" src="./js/loaders/GLTFLoader.js"></script>
+     <!--JSON -->
+    <script type="text/javascript" src="./js/loaders/JSONLoader.js"></script>
+    <!-- FBX模型 -->
+    <script type="text/javascript" src="./js/loaders/FBXLoader.js"></script>
+    <script type="text/javascript" src="./js/libs/inflate.min.js"></script>
+</head>
+<body>
+        <!-- https://threejs.org/examples/#webgl_animation_cloth -->
+        <canvas id="renderCanvas"></canvas>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script>
+main.init();
+main.addMap();
+    </script>   
+</body>
+</html>

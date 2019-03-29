@@ -129,16 +129,18 @@ var main = {
         //事件监听
         document.addEventListener('mousemove', this.onDocumentMouseMove, false);
         window.addEventListener('resize', this.onWindowResize, false);
-        //this.addTreeMod();
-        //this.addDamagedHelmetMod();
-        //this.addFbxMod();
         this.buildLightSystem();//添加光源线
         this.buildAuxSystem();//添加坐标系统
-        //this.addGround();
-        //this.buildMall();
-        this.addMap();//添加地图
-       
         this.animation();
+        
+    },
+    initModel:function(){
+       //this.addTreeMod();
+        //this.addDamagedHelmetMod();
+        //this.addFbxMod();
+        this.addGround();
+        //this.buildMall();
+        //this.addMap();//添加地图
         //this.addLabel();
     },
     loadControls:function(){
@@ -457,4 +459,3 @@ var main = {
     }
 };
 
-main.init();

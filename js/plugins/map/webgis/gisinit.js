@@ -5,17 +5,18 @@ var slLayer0_10,slLayer10_17,slLayer18_20,sl_mark_18_20;
 var yxLayer,luwang10_17,luwang18_19,yx_mark_10_17,yx_mark_18_19;
 
 function initgis(){
+	//显示范围坐标
 	var nanjingBounds=new LocaMap.Bounds(118,31.17,119.5,32.68);
-
-	 map = new LocaMap.Map({
-                 div: "map",  
-                 projection: "EPSG:4326",  
-                 displayProjection: new LocaMap.Projection("EPSG:4326"),  
-				 restrictedExtent:nanjingBounds,   // 将地图浏览限制到nanjingBounds以内
-				 minZoomLevel:10,
-                 numZoomLevels:21 //最高到20层，所以层数设置为21  
-				});  
-
+    //地图对象
+	map = new LocaMap.Map({
+		div: "map",  
+		projection: "EPSG:4326",  
+		displayProjection: new LocaMap.Projection("EPSG:4326"),  
+		restrictedExtent:nanjingBounds, // 将地图浏览限制到nanjingBounds以内
+		minZoomLevel:10,
+		numZoomLevels:21 //最高到20层，所以层数设置为21  
+	});  
+    
      
 					
 				/*
@@ -55,7 +56,7 @@ function initgis(){
 				// 矢量底图数据,其它的矢量数据全部作为overlayLayer
 				slLayer0_10 = new LocaMap.Layer.TDTWMTS({
 									name: "天地图地图",
-									url: "http://t4.tianditu.cn/vec_c/wmts",
+									url: "http://172.16.12.15:8080/dfc/services/ogc/wmts/vec",//"http://t4.tianditu.cn/vec_c/wmts",
 									layer: "vec",
 									style: "default",
 									matrixSet: "c",
@@ -220,8 +221,8 @@ function initgis(){
 	 
 	map.addLayers([yxLayer,luwang10_17,luwang18_19,yx_mark_10_17,yx_mark_18_19,slLayer0_10,slLayer10_17,slLayer18_20,sl_mark_18_20]);
 	map.addLayer(vectorGeoLayer);
-	 map.addLayer(vectorLayer);
-	 map.addLayer(markerLayer);
+	map.addLayer(vectorLayer);
+	map.addLayer(markerLayer);
 	 
 	
 	 
