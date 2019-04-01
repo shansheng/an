@@ -416,8 +416,8 @@ var main = {
                 material.transparent = true;
             }
             material.anisotropy = 16;
-            geometry.castShadow = !0;
-            geometry.receiveShadow = !1;
+            geometry.castShadow = true;
+            geometry.receiveShadow = true;
             geom = new THREE.Mesh(geometry, material);
             geom.name = model.name;
             if (model.name == "g") {
