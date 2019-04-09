@@ -332,29 +332,33 @@ var main = {
           main.scene.add(Mesh);
         })
     },
+    addDaeMod:function(){
+        var loader = new THREE.ColladaLoader();
+        var daeurl="model/dae/greenhouse/greenhouse.dae";
+        loader.load(daeurl, function (object) {
+            object.scene.castShadow = true;
+            object.scene.receiveShadow = true;
+            object.scene.scale.set(0.3,0.45,0.3);
+            object.scene.position.set(-100,0,80);
+            main.scene.add(object.scene);
+        });
+    },
     addFbxMod:function(){
-      				// model
-				var loader = new THREE.FBXLoader();//'model/fbx/Samba Dancing.fbx'
-				loader.load( 'model/fbx/Samba Dancing.fbx', function ( object ) {
-
-					mixer = new THREE.AnimationMixer( object );
-
-					var action = mixer.clipAction( object.animations[ 0 ] );
-					action.play();
-
-					object.traverse( function ( child ) {
-
-						if ( child.isMesh ) {
-
-							child.castShadow = true;
-							child.receiveShadow = true;
-
-						}
-
-					} );
-
-					main.scene.add( object );
-				} );
+        // model
+        var loader = new THREE.FBXLoader();
+        var fbxurl='model/fbx/Samba Dancing.fbx';
+        loader.load( fbxurl, function ( object ) {
+            mixer = new THREE.AnimationMixer( object );
+            var action = mixer.clipAction( object.animations[ 0 ] );
+            action.play();
+            object.traverse( function ( child ) {
+                if ( child.isMesh ) {
+                    child.castShadow = true;
+                    child.receiveShadow = true;
+                }
+            } );
+            main.scene.add( object );
+        } );
     },
     addDamagedHelmetMod:function(){
         _this = this;
@@ -386,8 +390,10 @@ var main = {
         var mtlLoader = new THREE.MTLLoader();
         mtlLoader.setCrossOrigin(true); 
         var objLoader = new THREE.OBJLoader();
-        mtlLoader.load('model/tree/materials.mtl', function(material){
-            objLoader.load('model/tree/model.obj',function(object){
+        var mtlurl='model/tree/materials.mtl';
+        var objurl='model/tree/model.obj';
+        mtlLoader.load(mtlurl, function(material){
+            objLoader.load(objurl,function(object){
                 _this.tree = object;
                 var children = object.children;
                 for (var i = 0; i < children.length; i++) {

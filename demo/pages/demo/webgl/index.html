@@ -24,6 +24,10 @@
     <!-- FBX模型 -->
     <script type="text/javascript" src="./js/loaders/FBXLoader.js"></script>
     <script type="text/javascript" src="./js/libs/inflate.min.js"></script>
+    <!-- DAE模型 -->
+    <script type="text/javascript" src="./js/loaders/ColladaLoader.js"></script>
+    <!-- <script type="text/javascript" src="./js/libs/WebGL.js"></script>
+    <script src="js/libs/stats.min.js"></script> -->
 </head>
 <body>
         <!-- https://threejs.org/examples/#webgl_animation_cloth -->
@@ -35,6 +39,7 @@
             <button id="btnObj" >加载obj模型</button>
             <button id="btnGltf" >加载gltf模型</button>
             <button id="btnFbx" >加载fbx模型</button>
+            <button id="btnDae" >加载dae模型</button>
             <button id="btnJson" >模拟火箭发射</button>
         </aside>
         <div class="svg-container" style="display:none;">
@@ -87,6 +92,9 @@ main.initModel();
         main.addFbxMod();
     });
 
+    $("#btnDae").click(function(){
+        main.addDaeMod();
+    });
     
     $("#btnJson").click(function(){
         main.addRocket();
