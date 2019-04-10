@@ -333,16 +333,25 @@ var main = {
         })
     },
     addDaeMod:function(){
+        //环境图
+        //https://blog.csdn.net/qq_37994494/article/details/76573540
+        var urls = [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ];
+        var JPGCubeMap = new THREE.CubeTextureLoader().setPath( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/cube/Bridge2/' ).load( urls );
+        // var urls = [ 'posx.jpg', 'posx.jpg', 'posx.jpg', 'posx.jpg', 'posx.jpg', 'posx.jpg' ];
+        // var JPGCubeMap = new THREE.CubeTextureLoader().setPath( 'model/dae/' ).load( urls );
+        this.scene.background = JPGCubeMap;
         var loader = new THREE.ColladaLoader();
         var daeurl="model/dae/greenhouse/greenhouse.dae";
         //var daeurl="model/dae/lk.dae";
         loader.load(daeurl, function (object) {
+            object.scene.envMap = JPGCubeMap;
             object.scene.castShadow = true;
             object.scene.receiveShadow = true;
             object.scene.scale.set(0.3,0.45,0.3);
             object.scene.position.set(-100,0,80);
             main.scene.add(object.scene);
         });
+
     },
     addFbxMod:function(){
         // model
@@ -361,14 +370,14 @@ var main = {
             main.scene.add( object );
         } );
     },
-    addDamagedHelmetMod:function(){
+    addGltfMod:function(){
         _this = this;
         var urls = [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ];
         var hdrUrls = [ 'px.hdr', 'nx.hdr', 'py.hdr', 'ny.hdr', 'pz.hdr', 'nz.hdr' ];
         //反射的环境图
         var JPGCubeMap = new THREE.CubeTextureLoader().setPath( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/cube/Bridge2/' ).load( urls );
         var hdrCubeMap = new THREE.HDRCubeTextureLoader().setPath( 'textures/pisaHDR/').load(THREE.UnsignedByteType,hdrUrls);
-       
+        this.scene.background = JPGCubeMap;
         var loader = new THREE.GLTFLoader();
         var path1='model/DamagedHelmet/DamagedHelmet.gltf';
         loader.load(path1, function ( gltf ) {
@@ -382,11 +391,9 @@ var main = {
                 }
             } );
             _this.scene.add( gltf.scene );
-        }, undefined, function ( e ) {
-            console.error( e );
-        } );
+        });
     },
-    addTreeMod: function(){
+    addMtlMod: function(){
         _this = this;
         var mtlLoader = new THREE.MTLLoader();
         mtlLoader.setCrossOrigin(true); 
