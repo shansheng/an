@@ -335,6 +335,7 @@ var main = {
     addDaeMod:function(){
         var loader = new THREE.ColladaLoader();
         var daeurl="model/dae/greenhouse/greenhouse.dae";
+        //var daeurl="model/dae/lk.dae";
         loader.load(daeurl, function (object) {
             object.scene.castShadow = true;
             object.scene.receiveShadow = true;

@@ -7948,6 +7948,7 @@
 			this.overdraw = source.overdraw;
 
 			this.visible = source.visible;
+			console.log(source.userData);
 			this.userData = JSON.parse( JSON.stringify( source.userData ) );
 
 			this.clipShadows = source.clipShadows;
