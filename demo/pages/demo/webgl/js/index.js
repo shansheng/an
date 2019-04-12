@@ -138,6 +138,7 @@ var main = {
        //this.addTreeMod();
         //this.addDamagedHelmetMod();
         //this.addFbxMod();
+        //this.initSky();
         this.addGround();
         //this.buildMall();
         //this.addMap();//添加地图
@@ -177,7 +178,7 @@ var main = {
         this.LightHelper = new THREE.DirectionalLightHelper(directionalLight);
         this.scene.add(this.LightHelper);
         this.scene.add(light)
-        this.loadControls()
+        this.loadControls();
       
     },
     animation:function(){
@@ -250,6 +251,33 @@ var main = {
     addMap:function(){
         var object = this.MultiMap();
         this.scene.add(object);
+    },
+    initSky:function(){
+        var vertexShader = document.getElementById( 'vertexShader' ).textContent;
+        var fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
+        var uniforms = {
+            topColor: { value: new THREE.Color( 0x0077ff ) },
+            bottomColor: { value: new THREE.Color( 0xffffff ) },
+            offset: { value: 33 },
+            exponent: { value: 0.6 }
+        };
+        var skyGeo = new THREE.SphereBufferGeometry(700, 60, 20 );
+        var skyMat = new THREE.ShaderMaterial( { vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide } );
+        var sky = new THREE.Mesh( skyGeo, skyMat );
+        this.scene.background = new THREE.Color().setHSL( 0.6, 0, 1 );
+        this.scene.add(sky);
+    },
+    initLargeGroud:function(){
+        var groundTexture = new THREE.TextureLoader().load( 'textures/grasslight-big.jpg' );
+        groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
+        groundTexture.repeat.set( 25, 25 );
+        groundTexture.anisotropy = 16;
+        var groundMaterial = new THREE.MeshLambertMaterial( { map: groundTexture } );
+        groundMaterial.side = THREE.DoubleSide;  
+        var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 20000, 20000 ), groundMaterial );
+        mesh.rotation.x = - Math.PI / 2;
+        mesh.receiveShadow = true;
+        this.scene.add( mesh );
     },
     // 构建平地
     addGround: function(){
@@ -333,21 +361,20 @@ var main = {
         })
     },
     addDaeMod:function(){
+        this.initLargeGroud();
+        this.scene.background = new THREE.Color( 0xcce0ff );
+        this.scene.fog = new THREE.Fog( 0xcce0ff, 500, 10000 );
         //环境图
         //https://blog.csdn.net/qq_37994494/article/details/76573540
-        var urls = [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ];
-        var JPGCubeMap = new THREE.CubeTextureLoader().setPath( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/cube/Bridge2/' ).load( urls );
-        // var urls = [ 'posx.jpg', 'posx.jpg', 'posx.jpg', 'posx.jpg', 'posx.jpg', 'posx.jpg' ];
-        // var JPGCubeMap = new THREE.CubeTextureLoader().setPath( 'model/dae/' ).load( urls );
-        this.scene.background = JPGCubeMap;
+        // var urls = [ 'posx.jpg', 'negx.jpg', 'posy.jpg', 'negy.jpg', 'posz.jpg', 'negz.jpg' ];
+        // var JPGCubeMap = new THREE.CubeTextureLoader().setPath( 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/cube/Bridge2/' ).load( urls );
+        // this.scene.background = JPGCubeMap;
         var loader = new THREE.ColladaLoader();
         var daeurl="model/dae/greenhouse/greenhouse.dae";
-        //var daeurl="model/dae/lk.dae";
         loader.load(daeurl, function (object) {
-            object.scene.envMap = JPGCubeMap;
             object.scene.castShadow = true;
             object.scene.receiveShadow = true;
-            object.scene.scale.set(0.3,0.45,0.3);
+            object.scene.scale.set(1,1.5,1);
             object.scene.position.set(-100,0,80);
             main.scene.add(object.scene);
         });
