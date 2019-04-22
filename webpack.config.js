@@ -76,6 +76,7 @@ module.exports = {
     inline: true, // 实时刷新
     hot: true,
     host:"0.0.0.0",
+    disableHostCheck: true,
     port:1088
   },
   performance: {
