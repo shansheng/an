@@ -77,7 +77,7 @@ module.exports = {
     hot: true,
     host:"0.0.0.0",
     disableHostCheck: true,
-    port:1088
+    port:1089
   },
   performance: {
     hints: false

@@ -28,7 +28,7 @@
     <router-view></router-view>
    </div>
     <div class="content" v-else>
-        <!-- <div style="width: 100%; height: 100%; overflow: hidden;"><iframe id='iframeId' src="http://www.0non0.com" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div> -->
+        <!-- <div style="width: 100%; height: 100%; overflow: hidden;"><iframe id='iframeId' src="http://www.baidu.com" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div> -->
         <!-- 路由匹配到的组件将渲染在这里 -->
         <router-view></router-view>
     </div>

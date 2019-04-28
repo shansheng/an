@@ -110,6 +110,16 @@ const menuArry={
           title:"图片预览（仿QQ空间预览）",
           path:"qq",
           iframe:"demo/pages/demo/dialog/qq.html"
+        },
+        {
+          title:"弹出框miniDialog",
+          path:"dialog",
+          iframe:"demo/pages/demo/dialog/miniDialog/demo.html"
+        },
+        {
+          title:"弹出框lay",
+          path:"lay",
+          iframe:"demo/pages/demo/dialog/layxs/index.html"
         }
       ]
     },
@@ -217,12 +227,12 @@ const menuArry={
         {
           title:"示例1",
           path:'mobile1',
-          iframe:'https://lastsoup.github.io/mobile/boluoyuan'
+          iframe:'https://lastsoup.github.io/mobile/boluoyuan/index.html'
         },
         {
           title:"示例2",
           path:'mobile2',
-          iframe:'https://lastsoup.github.io/mobile/yui'
+          iframe:'https://lastsoup.github.io/mobile/yui/index.htm'
         }
       ]
     },
@@ -254,12 +264,12 @@ const menuArry={
         {
           title:"Nifty",
           path:'nifty',
-          iframe:'https://lastsoup.github.io/themes/nifty'
+          iframe:'https://lastsoup.github.io/themes/nifty/index.html'
         },
         {
           title:"Ace",
           path:'ace',
-          iframe:'https://lastsoup.github.io/themes/ace'
+          iframe:'https://lastsoup.github.io/themes/ace/index.html'
         },
         {
           title:"AdminLTE",
@@ -326,7 +336,7 @@ const menuArry={
         {
           title:"个人博客（仿微博）",
           path:'blog',
-          iframe:'http://609a.com:3002'
+          iframe:'https://609a.com:3000'
         },
         {
           title:"HTML5",
@@ -428,7 +438,7 @@ const menuRoutes=function(arr,active){
       var src=oldchild.iframe?oldchild.iframe:"/#/404";
       oldchild["meta"]={active:active,group:arr[i].title,title:oldchild.title,src:src};
       //router-view换成Iframe
-      // var iframeStr='<div style="width:100%;height:100%;overflow: hidden;"><iframe src="'+(oldchild.iframe?oldchild.iframe:"http://www.0non0.com")+'" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div>';
+      // var iframeStr='<div style="width:100%;height:100%;overflow: hidden;"><iframe src="'+(oldchild.iframe?oldchild.iframe:"http://www.baidu.com")+'" frameborder="no" scrolling="auto" allowtransparency="true" width="100%" height="100%"></iframe></div>';
       // var Iframe = {template:iframeStr}
       // oldchild.component=Iframe;
       //router-view换成Iframe
@@ -453,7 +463,7 @@ const routes = [
   { 
     path: '/404', 
     default:'/404',
-    component:{template:"<div>404</div>"}
+    component:{template:"<div><center><h2>404</h2></center></div>"}
   },
   { 
     path: '/demo', 
@@ -507,7 +517,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   to.query["head"]=routes;
   to.query["menu"]=menuArry[to.meta.active];
-  to.params["showtabs"]=false;
+  //设置打开页面为多tab模式
+  to.params["showtabs"]=true;
   if (to.meta.group) {
       document.title = "anUI "+to.meta.group;
   }

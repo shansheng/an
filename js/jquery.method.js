@@ -1,6 +1,6 @@
 /*----------------------------------------
 * Copyright (c) 2017 菠萝工作室
-* 网站：http://www.0non0.com
+* 网站：https://609a.com:3000
 * Date: 2017-5-18
 * Creater:Cqy
 ----------------------------------------*/
@@ -48,8 +48,8 @@
             loadImage:'/js/plugins/easyui/themes/default/images/loading1.gif',
             message:"正在加载,请稍候 ...",
             delay:"0",
-            containter:$(".content"),
-            src:"http://www.0non0.com"
+            //src:"http://www.609a.com"
+            containter:$(".content")
         }
         var opt = $.extend(true, defaults,options);
         $tabBody=opt.containter;
